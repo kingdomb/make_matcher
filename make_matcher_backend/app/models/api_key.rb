@@ -9,8 +9,24 @@ class ApiKey < ApplicationRecord
 
   def self.validate(token)
     key, secret, time = token.split("::")
-    return false unless DateTime.now.to_i - time <= 30
-    return unless api_key = ApiKey.find_by(key: key)
-    return false unless secret == api_key.secret
+    if DateTime.now.to_i - time.to_i >= 30
+      puts "Timestamp expired."
+      return false
+    end
+
+    if (api_key = ApiKey.find_by(key: key, active: true)).nil?
+      puts "Could not find matching API key."
+      return false
+    end
+
+    puts "Found API Key #{api_key.id} -- Attemping authorization..."
+
+    if secret != api_key.secret
+      puts "Could not validate API Key #{api_key.id}"
+      return false
+    end
+
+    puts "Authorized API Key #{api_key.id} at #{DateTime.now}"
+    true
   end
 end
