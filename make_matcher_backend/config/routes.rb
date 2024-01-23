@@ -3,7 +3,8 @@ Rails.application.routes.draw do
   root "application#status"
 
   namespace :api do
-    match "/", to: "#status", via: %i[get post]
+    post "/", to: "#status"
+    post "/*", to: "#invalid"
   end
 
   get "*", to: "application#status"
