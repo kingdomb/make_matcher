@@ -2,7 +2,7 @@ name: Fly Deploy
 on:
   push:
     branches:
-      - feat/api_auth
+      - main
 jobs:
   deploy:
     name: Deploy app
