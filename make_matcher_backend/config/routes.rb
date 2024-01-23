@@ -4,8 +4,8 @@ Rails.application.routes.draw do
 
   namespace :api do
     post "/", to: "#status"
-    post "/*", to: "#invalid"
+    post "*path", to: "#invalid"
   end
 
-  get "*", to: "application#status"
+  get "*path", to: "application#status"
 end
