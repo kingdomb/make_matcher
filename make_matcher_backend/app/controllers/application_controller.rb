@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::API
-  rescue_from(Exception) { render html: "<i style='color:red;'>Offline</i>".html_safe, status: 503 }
+  rescue_from(Exception) { render html: "<i style='color:red;'>Offline</i>".html_safe, status: 503 } unless Rails.env.test?
 
   def status
     render html: "<i style='color:green;'>Online</i>".html_safe, status: 200
