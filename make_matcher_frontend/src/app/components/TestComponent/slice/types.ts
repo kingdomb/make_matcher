@@ -1,2 +1,6 @@
 /* --- STATE --- */
-export interface TestComponentState {}
+export interface TestComponentState {
+  status?: string;
+  loading: boolean;
+  error?: string;
+}
