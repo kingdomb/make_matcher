@@ -4,13 +4,25 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { testComponentSaga } from './saga';
 import { TestComponentState } from './types';
 
-export const initialState: TestComponentState = {};
+export const initialState: TestComponentState = {
+  loading: false,
+};
 
 const slice = createSlice({
   name: 'testComponent',
   initialState,
   reducers: {
-    someAction(state, action: PayloadAction<any>) {},
+    fetchStatus: state => {
+      state.loading = true;
+    },
+    fetchStatusSuccess: (state, action: PayloadAction<string>) => {
+      state.status = action.payload;
+      state.loading = false;
+    },
+    fetchStatusFailure: (state, action: PayloadAction<string>) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
   },
 });
 
