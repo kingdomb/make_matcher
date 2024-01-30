@@ -1,3 +1,4 @@
+import { TestComponent } from 'app/components/TestComponent/Loadable';
 import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 
@@ -6,9 +7,10 @@ export function HomePage() {
     <>
       <Helmet>
         <title>HomePage</title>
-        <meta name="description" content="A Boilerplate application homepage" />
+        <meta name="description" content="Make Matcher Team 1" />
       </Helmet>
-      <span>My HomePage</span>
+
+      <TestComponent />
     </>
   );
 }
