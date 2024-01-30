@@ -13,7 +13,9 @@ const slice = createSlice({
   initialState,
   reducers: {
     fetchStatus: state => {
+      state.status = null;
       state.loading = true;
+      state.error = null;
     },
     fetchStatusSuccess: (state, action: PayloadAction<string>) => {
       state.status = action.payload;

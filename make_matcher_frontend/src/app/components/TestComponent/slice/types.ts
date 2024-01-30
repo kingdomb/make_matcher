@@ -1,6 +1,6 @@
 /* --- STATE --- */
 export interface TestComponentState {
-  status?: string;
+  status?: string | null;
   loading: boolean;
-  error?: string;
+  error?: string | null;
 }
