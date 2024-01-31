@@ -363,3 +363,11 @@ Processing by ApplicationController#status as HTML
 Completed 200 OK in 0ms (Views: 0.2ms | ActiveRecord: 0.0ms | Allocations: 84)
 
 
+Started POST "/api" for ::1 at 2024-01-31 18:02:43 -0500
+  [1m[36mActiveRecord::SchemaMigration Load (3.6ms)[0m  [1m[34mSELECT "schema_migrations"."version" FROM "schema_migrations" ORDER BY "schema_migrations"."version" ASC[0m
+Processing by Api::Controller#status as */*
+  [1m[36mApiKey Load (1.3ms)[0m  [1m[34mSELECT "api_keys".* FROM "api_keys" WHERE "api_keys"."key" = $1 AND "api_keys"."active" = $2 LIMIT $3[0m  [["key", "{\"p\":\"edXMvi9QFoaJKdetgZfTSbGrgtdewIvDvP04m0nbu5XT6gic6g==\",\"h\":{\"iv\":\"VjBbXCEOuUJTkymc\",\"at\":\"jYKuh20hIbJ3lONw4UAVhg==\"}}"], ["active", true], ["LIMIT", 1]]
+  ↳ app/models/api_key.rb:17:in `validate'
+Completed 200 OK in 174ms (Views: 0.2ms | ActiveRecord: 30.8ms | Allocations: 25853)
+
+

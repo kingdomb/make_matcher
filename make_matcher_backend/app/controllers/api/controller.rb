@@ -12,7 +12,7 @@ class Api::Controller < ApplicationController
   private
 
   def validate_request!
-    token = request.headers["Authorization"]&.gsub("Bearer ", "")
+    token = request.headers["x-api-key"]&.gsub("Bearer ", "")
     return true if token && ApiKey.validate(token)
 
     render json: { status: "Unauthorized" }, status: 403
