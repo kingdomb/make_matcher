@@ -19,7 +19,7 @@ class ApiKey < ApplicationRecord
       return false
     end
 
-    puts "Found API Key #{api_key.id} -- Attemping authorization..."
+    puts "Found API Key #{api_key.id} -- Attempting authorization..."
 
     if secret != api_key.secret
       puts "Could not validate API Key #{api_key.id}"
