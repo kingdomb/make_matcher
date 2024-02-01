@@ -1,5 +1,4 @@
 module Api::Concerns::SessionConcern
-  include ActiveSupport::Concern
   SECRET_TOKEN = Rails.application.credentials.secret_token
 
   def encode_token(payload)
