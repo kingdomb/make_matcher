@@ -8,8 +8,9 @@ Rails.application.routes.draw do
     get     "/users/current",     to: "users#current"
     post    "/login",             to: "auth#login"
 
-    match   "*path",              to: "#invalid",                via: %i[post get]
+    match   "*path",              to: "#invalid",                 via: %i[post get]
   end
 
-  match "*path", to: "application#invalid", via: %i[post get]
+  get       "up",                 to: "rails/health#show",        as: :rails_health_check
+  match     "*path",              to: "application#invalid",      via: %i[post get]
 end

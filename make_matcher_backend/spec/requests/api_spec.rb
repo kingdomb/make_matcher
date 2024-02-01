@@ -7,10 +7,10 @@ RSpec.describe 'API', type: :request do
         post "/api"
       end
       it "returns status Unauthorized as JSON" do
-        expect(json["status"]).to eq "Unauthorized"
+        expect(json["status"]).to eq "Unauthorized application"
       end
       it "returns status code 403 (Unauthorized)" do
-        expect(response.status).to eq 403
+        expect(response.status).to eq 401
       end
     end
 
