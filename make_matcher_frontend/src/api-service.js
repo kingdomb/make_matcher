@@ -16,9 +16,9 @@ function getHeaders() {
 }
 
 export function apiGet(path, params = {}) {
-  console.log('GET request to:', apiBaseUrl);
-  console.log('params:', params);
-  console.log('headers:', getHeaders());
+  // console.log('GET request to:', apiBaseUrl);
+  // console.log('params:', params);
+  // console.log('headers:', getHeaders());
   return axios
     .get(`${apiBaseUrl}/${path}`, {
       headers: getHeaders(),
@@ -28,9 +28,9 @@ export function apiGet(path, params = {}) {
 }
 
 export function apiPost(path, data = {}) {
-  console.log('POST request to:', apiBaseUrl);
-  console.log('data:', data);
-  console.log('headers:', getHeaders());
+  // console.log('POST request to:', apiBaseUrl);
+  // console.log('data:', data);
+  // console.log('headers:', getHeaders());
 
   return axios
     .post(`${apiBaseUrl}/${path}`, data, {
@@ -48,4 +48,18 @@ function handleAxiosError(error) {
   }
 
   return Promise.reject(error);
+}
+
+export function getErrorMessage(error) {
+  let errorMessage = 'An unknown error occurred';
+
+  if (axios.isAxiosError(error)) {
+    errorMessage = `Error ${error.response?.status}: ${
+      error.response?.data.message || error.message
+    }`;
+  } else if (error instanceof Error) {
+    errorMessage = error.message;
+  }
+
+  return errorMessage;
 }
