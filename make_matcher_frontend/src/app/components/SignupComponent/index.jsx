@@ -1,6 +1,9 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-export function Signup() {
+export function SignupComponent() {
+  const navigate = useNavigate();
+
   async function handleSignUp(e) {
     e.preventDefault();
     const loginFormData = new FormData(e.target);
@@ -9,6 +12,7 @@ export function Signup() {
     console.log(userData);
 
     e.target.reset();
+    navigate('/home');
   }
 
   return (
@@ -86,7 +90,10 @@ export function Signup() {
         <button className="signup-btn">Create Account</button>
         <div className="ex-account text-center">
           <p>
-            Already have an account? Signin <a href="/">here</a>
+            Already have an account? Sign in{' '}
+            <button className="link-style" onClick={() => navigate('/')}>
+              here
+            </button>
           </p>
           <div className="divider"></div>
         </div>

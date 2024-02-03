@@ -1,12 +1,10 @@
 import React, { useState } from 'react';
+import { useNavigate } from 'react-router';
 
-export function Login(props) {
+export function LoginComponent(props) {
+  const navigate = useNavigate();
+
   const [userData, setUserData] = useState('');
-  const [rerouteToSignup, setRerouteToSignup] = useState(false);
-
-  function handleUserStatus() {
-    setRerouteToSignup(props.userStatus);
-  }
 
   function handleLogin(e) {
     e.preventDefault();
@@ -14,6 +12,7 @@ export function Login(props) {
     setUserData(Object.fromEntries(loginFormData.entries()));
     console.log(userData);
     e.target.reset();
+    navigate('/home');
   }
 
   return (
@@ -51,7 +50,11 @@ export function Login(props) {
         <button className="signup-btn">Log In</button>
         <div className="ex-account text-center">
           <p>
-            Create an account <a onClick={handleUserStatus}>here.</a>
+            Create an account{' '}
+            <button className="link-style" onClick={() => navigate('/signup')}>
+              here
+            </button>
+            .
           </p>
           <div className="divider"></div>
         </div>

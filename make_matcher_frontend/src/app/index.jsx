@@ -13,10 +13,11 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 // import { GlobalStyle } from 'styles/global-styles';
 import '../styles/main.scss';
 
-import { AuthPage } from './pages/AuthPage/AuthPage.jsx';
+import { AuthPage } from './pages/AuthPage/index.jsx';
 import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { useTranslation } from 'react-i18next';
+import { SignupPage } from './pages/SignupPage/Loadable';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -33,6 +34,7 @@ export function App() {
       <Routes>
         <Route index={true} path="/" element={<AuthPage />} />
         <Route path="/home" element={<HomePage />} />
+        <Route path="/signup" element={<SignupPage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
