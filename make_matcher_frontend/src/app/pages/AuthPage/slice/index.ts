@@ -1,7 +1,7 @@
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { authSaga } from './saga';
-import { AuthState, LoginCreds } from './types';
+import { AuthState, LoginCreds, SignupCreds } from './types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
 export const initialState: AuthState = {
@@ -17,6 +17,9 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
+    signupRequest: (state, action: PayloadAction<SignupCreds>) => {
+      state.loading = true;
+    },
     loginRequest: (state, action: PayloadAction<LoginCreds>) => {
       state.loading = true;
     },
