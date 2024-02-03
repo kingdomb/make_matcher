@@ -1,21 +1,43 @@
-import React from 'react';
+import { useAuthSlice } from 'app/pages/AuthPage/slice';
+import {
+  // selectError,
+  selectIsAuthenticated,
+  selectLoading,
+} from 'app/pages/AuthPage/slice/selectors';
+import React, { useEffect } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 
 export function SignupComponent() {
   const navigate = useNavigate();
+  const dispatch = useDispatch();
+  const { actions } = useAuthSlice();
+  const isAuthenticated = useSelector(selectIsAuthenticated);
+  const loading = useSelector(selectLoading);
+  // const error = useSelector(selectError);
 
-  async function handleSignUp(e) {
+  // if authenticated, either route to home,
+  // or render Player Profile form component
+  useEffect(() => {
+    if (isAuthenticated) {
+      navigate('/home');
+    }
+  }, [isAuthenticated, navigate]);
+
+  function handleSignUp(e) {
     e.preventDefault();
-    const loginFormData = new FormData(e.target);
-    const userData = Object.fromEntries(loginFormData.entries());
+    const signupFormData = new FormData(e.target);
+    const signupData = Object.fromEntries(signupFormData.entries());
 
-    console.log(userData);
+    console.log('Signup data:', signupData);
 
+    dispatch(actions.signupRequest(signupData));
     e.target.reset();
-    navigate('/home');
   }
 
-  return (
+  return loading ? (
+    'Loading...'
+  ) : (
     <>
       <form onSubmit={handleSignUp}>
         <h2 className="title">Welcome</h2>
