@@ -1,7 +1,8 @@
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { authSaga } from './saga';
-import { AuthState } from './types';
+import { AuthState, LoginCreds } from './types';
+import { PayloadAction } from '@reduxjs/toolkit';
 
 export const initialState: AuthState = {
   username: null,
@@ -16,11 +17,28 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    loginRequest: (state, action) => {},
-    loginSuccess: (state, action) => {},
-    loginFailure: (state, action) => {},
-    logoutRequest: state => {},
-    logout: state => {},
+    loginRequest: (state, action: PayloadAction<LoginCreds>) => {
+      state.loading = true;
+    },
+    loginSuccess: (state, action) => {
+      state.accessToken = action.payload.accessToken;
+      state.refreshToken = action.payload.refreshToken;
+      state.isAuthenticated = true;
+    },
+    loginFailure: (state, action) => {
+      state.loading = false;
+      state.error = action.payload;
+    },
+    logoutRequest: state => {
+      state.loading = true;
+    },
+    logout: state => {
+      state.username = null;
+      state.accessToken = null;
+      state.refreshToken = null;
+      state.isAuthenticated = false;
+      state.loading = false;
+    },
   },
 });
 
