@@ -10,10 +10,12 @@ import * as React from 'react';
 import { Helmet } from 'react-helmet-async';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
 
-import { GlobalStyle } from 'styles/global-styles';
+// import { GlobalStyle } from 'styles/global-styles';
+import '../styles/main.scss';
 
+import { AuthPage } from './pages/AuthPage/AuthPage.jsx';
 import { HomePage } from './pages/HomePage/Loadable';
-import { NotFoundPage } from './components/NotFoundPage/Loadable';
+import { NotFoundPage } from './pages/NotFoundPage';
 import { useTranslation } from 'react-i18next';
 
 export function App() {
@@ -29,10 +31,10 @@ export function App() {
       </Helmet>
 
       <Routes>
-        <Route path="/" element={<HomePage />} />
+        <Route index={true} path="/" element={<AuthPage />} />
+        <Route path="/home" element={<HomePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
-      <GlobalStyle />
     </BrowserRouter>
   );
 }
