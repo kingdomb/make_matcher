@@ -23,6 +23,7 @@ const slice = createSlice({
     loginSuccess: (state, action) => {
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
+      state.username = action.payload.username;
       state.isAuthenticated = true;
     },
     loginFailure: (state, action) => {
