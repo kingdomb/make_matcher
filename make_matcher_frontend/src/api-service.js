@@ -49,3 +49,17 @@ function handleAxiosError(error) {
 
   return Promise.reject(error);
 }
+
+export function getErrorMessage(error) {
+  let errorMessage = 'An unknown error occurred';
+
+  if (axios.isAxiosError(error)) {
+    errorMessage = `Error ${error.response?.status}: ${
+      error.response?.data.message || error.message
+    }`;
+  } else if (error instanceof Error) {
+    errorMessage = error.message;
+  }
+
+  return errorMessage;
+}

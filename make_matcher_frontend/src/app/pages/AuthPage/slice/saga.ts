@@ -2,6 +2,7 @@ import { delay, put, takeLatest } from 'redux-saga/effects';
 import { authActions as actions } from '.';
 // import { apiPost } from 'api-service';
 import axios from 'axios';
+import { getErrorMessage } from 'api-service';
 
 function* handleLogin(action) {
   try {
@@ -31,14 +32,7 @@ function* handleLogin(action) {
       }),
     );
   } catch (error) {
-    let errorMessage = 'An unknown error occurred';
-    if (axios.isAxiosError(error)) {
-      errorMessage = `Error ${error.response?.status}: ${
-        error.response?.data.message || error.message
-      }`;
-    } else if (error instanceof Error) {
-      errorMessage = error.message;
-    }
+    const errorMessage = getErrorMessage(error);
     yield put(actions.loginFailure(errorMessage));
   }
 }
