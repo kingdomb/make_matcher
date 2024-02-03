@@ -116,6 +116,7 @@ export function SignupComponent() {
             <button className="link-style" onClick={() => navigate('/')}>
               here
             </button>
+            .
           </p>
           <div className="divider"></div>
         </div>
