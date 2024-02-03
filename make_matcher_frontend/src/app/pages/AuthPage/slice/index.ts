@@ -3,7 +3,14 @@ import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { authSaga } from './saga';
 import { AuthState } from './types';
 
-export const initialState: AuthState = {};
+export const initialState: AuthState = {
+  username: null,
+  accessToken: null,
+  refreshToken: null,
+  isAuthenticated: false,
+  loading: false,
+  error: null,
+};
 
 const slice = createSlice({
   name: 'auth',
