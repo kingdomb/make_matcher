@@ -1,4 +1,3 @@
-import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { authSaga } from './saga';
@@ -10,7 +9,11 @@ const slice = createSlice({
   name: 'auth',
   initialState,
   reducers: {
-    someAction(state, action: PayloadAction<any>) {},
+    loginRequest: (state, action) => {},
+    loginSuccess: (state, action) => {},
+    loginFailure: (state, action) => {},
+    logoutRequest: state => {},
+    logout: state => {},
   },
 });
 
