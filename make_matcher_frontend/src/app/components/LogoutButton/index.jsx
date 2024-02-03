@@ -12,6 +12,7 @@ export function LogoutButton() {
 
   return (
     <div>
+      {/* TODO: update logout button styling */}
       <button onClick={() => navigate('/')} style={testStyles.button}>
         Log out
       </button>
