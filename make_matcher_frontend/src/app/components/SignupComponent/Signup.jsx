@@ -84,40 +84,40 @@ export function Signup() {
           />
         </div>
         <button className="signup-btn">Create Account</button>
-        <div class="ex-account text-center">
+        <div className="ex-account text-center">
           <p>
             Already have an account? Signin <a href="/">here</a>
           </p>
-          <div class="divider"></div>
+          <div className="divider"></div>
         </div>
       </form>
 
       <div style={{ display: 'none' }} className="password-requirements">
-        <ul class="list-unstyled">
-          <li class="">
-            <span class="low-upper-case">
-              <i class="low-upper-case-text" aria-hidden="true">
+        <ul className="list-unstyled">
+          <li className="">
+            <span className="low-upper-case">
+              <i className="low-upper-case-text" aria-hidden="true">
                 &nbsp;Lowercase &amp; Uppercase
               </i>
             </span>
           </li>
-          <li class="">
-            <span class="one-number">
-              <i class="one-number-text" aria-hidden="true">
+          <li className="">
+            <span className="one-number">
+              <i className="one-number-text" aria-hidden="true">
                 &nbsp;Number (0-9)
               </i>
             </span>
           </li>
-          <li class="">
-            <span class="one-special-char">
-              <i class="one-special-char-text" aria-hidden="true">
+          <li className="">
+            <span className="one-special-char">
+              <i className="one-special-char-text" aria-hidden="true">
                 &nbsp;Special Character (!@#$%^&*)
               </i>
             </span>
           </li>
-          <li class="">
-            <span class="character-length">
-              <i class="character-length-text" aria-hidden="true">
+          <li className="">
+            <span className="character-length">
+              <i className="character-length-text" aria-hidden="true">
                 &nbsp; 8 - 12 Characters
               </i>
             </span>
