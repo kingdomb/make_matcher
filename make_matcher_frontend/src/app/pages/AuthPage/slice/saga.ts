@@ -6,7 +6,7 @@ import axios from 'axios';
 function* handleLogin(action) {
   try {
     // placeholder
-    // const { username, password } = action.payload;
+    const { username, password } = action.payload;
     // const response = yield call(apiPost, 'auth/login', { username, password });
     // simulated api response:
     yield delay(3000);
@@ -17,8 +17,8 @@ function* handleLogin(action) {
         expiresIn: 3600,
         user: {
           id: '123',
-          username: 'JohnDoe',
-          email: 'johndoe@example.com',
+          username: username,
+          email: 'username@example.com',
         },
       },
     };
