@@ -22,6 +22,7 @@ function* handleLogin(action) {
         },
       },
     };
+    console.log('Login response data: ', response.data);
     const { accessToken, refreshToken, user } = response.data;
     yield put(
       actions.loginSuccess({
@@ -55,6 +56,7 @@ function* handleSignup(action) {
         },
       },
     };
+    console.log('Signup response data: ', response.data);
     const { accessToken, refreshToken, user } = response.data;
     yield put(
       actions.loginSuccess({

@@ -16,6 +16,7 @@ export function LogoutButton() {
 
   const handleLogout = () => {
     dispatch(actions.logout());
+    console.log('Logged out.');
     navigate('/');
   };
 

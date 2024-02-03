@@ -28,6 +28,7 @@ const slice = createSlice({
       state.refreshToken = action.payload.refreshToken;
       state.username = action.payload.username;
       state.isAuthenticated = true;
+      state.loading = false;
     },
     loginFailure: (state, action) => {
       state.loading = false;
