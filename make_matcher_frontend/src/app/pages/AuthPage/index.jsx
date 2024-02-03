@@ -1,5 +1,5 @@
 import { LoginComponent } from 'app/components/LoginComponent/Loadable';
-import React, { useState } from 'react';
+import React from 'react';
 
 export function AuthPage() {
   return <LoginComponent />;

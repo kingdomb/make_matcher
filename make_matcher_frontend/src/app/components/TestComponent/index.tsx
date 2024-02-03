@@ -12,10 +12,11 @@ import {
 } from './slice/selectors';
 import { useTestComponentSlice } from './slice';
 import { CSSProperties } from 'react';
+import { LogoutButton } from '../LogoutButton/Loadable';
 
 interface Props {}
 
-const styles: Record<string, CSSProperties> = {
+export const testStyles: Record<string, CSSProperties> = {
   container: {
     fontFamily: 'Arial, sans-serif',
     margin: '20px',
@@ -67,23 +68,24 @@ export function TestComponent(props: Props) {
   const error = useSelector(selectTestError);
 
   return (
-    <div style={styles.container}>
-      <div style={styles.header}>Make Matcher Team 1</div>
-      <div style={styles.paragraph}>(Test Component)</div>
-      <div style={styles.subHeader}>
+    <div style={testStyles.container}>
+      <div style={testStyles.header}>Make Matcher Team 1</div>
+      <div style={testStyles.paragraph}>(Test Component)</div>
+      <div style={testStyles.subHeader}>
         <div>
           <button
             onClick={() => dispatch(actions.fetchStatus())}
-            style={styles.button}
+            style={testStyles.button}
           >
             FETCH API STATUS
           </button>
           {!loading && !status && !error && (
-            <p style={styles.paragraph}>Click button to view API Status</p>
+            <p style={testStyles.paragraph}>Click button to view API Status</p>
           )}
-          {loading && <p style={styles.paragraph}>Loading...</p>}
-          {status && <p style={styles.successText}>Status: {status}</p>}
-          {error && <p style={styles.errorText}>Error: {error}</p>}
+          {loading && <p style={testStyles.paragraph}>Loading...</p>}
+          {status && <p style={testStyles.successText}>Status: {status}</p>}
+          {error && <p style={testStyles.errorText}>Error: {error}</p>}
+          <LogoutButton />
         </div>
       </div>
     </div>
