@@ -11,14 +11,14 @@ function generateToken() {
 function getHeaders() {
   const token = generateToken();
   return {
-    Authorization: `Bearer ${token}`,
+    'x-api-key': `Bearer ${token}`,
   };
 }
 
 export function apiGet(path, params = {}) {
-  // console.log('GET request to:', apiBaseUrl);
-  // console.log('params:', params);
-  // console.log('headers:', getHeaders());
+  console.log('GET request to:', apiBaseUrl);
+  console.log('params:', params);
+  console.log('headers:', getHeaders());
   return axios
     .get(`${apiBaseUrl}/${path}`, {
       headers: getHeaders(),
@@ -28,9 +28,9 @@ export function apiGet(path, params = {}) {
 }
 
 export function apiPost(path, data = {}) {
-  // console.log('POST request to:', apiBaseUrl);
-  // console.log('data:', data);
-  // console.log('headers:', getHeaders());
+  console.log('POST request to:', apiBaseUrl);
+  console.log('data:', data);
+  console.log('headers:', getHeaders());
 
   return axios
     .post(`${apiBaseUrl}/${path}`, data, {

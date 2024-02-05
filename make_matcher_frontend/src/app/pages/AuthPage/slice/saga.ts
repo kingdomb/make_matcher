@@ -1,33 +1,16 @@
-import { delay, put, takeLatest } from 'redux-saga/effects';
+import { call, delay, put, takeLatest } from 'redux-saga/effects';
 import { authActions as actions } from '.';
-// import { apiPost } from 'api-service';
+import { apiPost } from 'api-service';
 import { getErrorMessage } from 'api-service';
 
 function* handleLogin(action) {
   try {
-    // placeholder
-    // const response = yield call(apiPost, 'auth/login', action.payload);
-    // simulated api response:
-    yield delay(3000);
-    const { username } = action.payload;
-    const response = {
-      data: {
-        accessToken: '123',
-        refreshToken: 'abc',
-        expiresIn: 3600,
-        user: {
-          id: '123',
-          username: username,
-          email: 'username@example.com',
-        },
-      },
-    };
+    const response = yield call(apiPost, 'login', action.payload);
     console.log('Login response data: ', response.data);
-    const { accessToken, refreshToken, user } = response.data;
+    const { token, user } = response.data;
     yield put(
       actions.loginSuccess({
-        accessToken,
-        refreshToken,
+        accessToken: token,
         username: user.username,
       }),
     );
