@@ -1,4 +1,4 @@
-import { call, delay, put, takeLatest } from 'redux-saga/effects';
+import { call, put, takeLatest } from 'redux-saga/effects';
 import { authActions as actions } from '.';
 import { apiPost } from 'api-service';
 import { getErrorMessage } from 'api-service';
