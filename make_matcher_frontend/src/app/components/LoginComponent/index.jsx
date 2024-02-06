@@ -7,6 +7,7 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import './Login.scss';
 
 export function LoginComponent(props) {
   const navigate = useNavigate();
@@ -39,45 +40,51 @@ export function LoginComponent(props) {
     <>
       <form onSubmit={handleLogin}>
         <h2 className="title">Log In</h2>
-        <div className="form-sections">
-          <label className="form-labels" htmlFor="username">
-            Username
-          </label>
+        <div className="form-input-sections">
           <input
             type="text"
             id="username"
             className="username"
             name="username"
             title="Type a username e.g. galaxyuser000"
-            autoComplete="username"
           />
+          <label className="form-labels" htmlFor="username">
+            Username
+          </label>
         </div>
 
-        <div className="form-sections">
-          <label className="form-labels" htmlFor="password">
-            Password
-          </label>
+        <div id="last-input" className="form-input-sections">
           <input
             type="text"
             id="password"
             className="password form-inputs"
             name="password"
             title="Type your new password"
-            autoComplete="new-password"
           />
+          <label className="form-labels" htmlFor="password">
+            Password
+          </label>
         </div>
 
-        <button className="signup-btn">Log In</button>
-        <div className="ex-account text-center">
-          <p>
-            Create an account{' '}
-            <button className="link-style" onClick={() => navigate('/signup')}>
-              here
-            </button>
-            .
-          </p>
-          <div className="divider"></div>
+        <div className="checkbox-wrapper">
+          <label>
+            <input
+              type="checkbox"
+              className="login-checkbox"
+              name="login checkbox"
+            />
+            Keep me logged in
+          </label>
         </div>
+
+        <div className="login-btn-container">
+          <button className="login-btn">Log In</button>
+        </div>
+
+        <p className="login-link">
+          Don't have an account? Create one{' '}
+          <span onClick={() => navigate('/signup')}>here</span>.
+        </p>
       </form>
     </>
   );

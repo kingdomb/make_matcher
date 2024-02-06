@@ -7,6 +7,7 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import './Signup.scss';
 
 export function SignupComponent() {
   const navigate = useNavigate();
@@ -40,39 +41,37 @@ export function SignupComponent() {
   ) : (
     <>
       <form onSubmit={handleSignUp}>
-        <h2 className="title">Welcome</h2>
-        <div className="form-sections">
-          <label className="form-labels" htmlFor="username">
-            Username
-          </label>
+        <h2 className="title">Welcome!</h2>
+        <span className="sub-title">Sign up here.</span>
+        <div className="form-input-sections">
           <input
             type="text"
             id="username"
             className="username"
             name="username"
             title="Type a username e.g. galaxyuser000"
-            autoComplete="username"
+            required
           />
+          <label className="form-labels" htmlFor="username">
+            Username
+          </label>
         </div>
 
-        <div className="form-sections">
-          <label className="form-labels" htmlFor="email">
-            Email
-          </label>
+        <div className="form-input-sections">
           <input
             type="email"
             id="email"
             className="email"
             name="email"
             title="Type an email e.g. example@address.com"
-            autoComplete="email"
+            required
           />
+          <label className="form-labels" htmlFor="email">
+            Email
+          </label>
         </div>
 
-        <div className="form-sections">
-          <label className="form-labels" htmlFor="zip-code">
-            Zip Code
-          </label>
+        <div className="form-input-sections">
           <input
             type="text"
             id="zip-code"
@@ -80,45 +79,45 @@ export function SignupComponent() {
             name="zip-code"
             pattern="[0-9]{5}"
             title="Five digit zip code"
-            autoComplete="postal-code"
+            required
           />
-        </div>
-        <div className="form-sections">
-          <label className="form-labels" htmlFor="password">
-            Password
+          <label className="form-labels" htmlFor="zip-code">
+            Zip Code
           </label>
+        </div>
+        <div className="form-input-sections">
           <input
             type="text"
             id="password"
             className="password form-inputs"
             name="password"
             title="Type your new password"
-            autoComplete="new-password"
+            required
           />
-        </div>
-        <div className="form-sections">
-          <label className="form-labels" htmlFor="confirm-password">
-            Confirm Password
+          <label className="form-labels" htmlFor="password">
+            Password
           </label>
+        </div>
+
+        <div id="last-input" className="form-input-sections">
           <input
             type="text"
             id="confirm-password"
             className="confirm-password form-inputs"
             name="confirm-password"
-            title="Type your new password again"
-            autoComplete="new-password"
+            title="Re-type your new password again"
+            required
           />
+          <label className="form-labels" htmlFor="confirm-password">
+            Confirm Password
+          </label>
         </div>
-        <button className="signup-btn">Create Account</button>
-        <div className="ex-account text-center">
-          <p>
-            Already have an account? Sign in{' '}
-            <button className="link-style" onClick={() => navigate('/')}>
-              here
-            </button>
-            .
-          </p>
-          <div className="divider"></div>
+        <p className="login-link">
+          Already have an account? Sign in{' '}
+          <span onClick={() => navigate('/')}>here</span>.
+        </p>
+        <div className="signup-btn-container">
+          <button className="signup-btn">Create Account</button>
         </div>
       </form>
 
