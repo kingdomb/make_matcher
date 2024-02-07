@@ -5,7 +5,7 @@ export interface AuthState {
   refreshToken: null | string;
   isAuthenticated: boolean;
   loading: boolean;
-  error: string | null;
+  error: ErrorType | null;
 }
 
 export interface LoginCreds {
@@ -18,4 +18,9 @@ export interface SignupCreds {
   email: string;
   password: string;
   zipCode: string;
+}
+
+export interface ErrorType {
+  statusCode: string;
+  errorMessage: string;
 }

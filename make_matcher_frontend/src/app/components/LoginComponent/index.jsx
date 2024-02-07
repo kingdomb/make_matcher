@@ -1,13 +1,15 @@
 import { useAuthSlice } from 'app/pages/AuthPage/slice';
 import {
-  // selectError,
+  selectError,
   selectIsAuthenticated,
   selectLoading,
 } from 'app/pages/AuthPage/slice/selectors';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import './Login.scss';
+import { ErrorMessageComponent } from '../ErrorMessageComponent';
+import { LoadingIndicator } from '../LoadingIndicator';
 
 export function LoginComponent(props) {
   const navigate = useNavigate();
@@ -15,10 +17,13 @@ export function LoginComponent(props) {
   const { actions } = useAuthSlice();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
+  const error = useSelector(selectError);
+
+  const [isNavigationPending, setIsNavigationPending] = useState(false);
 
   useEffect(() => {
     if (isAuthenticated) {
+      setIsNavigationPending(true);
       navigate('/home');
     }
   }, [isAuthenticated, navigate]);
@@ -34,9 +39,11 @@ export function LoginComponent(props) {
     e.target.reset();
   }
 
-  return loading ? (
-    'Loading...'
-  ) : (
+  if (loading || isNavigationPending) {
+    return <LoadingIndicator />;
+  }
+
+  return (
     <>
       <form onSubmit={handleLogin}>
         <h2 className="title">Log In</h2>
@@ -83,8 +90,17 @@ export function LoginComponent(props) {
 
         <p className="login-link">
           Don't have an account? Create one{' '}
-          <span onClick={() => navigate('/signup')}>here</span>.
+          <span
+            onClick={() => {
+              navigate('/signup');
+              dispatch(actions.clearError());
+            }}
+          >
+            here
+          </span>
+          .
         </p>
+        {error ? <ErrorMessageComponent error={error} /> : <></>}
       </form>
     </>
   );

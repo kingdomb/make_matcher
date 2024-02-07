@@ -1,13 +1,15 @@
 import { useAuthSlice } from 'app/pages/AuthPage/slice';
 import {
-  // selectError,
+  selectError,
   selectIsAuthenticated,
   selectLoading,
 } from 'app/pages/AuthPage/slice/selectors';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import './Signup.scss';
+import { ErrorMessageComponent } from '../ErrorMessageComponent';
+import { LoadingIndicator } from '../LoadingIndicator';
 
 export function SignupComponent() {
   const navigate = useNavigate();
@@ -15,12 +17,15 @@ export function SignupComponent() {
   const { actions } = useAuthSlice();
   const isAuthenticated = useSelector(selectIsAuthenticated);
   const loading = useSelector(selectLoading);
-  // const error = useSelector(selectError);
+  const error = useSelector(selectError);
+
+  const [isNavigationPending, setIsNavigationPending] = useState(false);
 
   // if authenticated, either route to home,
   // or render Player Profile form component
   useEffect(() => {
     if (isAuthenticated) {
+      setIsNavigationPending(true);
       navigate('/home');
     }
   }, [isAuthenticated, navigate]);
@@ -36,9 +41,11 @@ export function SignupComponent() {
     e.target.reset();
   }
 
-  return loading ? (
-    'Loading...'
-  ) : (
+  if (loading || isNavigationPending) {
+    return <LoadingIndicator />;
+  }
+
+  return (
     <>
       <form onSubmit={handleSignUp}>
         <h2 className="title">Welcome!</h2>
@@ -114,11 +121,20 @@ export function SignupComponent() {
         </div>
         <p className="login-link">
           Already have an account? Sign in{' '}
-          <span onClick={() => navigate('/')}>here</span>.
+          <span
+            onClick={() => {
+              navigate('/');
+              dispatch(actions.clearError());
+            }}
+          >
+            here
+          </span>
+          .
         </p>
         <div className="signup-btn-container">
           <button className="signup-btn">Create Account</button>
         </div>
+        {error ? <ErrorMessageComponent error={error} /> : <></>}
       </form>
 
       <div style={{ display: 'none' }} className="password-requirements">
