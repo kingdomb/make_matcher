@@ -45,6 +45,9 @@ const slice = createSlice({
       state.isAuthenticated = false;
       state.loading = false;
     },
+    clearError: state => {
+      state.error = null;
+    },
   },
 });
 
