@@ -29,6 +29,7 @@ const slice = createSlice({
       state.username = action.payload.username;
       state.isAuthenticated = true;
       state.loading = false;
+      state.error = null;
     },
     loginFailure: (state, action) => {
       state.loading = false;
@@ -43,6 +44,9 @@ const slice = createSlice({
       state.refreshToken = null;
       state.isAuthenticated = false;
       state.loading = false;
+    },
+    clearError: state => {
+      state.error = null;
     },
   },
 });

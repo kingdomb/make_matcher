@@ -14,6 +14,15 @@ ActiveRecord::Schema[7.1].define(version: 2024_01_31_212831) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
+  create_table "api_keys", force: :cascade do |t|
+    t.string "key", default: "ksuk_edd7780bfeba046406782a1a67792002"
+    t.string "secret", default: "ksus_479baf6b252ec4bee32ff5de9c9f52d7"
+    t.string "name"
+    t.boolean "active"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
   create_table "users", force: :cascade do |t|
     t.string "username"
     t.string "password_digest"

@@ -1,5 +1,5 @@
-class UsersController < ApplicationController
-  skip_before_action :authorized_user, only: [:create]
+class Api::UsersController < Api::Controller
+  before_action :authorized_user, except: [:create]
 
   def create
     user = User.create!(user_params)
@@ -10,7 +10,7 @@ class UsersController < ApplicationController
   def current
     render json: UserSerializer.new(current_user), status: :ok
   end
-  
+
   private
 
   def user_params
