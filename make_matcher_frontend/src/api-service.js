@@ -52,30 +52,33 @@ function handleAxiosError(error) {
 
 export function getErrorMessage(error) {
   console.log('*** error: ', error);
-  let errorMessage = 'An unknown error occurred';
+  let statusCode = String(error.response?.status);
+  let errorMessage = 'An error occurred';
 
   // if error is an Axios error
   if (axios.isAxiosError(error)) {
     const message = error.response?.data.message;
     // if  message is array
     if (Array.isArray(message)) {
-      errorMessage = `Error ${error.response?.status}: ${message.join(', ')}`;
+      errorMessage = `${message.join(', ')}`;
     }
     // if message is string
     else if (typeof message === 'string') {
-      errorMessage = `Error ${error.response?.status}: ${message}`;
+      errorMessage = `${message}`;
     }
     // anything else
     else {
-      errorMessage = `Error ${error.response?.status}: ${error.message}`;
+      errorMessage = `${error.message}`;
     }
   }
   // direct error objects handling
   else if (error && error.status) {
     if (typeof error.message === 'string') {
-      errorMessage = `Error ${error.status}: ${error.message}`;
+      statusCode = error.status;
+      errorMessage = `${error.message}`;
     } else if (Array.isArray(error.message) && error.message.length) {
-      errorMessage = `Error ${error.status}: ${error.message.join(', ')}`;
+      statusCode = error.status;
+      errorMessage = `${error.message.join(', ')}`;
     }
   }
   // if standard js error objects
@@ -83,5 +86,5 @@ export function getErrorMessage(error) {
     errorMessage = error.message;
   }
 
-  return errorMessage;
+  return { statusCode, errorMessage };
 }

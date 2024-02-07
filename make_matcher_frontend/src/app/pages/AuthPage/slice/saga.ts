@@ -15,8 +15,8 @@ function* handleLogin(action) {
       }),
     );
   } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    yield put(actions.loginFailure(errorMessage));
+    const getError = getErrorMessage(error);
+    yield put(actions.loginFailure(getError));
   }
 }
 
@@ -33,8 +33,8 @@ function* handleSignup(action) {
       }),
     );
   } catch (error) {
-    const errorMessage = getErrorMessage(error);
-    yield put(actions.loginFailure(errorMessage));
+    const getError = getErrorMessage(error);
+    yield put(actions.loginFailure(getError));
   }
 }
 
