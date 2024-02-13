@@ -25,6 +25,11 @@ const slice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+    reset: state => {
+      state.status = null;
+      state.loading = false;
+      state.error = null;
+    },
   },
 });
 
