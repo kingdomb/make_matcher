@@ -1,7 +1,7 @@
 form {
   box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), -15px -15px 20px #fffb;
   border-radius: 20px;
-  padding: 4rem 3rem 2.5rem 3rem;
+  padding: 4.5rem 4.5rem;
   min-width: 18rem;
 }
 
@@ -26,27 +26,10 @@ form {
   margin-bottom: 10px;
 }
 
-// .form-input-sections:last-child {
-//   margin-bottom: 0px;
-// }
-
-.form-input-sections label {
-  position: absolute;
-  top: 50%;
-  left: 15px;
-  transform: translateY(-50%);
-  color: rgb(124, 124, 124);
-  padding: 0 5px;
-  pointer-events: none;
-  transition: .5s;
-  font-size: 1.2rem;
-  box-shadow: none;
-}
-
 .form-input-sections input {
   line-height: 2.5rem;
   border-radius: 10px;
-  width: 20rem;
+  width: 18rem;
   text-indent: 12px;
   border: none;
   outline: none;
@@ -58,6 +41,7 @@ form {
 .checkbox-wrapper label {
   margin-left: 15px;
   font-size: .85rem;
+  color: rgb(78, 78, 78);
   & input {
     margin-right: 5px;
     font-size: .85rem;
@@ -65,9 +49,9 @@ form {
 }
 
 .login-link {
-  margin-left: 15px;
   font-size: .85rem;
   text-align: center;
+  color: rgb(78, 78, 78);
 }
 
 .login-link span {

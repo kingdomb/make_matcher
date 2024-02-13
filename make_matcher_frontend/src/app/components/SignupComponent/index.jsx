@@ -1,3 +1,4 @@
+import { useState } from 'react';
 import { useAuthSlice } from 'app/pages/AuthPage/slice';
 import {
   // selectError,
@@ -7,6 +8,14 @@ import {
 import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
+import { InputComponent } from '../InputComponent';
+import {
+  isEmail,
+  isZipCode,
+  isNotEmpty,
+  hasMinLength,
+  isEqualsToOtherValue,
+} from '../../../utils/validation.js';
 import './Signup.scss';
 
 export function SignupComponent() {
@@ -17,6 +26,22 @@ export function SignupComponent() {
   const loading = useSelector(selectLoading);
   // const error = useSelector(selectError);
 
+  const [enteredValues, setEnteredValues] = useState({
+    username: '',
+    email: '',
+    zipCode: '',
+    password: '',
+    confirmPassword: '',
+  });
+
+  const [didChange, setDidChange] = useState({
+    username: false,
+    email: false,
+    zipCode: false,
+    password: false,
+    confirmPassword: false,
+  });
+
   // if authenticated, either route to home,
   // or render Player Profile form component
   useEffect(() => {
@@ -24,6 +49,39 @@ export function SignupComponent() {
       navigate('/home');
     }
   }, [isAuthenticated, navigate]);
+
+  let usernameIsInvalid =
+    didChange.username && !isNotEmpty(enteredValues.username);
+  let emailIsInvalid = didChange.email && !isEmail(enteredValues.email.trim());
+  let zipCodeIsInvalid =
+    didChange.zipCode && !isZipCode(enteredValues.zipCode.trim(), 5);
+  let passwordIsInvalid =
+    didChange.password && !hasMinLength(enteredValues.password.trim(), 8);
+  let confirmPasswordIsInvalid =
+    didChange.confirmPassword &&
+    !isEqualsToOtherValue(
+      enteredValues.confirmPassword.trim(),
+      enteredValues.password.trim(),
+    );
+
+  function handleEnteredValues(identifier, value) {
+    setEnteredValues(previousValues => ({
+      ...previousValues,
+      [identifier]: value,
+    }));
+    // Removes error when user starts typing again
+    setDidChange(prevInput => ({
+      ...prevInput,
+      [identifier]: false,
+    }));
+  }
+
+  function handleInputFocus(identifier) {
+    setDidChange(prevInput => ({
+      ...prevInput,
+      [identifier]: true,
+    }));
+  }
 
   function handleSignUp(e) {
     e.preventDefault();
@@ -43,75 +101,59 @@ export function SignupComponent() {
       <form onSubmit={handleSignUp}>
         <h2 className="title">Welcome!</h2>
         <span className="sub-title">Sign up here.</span>
-        <div className="form-input-sections">
-          <input
-            type="text"
-            id="username"
-            className="username"
-            name="username"
-            title="Type a username e.g. galaxyuser000"
-            required
-          />
-          <label className="form-labels" htmlFor="username">
-            Username
-          </label>
-        </div>
-
-        <div className="form-input-sections">
-          <input
-            type="email"
-            id="email"
-            className="email"
-            name="email"
-            title="Type an email e.g. example@address.com"
-            required
-          />
-          <label className="form-labels" htmlFor="email">
-            Email
-          </label>
-        </div>
-
-        <div className="form-input-sections">
-          <input
-            type="text"
-            id="zip-code"
-            className="zip-code form-inputs"
-            name="zip-code"
-            pattern="[0-9]{5}"
-            title="Five digit zip code"
-            required
-          />
-          <label className="form-labels" htmlFor="zip-code">
-            Zip Code
-          </label>
-        </div>
-        <div className="form-input-sections">
-          <input
-            type="text"
-            id="password"
-            className="password form-inputs"
-            name="password"
-            title="Type your new password"
-            required
-          />
-          <label className="form-labels" htmlFor="password">
-            Password
-          </label>
-        </div>
-
-        <div id="last-input" className="form-input-sections">
-          <input
-            type="text"
-            id="confirm-password"
-            className="confirm-password form-inputs"
-            name="confirm-password"
-            title="Re-type your new password again"
-            required
-          />
-          <label className="form-labels" htmlFor="confirm-password">
-            Confirm Password
-          </label>
-        </div>
+        <InputComponent
+          label="Username"
+          id="username"
+          className="form-inputs"
+          type="username"
+          name="username"
+          onBlur={() => handleInputFocus('username')}
+          onChange={e => handleEnteredValues('username', e.target.value)}
+          error={usernameIsInvalid && 'Please enter a valid username!'}
+        />
+        <InputComponent
+          label="Email"
+          id="email"
+          className="form-inputs"
+          type="email"
+          name="email"
+          onBlur={() => handleInputFocus('email')}
+          onChange={e => handleEnteredValues('email', e.target.value)}
+          error={emailIsInvalid && 'Please enter a valid email!'}
+        />
+        <InputComponent
+          label="Zip Code"
+          id="zip-code"
+          type="zip-code"
+          name="zip-code"
+          className="form-inputs"
+          pattern="[0-9]{5}"
+          title="Five digit zip code"
+          onBlur={() => handleInputFocus('zipCode')}
+          onChange={e => handleEnteredValues('zipCode', e.target.value)}
+          error={zipCodeIsInvalid && 'Please enter a valid zip code!'}
+        />
+        <InputComponent
+          label="Password"
+          id="password"
+          type="password"
+          name="password"
+          onBlur={() => handleInputFocus('password')}
+          onChange={e => handleEnteredValues('password', e.target.value)}
+          error={passwordIsInvalid && 'Please enter a valid password!'}
+        />
+        <InputComponent
+          label="Confirm Password"
+          id="confirm-password"
+          className="form-inputs"
+          type="password"
+          name="confirm-password"
+          onBlur={() => handleInputFocus('confirm-password')}
+          onChange={e => handleEnteredValues('confirmPassword', e.target.value)}
+          error={
+            confirmPasswordIsInvalid && 'Please enter the same valid password!'
+          }
+        />
         <p className="login-link">
           Already have an account? Sign in{' '}
           <span onClick={() => navigate('/')}>here</span>.
@@ -120,39 +162,6 @@ export function SignupComponent() {
           <button className="signup-btn">Create Account</button>
         </div>
       </form>
-
-      <div style={{ display: 'none' }} className="password-requirements">
-        <ul className="list-unstyled">
-          <li className="">
-            <span className="low-upper-case">
-              <i className="low-upper-case-text" aria-hidden="true">
-                &nbsp;Lowercase &amp; Uppercase
-              </i>
-            </span>
-          </li>
-          <li className="">
-            <span className="one-number">
-              <i className="one-number-text" aria-hidden="true">
-                &nbsp;Number (0-9)
-              </i>
-            </span>
-          </li>
-          <li className="">
-            <span className="one-special-char">
-              <i className="one-special-char-text" aria-hidden="true">
-                &nbsp;Special Character (!@#$%^&*)
-              </i>
-            </span>
-          </li>
-          <li className="">
-            <span className="character-length">
-              <i className="character-length-text" aria-hidden="true">
-                &nbsp; 8 - 12 Characters
-              </i>
-            </span>
-          </li>
-        </ul>
-      </div>
     </>
   );
 }

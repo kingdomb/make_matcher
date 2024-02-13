@@ -29,15 +29,24 @@ body {
   flex-grow: 1;
 }
 
-.form-input-sections input:focus~label,
-.form-input-sections input:valid~label {
-  top: 0%;
+.form-input-sections label {
+  position: absolute;
+  left: 15px;
+  transform: translateY(-50%);
+  color: rgb(124, 124, 124);
+  pointer-events: none;
   line-height: 1.1rem;
   border-radius: 15px;
   font-size: .8rem;
   background-color: #eef2f5; 
   padding: 0rem .5rem;
   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+}
+
+.control-error {
+  color: rgb(240, 93, 93);
+  margin-left: .6rem;
+  margin-top: .3rem;
 }
 
 
