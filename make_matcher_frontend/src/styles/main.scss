@@ -29,10 +29,6 @@ body {
   flex-grow: 1;
 }
 
-::selection {
-  background: rgb(148, 148, 148);
-}
-
 .form-input-sections label {
   position: absolute;
   left: 15px;

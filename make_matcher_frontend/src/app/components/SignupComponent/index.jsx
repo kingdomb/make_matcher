@@ -104,7 +104,9 @@ export function SignupComponent() {
         <InputComponent
           label="Username"
           id="username"
+          className="form-inputs"
           type="username"
+          name="username"
           onBlur={() => handleInputFocus('username')}
           onChange={e => handleEnteredValues('username', e.target.value)}
           error={usernameIsInvalid && 'Please enter a valid username!'}
@@ -112,7 +114,9 @@ export function SignupComponent() {
         <InputComponent
           label="Email"
           id="email"
+          className="form-inputs"
           type="email"
+          name="email"
           onBlur={() => handleInputFocus('email')}
           onChange={e => handleEnteredValues('email', e.target.value)}
           error={emailIsInvalid && 'Please enter a valid email!'}
@@ -120,7 +124,9 @@ export function SignupComponent() {
         <InputComponent
           label="Zip Code"
           id="zip-code"
-          type="text"
+          type="zip-code"
+          name="zip-code"
+          className="form-inputs"
           pattern="[0-9]{5}"
           title="Five digit zip code"
           onBlur={() => handleInputFocus('zipCode')}
@@ -131,6 +137,7 @@ export function SignupComponent() {
           label="Password"
           id="password"
           type="password"
+          name="password"
           onBlur={() => handleInputFocus('password')}
           onChange={e => handleEnteredValues('password', e.target.value)}
           error={passwordIsInvalid && 'Please enter a valid password!'}
@@ -138,7 +145,9 @@ export function SignupComponent() {
         <InputComponent
           label="Confirm Password"
           id="confirm-password"
+          className="form-inputs"
           type="password"
+          name="confirm-password"
           onBlur={() => handleInputFocus('confirm-password')}
           onChange={e => handleEnteredValues('confirmPassword', e.target.value)}
           error={
