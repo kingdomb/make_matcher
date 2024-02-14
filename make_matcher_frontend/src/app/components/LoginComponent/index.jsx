@@ -1,11 +1,10 @@
-import { useState } from 'react';
 import { useAuthSlice } from 'app/pages/AuthPage/slice';
 import {
   // selectError,
   selectIsAuthenticated,
   selectLoading,
 } from 'app/pages/AuthPage/slice/selectors';
-import React, { useEffect } from 'react';
+import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { InputComponent } from '../InputComponent';
