@@ -11,9 +11,10 @@ export function hasMinLength(value, minLength) {
 }
 
 export function isEqualsToOtherValue(value, otherValue) {
+  console.log('Comparing values:', value, otherValue);
   return value === otherValue;
 }
 
 export function isZipCode(value, minLength) {
-  return minLength && value.match(/^\d+$/);
+  return value.length === 5 && value.match(/^\d+$/);
 }
