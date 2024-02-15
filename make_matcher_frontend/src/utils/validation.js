@@ -15,5 +15,5 @@ export function isEqualsToOtherValue(value, otherValue) {
 }
 
 export function isZipCode(value, minLength) {
-  return minLength && value.match(/^\d+$/);
+  return value.length === minLength && /^\d+$/.test(value);
 }
