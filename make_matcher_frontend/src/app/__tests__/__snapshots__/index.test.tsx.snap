@@ -3,7 +3,7 @@
 exports[`<App /> should render and match the snapshot 1`] = `
 <BrowserRouter>
   <Helmet
-    defaultTitle="React Boilerplate"
+    defaultTitle="Make Matcher Team 1"
     defer={true}
     encodeSpecialCharacters={true}
     htmlAttributes={
