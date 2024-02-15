@@ -28,6 +28,8 @@ export function SignupComponent() {
   const error = useSelector(selectError);
 
   const [isNavigationPending, setIsNavigationPending] = useState(false);
+  // added
+  const [passwordMismatchError, setPasswordMismatchError] = useState('');
 
   const [enteredValues, setEnteredValues] = useState({
     username: '',
@@ -61,18 +63,19 @@ export function SignupComponent() {
     didChange.zipCode && !isZipCode(enteredValues.zipCode.trim(), 5);
   let passwordIsInvalid =
     didChange.password && !hasMinLength(enteredValues.password.trim(), 8);
-  let confirmPasswordIsInvalid =
-    didChange.confirmPassword &&
-    !isEqualsToOtherValue(
-      enteredValues.confirmPassword.trim(),
-      enteredValues.password.trim(),
-    );
 
   function handleEnteredValues(identifier, value) {
     setEnteredValues(previousValues => ({
       ...previousValues,
       [identifier]: value,
     }));
+
+    // added
+    // when input changed, reset passwordMismatchError message
+    if (identifier === 'password' || identifier === 'confirmPassword') {
+      setPasswordMismatchError('');
+    }
+
     // Removes error when user starts typing again
     setDidChange(prevInput => ({
       ...prevInput,
@@ -89,6 +92,18 @@ export function SignupComponent() {
 
   function handleSignUp(e) {
     e.preventDefault();
+
+    // added
+    if (
+      !isEqualsToOtherValue(
+        enteredValues.password.trim(),
+        enteredValues.confirmPassword.trim(),
+      )
+    ) {
+      setPasswordMismatchError('Passwords do not match!');
+      return;
+    }
+
     const signupFormData = new FormData(e.target);
     const signupData = Object.fromEntries(signupFormData.entries());
 
@@ -156,9 +171,7 @@ export function SignupComponent() {
           name="confirm-password"
           onBlur={() => handleInputFocus('confirm-password')}
           onChange={e => handleEnteredValues('confirmPassword', e.target.value)}
-          error={
-            confirmPasswordIsInvalid && 'Please enter the same valid password!'
-          }
+          error={passwordMismatchError}
         />
         <p className="login-link">
           Already have an account? Sign in{' '}
