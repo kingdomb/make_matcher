@@ -6,8 +6,8 @@ export function isNotEmpty(value) {
   return value.trim() !== '';
 }
 
-export function hasMinLength(value, minLength) {
-  return value.length >= minLength;
+export function hasMinLength(value, minLength, maxLength) {
+  return value.length >= minLength && value.length <= maxLength;
 }
 
 export function isEqualsToOtherValue(value, otherValue) {
@@ -15,5 +15,5 @@ export function isEqualsToOtherValue(value, otherValue) {
 }
 
 export function isZipCode(value, minLength) {
-  return minLength && value.match(/^\d+$/);
+  return value.length === minLength && /^\d+$/.test(value);
 }
