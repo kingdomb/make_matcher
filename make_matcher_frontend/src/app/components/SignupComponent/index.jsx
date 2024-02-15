@@ -12,7 +12,7 @@ import {
   isEmail,
   isZipCode,
   isNotEmpty,
-  hasMinLength,
+  hasLength,
   isEqualsToOtherValue,
 } from '../../../utils/validation.js';
 import './Signup.scss';
@@ -54,14 +54,15 @@ export function SignupComponent() {
     }
   }, [isAuthenticated, navigate]);
 
-  let usernameIsInvalid =
+  const usernameIsInvalid =
     didChange.username && !isNotEmpty(enteredValues.username);
-  let emailIsInvalid = didChange.email && !isEmail(enteredValues.email.trim());
-  let zipCodeIsInvalid =
+  const emailIsInvalid =
+    didChange.email && !isEmail(enteredValues.email.trim());
+  const zipCodeIsInvalid =
     didChange.zipCode && !isZipCode(enteredValues.zipCode.trim(), 5);
-  let passwordIsInvalid =
-    didChange.password && !hasMinLength(enteredValues.password.trim(), 8);
-  let confirmPasswordIsInvalid =
+  const passwordIsInvalid =
+    didChange.password && !hasLength(enteredValues.password.trim(), 8, 15);
+  const confirmPasswordIsInvalid =
     didChange.confirmPassword &&
     !isEqualsToOtherValue(
       enteredValues.confirmPassword.trim(),
@@ -89,6 +90,14 @@ export function SignupComponent() {
 
   function handleSignUp(e) {
     e.preventDefault();
+    if (
+      usernameIsInvalid ||
+      emailIsInvalid ||
+      zipCodeIsInvalid ||
+      passwordIsInvalid ||
+      confirmPasswordIsInvalid
+    )
+      return;
     const signupFormData = new FormData(e.target);
     const signupData = Object.fromEntries(signupFormData.entries());
 
@@ -130,13 +139,13 @@ export function SignupComponent() {
         <InputComponent
           label="Zip Code"
           id="zip-code"
-          type="zip-code"
+          type="text"
           name="zip-code"
           className="form-inputs"
           pattern="[0-9]{5}"
           title="Five digit zip code"
-          onBlur={() => handleInputFocus('zipCode')}
-          onChange={e => handleEnteredValues('zipCode', e.target.value)}
+          onBlur={() => handleInputFocus('zip-code')}
+          onChange={e => handleEnteredValues('zip-code', e.target.value)}
           error={zipCodeIsInvalid && 'Please enter a valid zip code!'}
         />
         <InputComponent
@@ -155,7 +164,9 @@ export function SignupComponent() {
           type="password"
           name="confirm-password"
           onBlur={() => handleInputFocus('confirm-password')}
-          onChange={e => handleEnteredValues('confirmPassword', e.target.value)}
+          onChange={e =>
+            handleEnteredValues('confirm-password', e.target.value)
+          }
           error={
             confirmPasswordIsInvalid && 'Please enter the same valid password!'
           }
