@@ -12,7 +12,7 @@ import {
   isEmail,
   isZipCode,
   isNotEmpty,
-  hasLength,
+  hasMinLength,
   isEqualsToOtherValue,
 } from '../../../utils/validation.js';
 import './Signup.scss';
