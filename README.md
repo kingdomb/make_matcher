@@ -22,6 +22,8 @@
 
 [Forecast](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Forecast.pdf)
 
+[Stories/Tasks](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Stories.pdf)
+
 [SCRUM Meeting](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/SCRUM.pdf)
 
 [Mobbing](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Mobbing.png)
