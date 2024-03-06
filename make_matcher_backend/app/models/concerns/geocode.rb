@@ -5,7 +5,8 @@ module Geocode
 
   API_KEY = ENV['GEOCODE_KEY'] || Rails.application.credentials.geocode[:api_key]
   GEOCODE_URL = "https://geocode.maps.co/search?api_key=#{API_KEY}&country=US&postalcode=".freeze
-  TIMEZONE_URL = "https://www.timeapi.io/api/TimeZone/coordinate?".freeze
+  TIMEZONE_URL = 'https://www.timeapi.io/api/TimeZone/coordinate?'.freeze
+  UTC_OFFSET_URL = 'https://www.timeapi.io/api/TimeZone/zone?timeZone='.freeze
 
   def self.coordinate(zip_code)
     uri = URI("#{GEOCODE_URL}#{zip_code}")
@@ -17,14 +18,24 @@ module Geocode
     { latitude: data['lat'], longitude: data['lon'] }
   end
 
+  def self.calc_utc_offset(timezone)
+    uri = URI("#{UTC_OFFSET_URL}#{timezone}")
+    res = Net::HTTP.get_response(uri)
+    return 'There was an error' unless res.is_a?(Net::HTTPSuccess)
+
+    Rails.logger.info "Finding UTC offset for #{timezone} time zone"
+    utc_offset = JSON.parse(res.body)['standardUtcOffset']['seconds']
+    { utc_offset: }
+  end
+
   def self.locate_timezone(lat, long)
     uri = URI("#{TIMEZONE_URL}latitude=#{lat}&longitude=#{long}")
     res = Net::HTTP.get_response(uri)
     return 'There was an error' unless res.is_a?(Net::HTTPSuccess)
 
     Rails.logger.info "Finding timezone for #{lat}, #{long}"
-    timezone = JSON.parse(res.body)["timeZone"]
-    { timezone: }
+    timezone = JSON.parse(res.body)['timeZone']
+    calc_utc_offset(timezone)
   end
 
   RAD_PER_DEG = Math::PI / 180

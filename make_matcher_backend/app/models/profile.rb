@@ -16,13 +16,14 @@ class Profile < ApplicationRecord
 
   # Associations
   belongs_to :user
+  has_and_belongs_to_many :games
 
   # Callbacks
   before_save :locate
 
   # Validations
   validates_presence_of :display_name
-  validates :intensity, :skill, :language, in: 1..10
+  validates :intensity, :skill, :language, inclusion: 1..10, allow_nil: true
 
   # Constants
   COORDINATES = %w[latitude longitude].freeze

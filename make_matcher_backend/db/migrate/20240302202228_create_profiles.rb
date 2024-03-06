@@ -6,7 +6,7 @@ class CreateProfiles < ActiveRecord::Migration[7.1]
       t.string :zip_code
       t.decimal :latitude, precision: 10, scale: 6
       t.decimal :longitude, precision: 10, scale: 6
-      t.string :timezone
+      t.integer :utc_offset
       t.date :date_of_birth
       t.integer :intensity
       t.integer :skill
