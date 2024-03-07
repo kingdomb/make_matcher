@@ -4,6 +4,7 @@ class Profile < ApplicationRecord
   # Attributes
   # user_id         User Key
   # display_name    Display Name
+  # zip_code        Zip Code
   # latitude        Latitude
   # longitude       Longitude
   # timezone        Time Zone
