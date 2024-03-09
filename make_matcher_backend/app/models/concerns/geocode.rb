@@ -4,7 +4,7 @@ module Geocode
   require 'json'
 
   API_KEY = ENV['GEOCODE_KEY'] || Rails.application.credentials.geocode[:api_key]
-  GEOCODE_URL = "https://geoc24ode.maps.co/search?api_key=#{API_KEY}&country=US&postalcode=".freeze
+  GEOCODE_URL = "https://geocode.maps.co/search?api_key=#{API_KEY}&country=US&postalcode=".freeze
   TIMEZONE_URL = 'https://www.timeapi.io/api/TimeZone/coordinate?'.freeze
   UTC_OFFSET_URL = 'https://www.timeapi.io/api/TimeZone/zone?timeZone='.freeze
 
