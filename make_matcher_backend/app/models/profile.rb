@@ -31,8 +31,22 @@ class Profile < ApplicationRecord
 
   private
 
+  def locate_coordinates?
+    return false unless zip_code.present?
+
+    zip_code_changed? || COORDINATES.any? { |l| send(l).nil? }
+  end
+
+  def locate_utc_offset?
+    return false unless COORDINATES.all? { |l| send(l).present? }
+
+    (changed & COORDINATES).present? || utc_offset.nil?
+  end
+
   def locate
-    assign_attributes Geocode.coordinate(zip_code) if zip_code_changed?
-    assign_attributes Geocode.locate_timezone(latitude, longitude) if (changed & COORDINATES).present?
+    assign_attributes Geocode.coordinate(zip_code) if locate_coordinates?
+    assign_attributes Geocode.locate_timezone(latitude, longitude) if locate_utc_offset?
+  rescue StandardError => e
+    Rails.logger.error "There was an error locating the zip code (#{zip_code}) -- #{e.inspect}"
   end
 end

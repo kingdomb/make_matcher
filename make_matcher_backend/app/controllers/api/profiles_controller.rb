@@ -6,7 +6,7 @@ class Api::ProfilesController < Api::Controller
   end
 
   def update
-    @profile.update(profile_params)
+    @profile.update!(profile_params)
     render_profile
   end
 
