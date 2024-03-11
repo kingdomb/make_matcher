@@ -8,6 +8,10 @@ Rails.application.routes.draw do
     get     "/users/current",     to: "users#current"
     post    "/login",             to: "auth#login"
 
+    # Profiles
+    get     "profile",            to: "profiles#edit"
+    post    "profile",            to: "profiles#update"
+
     match   "*path",              to: "#invalid",                 via: %i[post get]
   end
 
