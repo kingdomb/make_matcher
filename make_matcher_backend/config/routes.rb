@@ -8,6 +8,12 @@ Rails.application.routes.draw do
     get     "/users/current",     to: "users#current"
     post    "/login",             to: "auth#login"
 
+    resources :groups, only: [:create, :index, :destroy, :show] do
+      resources :memberships, only: [:create, :destroy]
+    end
+    resources :friends, only: [:create, :index, :destroy]
+    resources :friend_requests, only: [:create, :index, :destroy]
+
     # Profiles
     get     "profile",            to: "profiles#edit"
     post    "profile",            to: "profiles#update"
