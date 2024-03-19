@@ -13,11 +13,13 @@ import {
 import { useTestComponentSlice } from './slice';
 import { CSSProperties } from 'react';
 import { LogoutButton } from '../LogoutButton/Loadable';
+import ProfileTest from '../ProfileTest';
 
 interface Props {}
 
 export const testStyles: Record<string, CSSProperties> = {
   container: {
+    width: '350px',
     fontFamily: 'Arial, sans-serif',
     margin: '20px',
     border: '1px solid #ccc',
@@ -85,6 +87,7 @@ export function TestComponent(props: Props) {
           {loading && <p style={testStyles.paragraph}>Loading...</p>}
           {status && <p style={testStyles.successText}>Status: {status}</p>}
           {error && <p style={testStyles.errorText}>Error: {error}</p>}
+          <ProfileTest />
           <LogoutButton />
         </div>
       </div>
