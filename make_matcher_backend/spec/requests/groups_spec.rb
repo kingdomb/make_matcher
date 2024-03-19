@@ -1,66 +1,96 @@
 require 'rails_helper'
 
 RSpec.describe "Groups", type: :request do
-  describe "GET /friend_requests" do
+  describe "GET /groups" do
     context "authorized" do
-      it "returns current user friend requests" do
+      it "returns current user groups" do
         headers = authenticated_headers
-        FriendRequest.create!(requestee_id: User.last.id, requestor_id: User.last.id)
+        Group.create!(name: "test group")
+        GroupMembership.create!(user_id: User.all.last.id, group_id: Group.all.last.id)
 
-        get "/api/friend_requests", headers: headers
+        get "/api/groups", headers: headers
 
-        expect(json.dig("friend_requests", 0, "requestee_id")).to eq(User.last.id)
-        expect(json.dig("friend_requests", 0, "requestor_id")).to eq(User.last.id)
-        expect(json.dig("friend_requests", 0, "friend_name")).to eq(User.last.username)
+        expect(json.dig("groups", 0, "name")).to eq("test group")
+        expect(json.dig("groups", 0, "users", 0, "id")).to eq(User.last.id)
+      end
+
+      it "returns all groups if passed :all parameter" do
+        headers = authenticated_headers
+        Group.create!(name: "test group 1")
+        Group.create!(name: "test group 2")
+
+        get "/api/groups", headers: headers, params: { all: true }
+
+        expect(json.dig("groups", 0, "name")).to eq("test group 1")
+        expect(json.dig("groups", 1, "name")).to eq("test group 2")
       end
     end
 
     context "unauthorized" do
       it "returns 401" do
-        get "/api/friend_requests", headers: api_headers
+        get "/api/groups", headers: api_headers
         expect(json["message"]).to eq("Unauthorized")
         expect(response.status).to eq(401)
       end
     end
   end
 
-  describe "POST /friend_requests" do
+  describe "POST /groups" do
     context "authorized" do
-      it "create current user friend requests" do
+      it "create group" do
         headers = authenticated_headers
 
-        post "/api/friend_requests", headers: headers, params: { requestee_id: User.last.id }
+        post "/api/groups", headers: headers, params: { name: "test group" }
 
-        expect(json.dig("friend_request", "requestee_id")).to eq(User.last.id)
-        expect(json.dig("friend_request", "requestor_id")).to eq(User.last.id)
-        expect(json.dig("friend_request", "friend_name")).to eq(User.last.username)
+        expect(json.dig("group", "name")).to eq("test group")
       end
     end
 
     context "unauthorized" do
       it "returns 401" do
-        post "/api/friend_requests", headers: api_headers
+        post "/api/groups", headers: api_headers
         expect(json["message"]).to eq("Unauthorized")
         expect(response.status).to eq(401)
       end
     end
   end
 
-  describe "DELETE /friend_requests" do
+  describe "DELETE /groups/:id" do
     context "authorized" do
-      it "delete current user friend requests" do
+      it "delete group" do
         headers = authenticated_headers
-        FriendRequest.create!(requestee_id: User.last.id, requestor_id: User.last.id)
+        Group.create!(name: "test group")
 
-        delete "/api/friend_requests/#{User.last.id}", headers: headers
+        delete "/api/groups/#{Group.last.id}", headers: headers
 
-        expect(User.last.friends).to be_empty
+        expect(Group.all).to be_empty
       end
     end
 
     context "unauthorized" do
       it "returns 401" do
-        delete "/api/friend_requests/0", headers: api_headers
+        delete "/api/groups/0", headers: api_headers
+        expect(json["message"]).to eq("Unauthorized")
+        expect(response.status).to eq(401)
+      end
+    end
+  end
+
+  describe "GET /groups/:id" do
+    context "authorized" do
+      it "retrieve group" do
+        headers = authenticated_headers
+        Group.create!(name: "test group")
+
+        get "/api/groups/#{Group.last.id}", headers: headers
+
+        expect(json.dig("group", "name")).to eq("test group")
+      end
+    end
+
+    context "unauthorized" do
+      it "returns 401" do
+        get "/api/groups/0", headers: api_headers
         expect(json["message"]).to eq("Unauthorized")
         expect(response.status).to eq(401)
       end

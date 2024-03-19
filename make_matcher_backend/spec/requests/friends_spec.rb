@@ -46,7 +46,7 @@ RSpec.describe "Friends", type: :request do
     end
   end
 
-  describe "DELETE /friends" do
+  describe "DELETE /friends/:id" do
     context "authorized" do
       it "delete current user friend" do
         headers = authenticated_headers

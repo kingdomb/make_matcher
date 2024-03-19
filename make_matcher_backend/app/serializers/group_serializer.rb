@@ -1,7 +1,7 @@
 class GroupSerializer < ActiveModel::Serializer
   type :group
 
-  attributes :name
+  attributes :id, :name
 
   has_many :users, serializer: UserSerializer
 end

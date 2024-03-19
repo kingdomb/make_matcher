@@ -46,7 +46,7 @@ RSpec.describe "FriendRequests", type: :request do
     end
   end
 
-  describe "DELETE /friend_requests" do
+  describe "DELETE /friend_requests/:id" do
     context "authorized" do
       it "delete current user friend requests" do
         headers = authenticated_headers
@@ -54,7 +54,7 @@ RSpec.describe "FriendRequests", type: :request do
 
         delete "/api/friend_requests/#{User.last.id}", headers: headers
 
-        expect(User.last.friends).to be_empty
+        expect(User.last.friend_requests).to be_empty
       end
     end
 
