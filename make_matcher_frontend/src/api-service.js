@@ -30,7 +30,7 @@ export function apiGet(path, params = {}) {
 export function apiPostAuth(path, data = {}) {
   console.log(`POST request to: ${apiBaseUrl}/${path}`);
   console.log('data:', data);
-  console.log('headers:', getHeaders());
+  // console.log('headers:', getHeaders());
 
   return axios
     .post(`${apiBaseUrl}/${path}`, data, {
@@ -53,7 +53,7 @@ export function apiGetProfile(token) {
 
 export function apiPostProfile(data, token) {
   console.log(`POST request to: ${apiBaseUrl}/profile`);
-  console.log('data:', data);
+  // console.log('data:', data);
   return axios
     .post(`${apiBaseUrl}/profile`, data, {
       headers: {

@@ -44,6 +44,7 @@ const slice = createSlice({
       state.profile = null;
       state.loading = false;
       state.error = null;
+      state.updateSuccess = false;
     },
   },
 });

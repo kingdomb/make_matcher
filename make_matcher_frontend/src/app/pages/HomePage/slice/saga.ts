@@ -7,7 +7,7 @@ import { getErrorMessage } from 'api-service';
 function* fetchProfile(action) {
   try {
     const token = action.payload.token;
-    console.log('*** checking token:', token);
+    // console.log('*** checking token:', token);
     const response = yield call(apiGetProfile, token);
     console.log('Profile data: ', response.data);
     yield put(actions.fetchProfileSuccess(response.data));

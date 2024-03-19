@@ -65,13 +65,13 @@ const ProfileTest = () => {
   return (
     <div>
       <br />
-      <h4>Test Profile Fetch and Update</h4>
+      <h4>Test API Calls to Fetch & Update Profile</h4>
       <button
         onClick={handleFetchProfile}
         disabled={loading}
         style={testStyles.button}
       >
-        Fetch Profile
+        FETCH PROFILE
       </button>
 
       {loading && <p>Loading...</p>}
@@ -98,7 +98,7 @@ const ProfileTest = () => {
         disabled={loading || !editableProfile}
         style={testStyles.button}
       >
-        Update Profile
+        UPDATE PROFILE
       </button>
       <br />
     </div>
