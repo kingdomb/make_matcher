@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { testComponentActions as actions } from '.';
-import { apiPost } from 'api-service';
+import { apiPostAuth } from 'api-service';
 import axios from 'axios';
 
 function* fetchStatusSaga() {
   try {
-    const response = yield call(apiPost, '', {});
+    const response = yield call(apiPostAuth, '', {});
     if (response.data.status) {
       yield put(actions.fetchStatusSuccess(response.data.status));
     } else {
