@@ -30,7 +30,7 @@ export function apiGet(path, params = {}) {
 export function apiPostAuth(path, data = {}) {
   console.log(`POST request to: ${apiBaseUrl}/${path}`);
   console.log('data:', data);
-  // console.log('headers:', getHeaders());
+  console.log('headers:', getHeaders());
 
   return axios
     .post(`${apiBaseUrl}/${path}`, data, {
@@ -44,7 +44,7 @@ export function apiGetProfile(token) {
   return axios
     .get(`${apiBaseUrl}/profile`, {
       headers: {
-        'x-api-key': `Bearer ${generateToken()}`,
+        'x-api-key': generateToken(),
         Authorization: `Token ${token}`,
       },
     })
@@ -58,7 +58,7 @@ export function apiPostProfile(data, token) {
     .post(`${apiBaseUrl}/profile`, data, {
       headers: {
         'Content-Type': 'application/json',
-        'x-api-key': `Bearer ${generateToken()}`,
+        'x-api-key': generateToken(),
         Authorization: `Token ${token}`,
       },
     })
