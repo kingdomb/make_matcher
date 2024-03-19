@@ -1,8 +1,17 @@
 require 'rails_helper'
 
 RSpec.describe Profile, type: :model do
-  before :each do
-    @profile = create :profile
+  describe "validations" do
+    it { should validate_presence_of(:display_name) }
+    %i[intensity language].each do |field|
+      it { should allow_value(1..10).for(field) }
+      it { should_not allow_value(11).for(field) }
+      it { should_not allow_value(-1).for(field) }
+    end
+  end
+
+  describe "relations" do
+    it { should have_and_belong_to_many(:games) }
   end
 
   describe 'creation' do
@@ -14,34 +23,11 @@ RSpec.describe Profile, type: :model do
     end
   end
 
-  describe 'validations' do
-    it { should validate_presence_of(:display_name) }
-    context 'when the intensity is between 1 and 10' do
-      it 'is invalid' do
-        @profile.intensity = 11
-        expect(@profile.valid?).to be false
-        @profile.intensity = 0
-        expect(@profile.valid?).to be false
-        @profile.intensity = 10
-        expect(@profile.valid?).to be true
-        @profile.intensity = 1
-        expect(@profile.valid?).to be true
-      end
-    end
-  end
-
-  describe "associations" do
-    it "belongs to a user" do
-      expect(@profile.user.present?).to be true
-    end
-
-    it "has and belongs to many games" do
-      expect(@profile.games.present?).to be true
-    end
-  end
-
   describe "geocoding" do
     context "when the zip code has changed" do
+      before do
+        @profile = create :profile
+      end
       it "should geocode its coordinates and calculate UTC offset" do
         @profile.save
         expect(@profile.latitude).to eq(0.41994404e2)

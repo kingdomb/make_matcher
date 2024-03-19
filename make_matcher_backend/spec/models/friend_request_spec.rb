@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe FriendRequest, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "relations" do
+    it { should belong_to(:requestor) }
+    it { should belong_to(:requestee) }
+  end
 end

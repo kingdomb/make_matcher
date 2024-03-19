@@ -9,7 +9,8 @@ Rails.application.routes.draw do
     post    "/login",             to: "auth#login"
 
     resources :groups, only: [:create, :index, :destroy, :show] do
-      resources :memberships, only: [:create, :destroy]
+      post "/memberships", to: "memberships#create"
+      delete "/memberships", to: "memberships#destroy"
     end
     resources :friends, only: [:create, :index, :destroy]
     resources :friend_requests, only: [:create, :index, :destroy]

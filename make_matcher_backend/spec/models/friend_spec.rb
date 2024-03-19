@@ -1,5 +1,8 @@
 require 'rails_helper'
 
 RSpec.describe Friend, type: :model do
-  pending "add some examples to (or delete) #{__FILE__}"
+  describe "relations" do
+    it { should belong_to(:destination) }
+    it { should belong_to(:source) }
+  end
 end

@@ -8,17 +8,21 @@ class Api::GroupsController < Api::Controller
   end
   
   def index
-    render json: { groups: current_user.groups }, each_serializer: GroupSerializer
+    if params[:all]
+      render json: { groups: Group.all.map {|g| GroupSerializer.new(g) } }
+    else
+      render json: { groups: current_user.groups.map {|g| GroupSerializer.new(g) } }
+    end
   end
 
   def destroy
-    Group.where(group_params).destroy_all
+    Group.where(id: params[:id]).destroy_all
 
     render json: { message: "Success" }, status: :ok
   end
 
   def show
-    group = Group.find!(params[:id])
+    group = Group.find(params[:id])
 
     render json: { group: GroupSerializer.new(group) }, status: :ok
   end

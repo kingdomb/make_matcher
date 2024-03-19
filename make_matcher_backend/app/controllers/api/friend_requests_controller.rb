@@ -8,11 +8,11 @@ class Api::FriendRequestsController < Api::Controller
   end
   
   def index
-    render json: { friend_requests: current_user.friend_requests }, each_serializer: FriendRequestSerializer
+    render json: { friend_requests: current_user.friend_requests.map {|r| FriendRequestSerializer.new(r) } }
   end
 
   def destroy
-    FriendRequest.where(friend_request_params.merge(requestor_id: current_user.id)).destroy_all
+    FriendRequest.where(requestee_id: params[:id], requestor_id: current_user.id).destroy_all
 
     render json: { message: "Success" }, status: :ok
   end
