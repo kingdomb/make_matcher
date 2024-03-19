@@ -27,7 +27,7 @@ export function apiGet(path, params = {}) {
     .catch(handleAxiosError);
 }
 
-export function apiPost(path, data = {}) {
+export function apiPostAuth(path, data = {}) {
   console.log(`POST request to: ${apiBaseUrl}/${path}`);
   console.log('data:', data);
   // console.log('headers:', getHeaders());
@@ -35,6 +35,32 @@ export function apiPost(path, data = {}) {
   return axios
     .post(`${apiBaseUrl}/${path}`, data, {
       headers: getHeaders(),
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiGetProfile(token) {
+  console.log(`GET request to: ${apiBaseUrl}/profile`);
+  return axios
+    .get(`${apiBaseUrl}/profile`, {
+      headers: {
+        'x-api-key': `Bearer ${generateToken()}`,
+        Authorization: `Token ${token}`,
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiPostProfile(data, token) {
+  console.log(`POST request to: ${apiBaseUrl}/profile`);
+  console.log('data:', data);
+  return axios
+    .post(`${apiBaseUrl}/profile`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        'x-api-key': `Bearer ${generateToken()}`,
+        Authorization: `Token ${token}`,
+      },
     })
     .catch(handleAxiosError);
 }
