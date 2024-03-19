@@ -1,6 +1,6 @@
 FactoryBot.define do
   factory :user do
-    username { "test_user" }
+    username { SecureRandom.alphanumeric(5) }
     password { "abc123" }
     password_confirmation { "abc123" }
   end

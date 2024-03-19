@@ -12,7 +12,7 @@ import {
   isEmail,
   isZipCode,
   isNotEmpty,
-  hasLength,
+  hasMinLength,
   isEqualsToOtherValue,
 } from '../../../utils/validation.js';
 import './Signup.scss';
@@ -151,8 +151,8 @@ export function SignupComponent() {
           className="form-inputs"
           pattern="[0-9]{5}"
           title="Five digit zip code"
-          onBlur={() => handleInputFocus('zip-code')}
-          onChange={e => handleEnteredValues('zip-code', e.target.value)}
+          onBlur={() => handleInputFocus('zipCode')}
+          onChange={e => handleEnteredValues('zipCode', e.target.value)}
           error={zipCodeIsInvalid && 'Please enter a valid zip code!'}
         />
         <InputComponent

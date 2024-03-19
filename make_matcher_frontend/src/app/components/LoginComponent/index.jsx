@@ -8,7 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { InputComponent } from '../InputComponent';
-import { isNotEmpty, hasLength } from '../../../utils/validation.js';
+import { isNotEmpty, hasMinLength } from '../../../utils/validation.js';
 import './Login.scss';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
@@ -43,7 +43,7 @@ export function LoginComponent(props) {
   let usernameIsInvalid =
     didChange.username && !isNotEmpty(enteredValues.username);
   let passwordIsInvalid =
-    didChange.password && !hasLength(enteredValues.password.trim(), 8);
+    didChange.password && !hasMinLength(enteredValues.password.trim(), 8);
 
   function handleEnteredValues(identifier, value) {
     setEnteredValues(previousValues => ({

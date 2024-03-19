@@ -22,10 +22,17 @@
 
 [Forecast](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Forecast.pdf)
 
-[SCRUM Meeting](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/SCRUM.pdf)
+[Stories/Tasks](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Stories.pdf)
+
+[Scrum Artifact I](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Scrum1.pdf)
+
+[Scrum Artifact II](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Scrum2.pdf)
 
 [Mobbing](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Mobbing.png)
 
 [Burndown](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Burndown.png)
 
-[Retrospective](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Retrospective.pdf)
+[Review](https://github.com/makematcher/make_matcher/blob/main/documentation/sprints/1/Review.pdf)
+
+---
+_Game Data provided by [MobyGames](https://www.mobygames.com/)_
