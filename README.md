@@ -36,3 +36,7 @@
 
 ---
 _Game Data provided by [MobyGames](https://www.mobygames.com/)_
+
+_Geocoding provided by [Geocoding API](https://geocode.maps.co)_
+
+_Time Zones and UTC Offsets provided by [TimeAPI](https://timeapi.io)_
