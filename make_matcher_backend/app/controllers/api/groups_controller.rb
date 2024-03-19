@@ -8,7 +8,7 @@ class Api::GroupsController < Api::Controller
   end
   
   def index
-    render json: { groups: current_user.groups }, each_serializer: GroupSerializer
+    render json: { groups: current_user.groups.map {|g| GroupSerializer.new(g) } }
   end
 
   def destroy
