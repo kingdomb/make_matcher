@@ -15,6 +15,8 @@
 
 [Kanban Board](https://swe6813-1.atlassian.net/jira/software/projects/MM/boards/1)
 
+[API Documentation](https://documenter.getpostman.com/view/27971800/2sA2xiWX8m#b8181758-d0f2-44a1-b6ba-920e8a48a45e)
+
 [Current Prototype](https://agreeable-river-036ae3910.4.azurestaticapps.net/)
 
 
