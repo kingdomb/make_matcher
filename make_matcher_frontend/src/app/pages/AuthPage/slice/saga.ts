@@ -1,11 +1,11 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { authActions as actions } from '.';
-import { apiPost } from 'api-service';
+import { apiPostAuth } from 'api-service';
 import { getErrorMessage } from 'api-service';
 
 function* handleLogin(action) {
   try {
-    const response = yield call(apiPost, 'login', action.payload);
+    const response = yield call(apiPostAuth, 'login', action.payload);
     console.log('Login response data: ', response.data);
     const { token, user } = response.data;
     yield put(
@@ -23,7 +23,7 @@ function* handleLogin(action) {
 function* handleSignup(action) {
   const { username, password } = action.payload;
   try {
-    const response = yield call(apiPost, 'users', { username, password });
+    const response = yield call(apiPostAuth, 'users', { username, password });
     console.log('Signup response data: ', response.data);
     const { token, user } = response.data;
     yield put(

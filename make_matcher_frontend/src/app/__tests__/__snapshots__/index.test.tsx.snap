@@ -21,14 +21,22 @@ exports[`<App /> should render and match the snapshot 1`] = `
   </Helmet>
   <Routes>
     <Route
-      element={<Unknown />}
+      element={<AuthPage />}
+      index={true}
       path="/"
     />
     <Route
       element={<Unknown />}
+      path="/home"
+    />
+    <Route
+      element={<Unknown />}
+      path="/signup"
+    />
+    <Route
+      element={<NotFoundPage />}
       path="*"
     />
   </Routes>
-  <Memo(l) />
 </BrowserRouter>
 `;
