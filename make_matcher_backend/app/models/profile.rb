@@ -18,6 +18,9 @@ class Profile < ApplicationRecord
   # Associations
   belongs_to :user
   has_and_belongs_to_many :games
+  def matches
+    Match.where("matcher_id = :id OR matched_id = :id", id:)
+  end
 
   # Callbacks
   before_save :locate
@@ -28,6 +31,12 @@ class Profile < ApplicationRecord
 
   # Constants
   COORDINATES = %w[latitude longitude].freeze
+
+  def age
+    return rand(0..99) if date_of_birth.nil?
+
+    (Date.today - date_of_birth).to_i / 365
+  end
 
   private
 
