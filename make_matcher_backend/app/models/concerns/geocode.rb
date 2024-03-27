@@ -38,24 +38,19 @@ module Geocode
   def self.distance(from:, to:)
     return if [from, to].include?(nil)
 
-    begin
+    lat1 = from.latitude
+    lon1 = from.longitude
+    lat2 = to.latitude
+    lon2 = to.longitude
+    lat1_rad = lat1 * RAD_PER_DEG
+    lat2_rad = lat2 * RAD_PER_DEG
+    lon1_rad = lon1 * RAD_PER_DEG
+    lon2_rad = lon2 * RAD_PER_DEG
 
-      lat1 = from.lat
-      lon1 = from.long
-      lat2 = to.lat
-      lon2 = to.long
-      lat1_rad = lat1 * RAD_PER_DEG
-      lat2_rad = lat2 * RAD_PER_DEG
-      lon1_rad = lon1 * RAD_PER_DEG
-      lon2_rad = lon2 * RAD_PER_DEG
+    a = Math.sin((lat2_rad - lat1_rad) / 2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin((lon2_rad - lon1_rad) / 2)**2
+    c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
 
-      a = Math.sin((lat2_rad - lat1_rad) / 2)**2 + Math.cos(lat1_rad) * Math.cos(lat2_rad) * Math.sin((lon2_rad - lon1_rad) / 2)**2
-      c = 2 * Math.atan2(Math.sqrt(a), Math.sqrt(1 - a))
-
-      RM * c * 0.00062137 # Delta in miles
-    rescue
-      1
-    end
+    RM * c * 0.00062137 # Delta in miles
   end
 end
 
