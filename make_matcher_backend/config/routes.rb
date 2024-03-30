@@ -14,6 +14,7 @@ Rails.application.routes.draw do
     end
     resources :friends, only: [:create, :index, :destroy]
     resources :friend_requests, only: [:create, :index, :destroy]
+    resources :matches, only: [:index, :destroy]
 
     # Profiles
     get     "profile",            to: "profiles#edit"

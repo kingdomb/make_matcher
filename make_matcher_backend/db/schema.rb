@@ -15,8 +15,8 @@ ActiveRecord::Schema[7.1].define(version: 2024_03_27_161733) do
   enable_extension "plpgsql"
 
   create_table "api_keys", force: :cascade do |t|
-    t.string "key", default: "ksuk_edd7780bfeba046406782a1a67792002"
-    t.string "secret", default: "ksus_479baf6b252ec4bee32ff5de9c9f52d7"
+    t.string "key", default: "ksuk_3acfb725f860521abe04453c0cdd8be6"
+    t.string "secret", default: "ksus_ecadb6293bd7c92d3b96ee17f6468607"
     t.string "name"
     t.boolean "active"
     t.datetime "created_at", null: false

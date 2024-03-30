@@ -18,9 +18,7 @@ class Profile < ApplicationRecord
   # Associations
   belongs_to :user
   has_and_belongs_to_many :games
-  def matches
-    Match.where("matcher_id = :id OR matched_id = :id", id:)
-  end
+  has_many :matches, foreign_key: :matcher_id
 
   # Callbacks
   before_save :locate
