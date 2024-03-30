@@ -11,4 +11,5 @@ class User < ApplicationRecord
   has_many :group_memberships, foreign_key: :user_id
   has_many :groups, through: :group_memberships
   has_many :friend_requests, class_name: "FriendRequest", foreign_key: :requestee_id
+  has_many :matches, through: :profile
 end
