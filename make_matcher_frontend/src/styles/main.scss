@@ -50,6 +50,20 @@ body {
   font-size: .8rem;
 }
 
+button {
+  font-size: 1.5rem;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+  font-weight: 600;
+  background: transparent;
+  &:focus {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  }
+}
 
 
 

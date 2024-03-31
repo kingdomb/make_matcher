@@ -31,6 +31,9 @@ export function SignupComponent() {
   // added
   const [passwordMismatchError, setPasswordMismatchError] = useState('');
 
+  // TODO ATTN Arbern
+  const [userProfileIsComplete, setUserProfileIsComplete] = useState(false);
+
   const [enteredValues, setEnteredValues] = useState({
     username: '',
     email: '',
@@ -50,11 +53,14 @@ export function SignupComponent() {
   // if authenticated, either route to home,
   // or render Player Profile form component
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && userProfileIsComplete) {
       setIsNavigationPending(true);
       navigate('/home');
+    } else if (isAuthenticated) {
+      setIsNavigationPending(true);
+      navigate('/profile');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, userProfileIsComplete, navigate]);
 
   const usernameIsInvalid =
     didChange.username && !isNotEmpty(enteredValues.username);
