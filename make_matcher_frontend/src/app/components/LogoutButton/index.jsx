@@ -25,10 +25,10 @@ export function LogoutButton() {
   };
 
   return (
-    <div>
+    <>
       <button className="logout-btn" onClick={handleLogout}>
         Log Out
       </button>
-    </div>
+    </>
   );
 }

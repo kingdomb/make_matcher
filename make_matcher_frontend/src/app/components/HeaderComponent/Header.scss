@@ -1,4 +1,4 @@
-@import "../../../styles/variables";
+@import '../../../styles/variables';
 
 .header-wrapper {
   display: flex;
@@ -11,7 +11,7 @@
   width: 100%;
   z-index: 99;
   background-color: $background-color;
-  box-shadow:20px 15px 15px -10px white;
+  box-shadow: 20px 15px 15px -10px white;
 }
 
 .nav-logo {
@@ -22,13 +22,13 @@
   align-items: center;
 }
 
-.nav-logo-matchimage{
+.nav-logo-matchimage {
   max-width: 20%;
-  max-height: 50%; 
+  max-height: 50%;
 }
 
 .nav-logo-svgimage {
-  max-width:60%;
+  max-width: 60%;
   // max-height: 50%;
   filter: drop-shadow(2px 2px 4px rgba(255, 255, 0, 0.5));
 }
@@ -47,22 +47,30 @@
   text-decoration: none;
   font-size: 1.5rem;
   color: rgb(78, 78, 78);
-   &:hover {
-    font-weight: 500;
+  padding: 0rem 3rem;
+  padding-top: 0.3rem;
+  border: none;
+  border-radius: 50px;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+  background: transparent;
+  &:hover {
+    font-weight: 600;
   }
 }
 
 .active {
-  color: black;
+  color: rgb(78, 78, 78);
+  font-weight: 600;
   font-size: 1.5rem;
   padding: 0rem 3rem;
+  padding-top: 0.3rem;
   border: none;
-  border-radius: 50PX;
+  border-radius: 50px;
   cursor: pointer;
-  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
-  font-weight: 600;
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
   background: transparent;
-  &:focus {
-    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
-  }
+  // &:focus {
+  //   box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  // }
 }
