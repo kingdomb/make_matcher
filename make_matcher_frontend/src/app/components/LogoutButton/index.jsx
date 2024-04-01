@@ -4,7 +4,6 @@
  *
  */
 import * as React from 'react';
-import { testStyles } from '../TestComponent';
 import { useNavigate } from 'react-router';
 import { useDispatch } from 'react-redux';
 import { useAuthSlice } from 'app/pages/AuthPage/slice';
@@ -27,9 +26,8 @@ export function LogoutButton() {
 
   return (
     <div>
-      {/* TODO: update logout button styling */}
-      <button onClick={handleLogout} style={testStyles.button}>
-        Log out
+      <button className="logout-btn" onClick={handleLogout}>
+        Log Out
       </button>
     </div>
   );

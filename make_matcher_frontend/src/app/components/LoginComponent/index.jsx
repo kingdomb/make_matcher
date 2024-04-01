@@ -33,12 +33,21 @@ export function LoginComponent(props) {
     password: false,
   });
 
+  // TODO ATTN Arbern
+  // eslint-disable-next-line no-unused-vars
+  const [userProfileIsComplete, setUserProfileIsComplete] = useState(false);
+
+  // if authenticated, either route to home,
+  // or render Player Profile form component
   useEffect(() => {
-    if (isAuthenticated) {
+    if (isAuthenticated && userProfileIsComplete) {
       setIsNavigationPending(true);
       navigate('/home');
+    } else if (isAuthenticated) {
+      setIsNavigationPending(true);
+      navigate('/profile');
     }
-  }, [isAuthenticated, navigate]);
+  }, [isAuthenticated, userProfileIsComplete, navigate]);
 
   let usernameIsInvalid =
     didChange.username && !isNotEmpty(enteredValues.username);

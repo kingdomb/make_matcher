@@ -41,14 +41,6 @@ export const testStyles: Record<string, CSSProperties> = {
     fontSize: '16px',
     color: '#555',
   },
-  button: {
-    fontFamily: 'Arial, sans-serif',
-    padding: '10px 15px',
-    margin: '5px',
-    border: 'none',
-    borderRadius: '4px',
-    cursor: 'pointer',
-  },
   paragraph: {
     fontFamily: 'Arial, sans-serif',
   },

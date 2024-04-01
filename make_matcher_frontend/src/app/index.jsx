@@ -18,6 +18,7 @@ import { HomePage } from './pages/HomePage/Loadable';
 import { NotFoundPage } from './pages/NotFoundPage';
 import { useTranslation } from 'react-i18next';
 import { SignupPage } from './pages/SignupPage/Loadable';
+import { ProfilePage } from './pages/ProfilePage';
 
 export function App() {
   const { i18n } = useTranslation();
@@ -35,6 +36,7 @@ export function App() {
         <Route index={true} path="/" element={<AuthPage />} />
         <Route path="/home" element={<HomePage />} />
         <Route path="/signup" element={<SignupPage />} />
+        <Route path="/profile" element={<ProfilePage />} />
         <Route path="*" element={<NotFoundPage />} />
       </Routes>
     </BrowserRouter>
