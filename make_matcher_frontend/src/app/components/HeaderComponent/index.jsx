@@ -11,7 +11,7 @@ export function HeaderComponent() {
   return (
     <>
       <nav className="header-wrapper">
-        <Link to="/home" className="navbar-link nav-logo" id="nav-logo">
+        <Link to="/home" className="navbar-logo-link nav-logo" id="nav-logo">
           <img src={matchLogo} alt="" className="nav-logo-matchimage" />
           <img src={svgLogo} alt="" className="nav-logo-svgimage" />
         </Link>
