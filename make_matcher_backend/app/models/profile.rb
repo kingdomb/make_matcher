@@ -19,6 +19,9 @@ class Profile < ApplicationRecord
   belongs_to :user
   has_and_belongs_to_many :games
   has_many :matches, foreign_key: :matcher_id
+  def matches
+    super.order(:score).limit(10)
+  end
 
   # Callbacks
   before_save :locate
@@ -29,6 +32,8 @@ class Profile < ApplicationRecord
 
   # Constants
   COORDINATES = %w[latitude longitude].freeze
+  DAYS = %w[Mon Tues Wed Thurs Fri Sat Sun].freeze
+  TIMES = %w[Morning Afternoon Evening Graveyard].freeze
 
   def age
     return rand(0..99) if date_of_birth.nil?
