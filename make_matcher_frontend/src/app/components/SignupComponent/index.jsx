@@ -32,6 +32,7 @@ export function SignupComponent() {
   const [passwordMismatchError, setPasswordMismatchError] = useState('');
 
   // TODO ATTN Arbern
+  // eslint-disable-next-line no-unused-vars
   const [userProfileIsComplete, setUserProfileIsComplete] = useState(false);
 
   const [enteredValues, setEnteredValues] = useState({

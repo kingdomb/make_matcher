@@ -34,6 +34,7 @@ export function LoginComponent(props) {
   });
 
   // TODO ATTN Arbern
+  // eslint-disable-next-line no-unused-vars
   const [userProfileIsComplete, setUserProfileIsComplete] = useState(false);
 
   // if authenticated, either route to home,

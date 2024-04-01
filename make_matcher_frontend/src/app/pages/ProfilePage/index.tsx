@@ -5,12 +5,15 @@
  */
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { messages } from './messages';
-import { HeaderComponent } from "../../components/HeaderComponent";
-import { TestComponent } from "../../components/TestComponent";
-import { FooterComponent } from "../../components/FooterComponent";
+import { HeaderComponent } from '../../components/HeaderComponent';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import { TestComponent } from '../../components/TestComponent';
+import { FooterComponent } from '../../components/FooterComponent';
 import { Helmet } from 'react-helmet-async';
 
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Props {}
 
 export function ProfilePage() {
