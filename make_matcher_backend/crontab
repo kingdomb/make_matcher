@@ -1,1 +1,1 @@
-0 0 * * * /rails/bin/rails match RAILS_ENV=production >> /rails/log/production.log 2>&1
+0 1 * * * /rails/bin/rails match RAILS_ENV=production

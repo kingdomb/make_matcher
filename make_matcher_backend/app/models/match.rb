@@ -4,7 +4,7 @@ class Match < ApplicationRecord
   belongs_to :matched, class_name: "Profile"
 
   # Callbacks
-  before_save :calculate_score
+  after_initialize :calculate_score
 
   # Constants
   SCORE_ATTRS = %i[location utc_offset age intensity skill language days times game_ids].freeze
