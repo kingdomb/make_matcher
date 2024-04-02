@@ -15,7 +15,7 @@ class Match < ApplicationRecord
   end
 
   def games
-    matched.games & matcher.games
+    Game.joins(:profiles).where(profiles: { id: [matcher_id, matched_id] })
   end
 
   private
