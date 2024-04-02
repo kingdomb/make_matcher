@@ -20,7 +20,7 @@ class Profile < ApplicationRecord
   has_and_belongs_to_many :games
   has_many :matches, foreign_key: :matcher_id
   def matches
-    super.order(:score).limit(10)
+    super.where(reject: false).order(:score).limit(10)
   end
 
   # Callbacks
