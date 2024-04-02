@@ -3,6 +3,11 @@ class Match < ApplicationRecord
   belongs_to :matcher, class_name: "Profile"
   belongs_to :matched, class_name: "Profile"
 
+  # Joins
+  def games
+    Game.joins(:profiles).where(profiles: { id: [matcher_id, matched_id] })
+  end
+
   # Callbacks
   after_initialize :calculate_score
 
@@ -12,10 +17,6 @@ class Match < ApplicationRecord
   # Calculate Match Score - Lower is better.
   def calculate_score
     self.score = SCORE_ATTRS.map { |attr| score_for(attr) }.sum
-  end
-
-  def games
-    Game.joins(:profiles).where(profiles: { id: [matcher_id, matched_id] })
   end
 
   private

@@ -11,5 +11,10 @@ class User < ApplicationRecord
   has_many :group_memberships, foreign_key: :user_id
   has_many :groups, through: :group_memberships
   has_many :friend_requests, class_name: "FriendRequest", foreign_key: :requestee_id
-  has_many :matches, through: :profile
+  has_many :matches, through: :profile do
+    def daily
+      where.not(reject: true, matched_id: proxy_association.owner.friend_ids)
+           .order(:score).limit(10)
+    end
+  end
 end

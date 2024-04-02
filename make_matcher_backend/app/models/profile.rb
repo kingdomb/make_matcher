@@ -17,11 +17,9 @@ class Profile < ApplicationRecord
 
   # Associations
   belongs_to :user
+  has_many :friends, through: :user
   has_and_belongs_to_many :games
   has_many :matches, foreign_key: :matcher_id
-  def matches
-    super.where(reject: false).order(:score).limit(10)
-  end
 
   # Callbacks
   before_save :locate

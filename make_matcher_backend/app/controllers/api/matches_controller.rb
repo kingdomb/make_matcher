@@ -2,7 +2,7 @@ class Api::MatchesController < Api::Controller
   before_action :authorized_user
 
   def index
-    render json: { matches: current_user.matches.map {|m| MatchSerializer.new(m) } }
+    render json: { matches: current_user.matches.daily.map { |m| MatchSerializer.new(m) } }
   end
 
   def destroy
