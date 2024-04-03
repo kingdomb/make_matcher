@@ -1,0 +1,1 @@
+0 1 * * * /rails/bin/rails match RAILS_ENV=production

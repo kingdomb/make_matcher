@@ -3,11 +3,16 @@ class Match < ApplicationRecord
   belongs_to :matcher, class_name: "Profile"
   belongs_to :matched, class_name: "Profile"
 
+  # Joins
+  def games
+    Game.joins(:profiles).where(profiles: { id: [matcher_id, matched_id] })
+  end
+
   # Callbacks
   after_initialize :calculate_score
 
   # Constants
-  SCORE_ATTRS = %i[location utc_offset age intensity skill language days times].freeze
+  SCORE_ATTRS = %i[location utc_offset age intensity skill language days times game_ids].freeze
 
   # Calculate Match Score - Lower is better.
   def calculate_score
@@ -28,7 +33,7 @@ class Match < ApplicationRecord
   end
 
   # Array Scores - Number of shared values
-  %i[days times].each do |attr|
+  %i[days times game_ids].each do |attr|
     define_method attr do
       (20 / ((matcher.send(attr).to_a & matched.send(attr).to_a).count + 1)).round
     end
