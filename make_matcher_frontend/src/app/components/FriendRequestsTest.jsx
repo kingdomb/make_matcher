@@ -68,14 +68,12 @@ const FriendRequestsTest = () => {
         </div>
       )}
       <br />
-      <br />
       <h4>Friend Requests:</h4>
       <div style={testStyles.list}>
         {friendRequests && friendRequests.length > 0 ? (
           <ul>
             {friendRequests.map(request => (
-              <div key={request.requestor_id}>
-                {`Requester ID: ${request.requestor_id}, Name: ${request.friend_name}`}
+              <div key={request.requestor_id} style={{ fontSize: 12 }}>
                 <button
                   style={testStyles.buttonRed}
                   onClick={() =>
@@ -83,7 +81,8 @@ const FriendRequestsTest = () => {
                   }
                 >
                   X
-                </button>
+                </button>{' '}
+                {`Requester ID: ${request.requestor_id}, Name: ${request.friend_name}`}
               </div>
             ))}
           </ul>

@@ -66,20 +66,19 @@ const FriendTest = () => {
         </div>
       )}
       <br />
-      <br />
       <h4>Friends List:</h4>
       <div style={testStyles.list}>
         {friends && friends.friends && friends.friends.length > 0 ? (
           <ul>
             {friends.friends.map(friend => (
-              <div key={friend.destination_id}>
-                {`Friend ID: ${friend.destination_id}, Name: ${friend.friend_name}`}
+              <div key={friend.destination_id} style={{ fontSize: 12 }}>
                 <button
                   style={testStyles.buttonRed}
                   onClick={() => handleDeleteFriend(friend.destination_id)}
                 >
                   X
                 </button>
+                {`Friend ID: ${friend.destination_id}, Name: ${friend.friend_name}`}
               </div>
             ))}
           </ul>

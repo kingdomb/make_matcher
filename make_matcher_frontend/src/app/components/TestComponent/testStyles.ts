@@ -74,5 +74,6 @@ export const testStyles: Record<string, CSSProperties> = {
   column: {
     flex: '1',
   },
-  list: { height: '150px', width: '100%', overflow: 'auto' },
+  list: { height: '135px', width: '100%', overflow: 'auto' },
+  listmatches: { height: '275px', width: '100%', overflow: 'auto' },
 };

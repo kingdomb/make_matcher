@@ -22,6 +22,12 @@ const ProfileTest = () => {
   const [notification, setNotification] = useState('');
 
   useEffect(() => {
+    if (token) {
+      dispatch(actions.fetchProfileRequest({ token }));
+    }
+  }, [token]);
+
+  useEffect(() => {
     if (profile) {
       setEditableProfile(JSON.stringify(profile, null, 2));
       setNotification('Profile fetched successfully.');
