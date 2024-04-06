@@ -6,8 +6,9 @@ import {
   apiCreateFriendRequest,
   apiDeleteFriendRequest,
 } from 'api-service';
+import { apiGetFriends, apiCreateFriend, apiDeleteFriend } from 'api-service';
 import { getErrorMessage } from 'api-service';
-import { request } from 'http';
+// import { request } from 'http';
 
 // function* doSomething() {}
 function* fetchProfile(action) {
@@ -76,16 +77,53 @@ function* deleteFriendRequest(action) {
     const response = yield call(apiDeleteFriendRequest, requestId, token);
     console.log('Delete friend request response: ', response.data);
     yield put(actions.deleteFriendRequestSuccess(requestId));
-    if (response.data.success) {
-      yield put(actions.fetchFriendRequestsRequest({ token }));
-    } else {
-      throw new Error('Delete operation failed');
-    }
+    yield put(actions.fetchFriendRequestsRequest({ token }));
   } catch (error) {
     const errorMsg = getErrorMessage(error);
     yield put(actions.friendRequestFailure(errorMsg));
   }
 }
+
+/*-- Friends --*/
+
+function* fetchFriends(action) {
+  try {
+    const { token } = action.payload;
+    const response = yield call(apiGetFriends, token);
+    console.log('Fetch friends response: ', response.data);
+    yield put(actions.fetchFriendsSuccess(response.data));
+  } catch (error) {
+    yield put(actions.friendFailure(getErrorMessage(error)));
+  }
+}
+
+function* createFriend(action) {
+  try {
+    const { destination_id, token } = action.payload;
+    console.log('Create friend destination ID: ', destination_id);
+    const response = yield call(apiCreateFriend, { destination_id }, token);
+    console.log('Create friend response: ', response.data);
+    yield put(actions.createFriendSuccess(response.data));
+    yield put(actions.fetchFriendsRequest({ token }));
+  } catch (error) {
+    yield put(actions.friendFailure(getErrorMessage(error)));
+  }
+}
+
+function* deleteFriend(action) {
+  try {
+    const { friendId, token } = action.payload;
+    console.log('Delete friend ID: ', friendId);
+    const response = yield call(apiDeleteFriend, friendId, token);
+    console.log('Delete friend response: ', response.data);
+    yield put(actions.deleteFriendSuccess(friendId));
+    yield put(actions.fetchFriendsRequest({ token }));
+  } catch (error) {
+    yield put(actions.friendFailure(getErrorMessage(error)));
+  }
+}
+
+/*--  --*/
 
 /*--  --*/
 
@@ -108,4 +146,14 @@ export function* homePageSaga() {
     actions.deleteFriendRequestRequest.type,
     deleteFriendRequest,
   );
+  /*-- Friends --*/
+  yield takeLatest(actions.fetchFriendsRequest.type, fetchFriends);
+  yield takeLatest(actions.createFriendRequest.type, createFriend);
+  yield takeLatest(actions.deleteFriendRequest.type, deleteFriend);
+
+  /*--  --*/
+
+  /*--  --*/
+
+  /*--  --*/
 }

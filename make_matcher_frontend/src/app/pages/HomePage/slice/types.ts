@@ -7,6 +7,13 @@ export interface HomePageState {
   /*-- Friend Requests --*/
   friendRequests: FriendRequest[] | null;
   recentFriendRequest: FriendRequest | null;
+  /*-- Friends --*/
+  friends: Friend[] | null;
+  recentCreateFriend: Friend | null;
+
+  /*--  --*/
+  /*--  --*/
+  /*--  --*/
 }
 
 export interface Profile {
@@ -48,6 +55,30 @@ export interface DeleteFriendRequestPayload {
   requestId: number;
   token: string;
 }
+
+/*-- Friends --*/
+export interface Friend {
+  id: number;
+  source_id: number;
+  destination_id: number;
+  friend_name?: string;
+}
+
+export interface FetchFriendsPayload {
+  token: string;
+}
+
+export interface CreateFriendPayload {
+  destination_id: number;
+  token: string;
+}
+
+export interface DeleteFriendPayload {
+  friendId: number;
+  token: string;
+}
+
+/*--  --*/
 
 /*--  --*/
 

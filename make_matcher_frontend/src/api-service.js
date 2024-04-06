@@ -104,6 +104,43 @@ export function apiDeleteFriendRequest(requestId, token) {
     .catch(handleAxiosError);
 }
 
+/*-- Friends --*/
+
+export function apiGetFriends(token) {
+  return axios
+    .get(`${apiBaseUrl}/friends`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiCreateFriend(data, token) {
+  return axios
+    .post(`${apiBaseUrl}/friends`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiDeleteFriend(friendId, token) {
+  return axios
+    .delete(`${apiBaseUrl}/friends/${friendId}`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+/*--  --*/
 /*--  --*/
 /*--  --*/
 

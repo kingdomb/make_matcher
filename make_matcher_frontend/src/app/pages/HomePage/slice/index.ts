@@ -3,9 +3,13 @@ import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { homePageSaga } from './saga';
 import {
+  CreateFriendPayload,
   CreateFriendRequestPayload,
+  DeleteFriendPayload,
   DeleteFriendRequestPayload,
   FetchFriendRequestsPayload,
+  FetchFriendsPayload,
+  Friend,
   FriendRequest,
   HomePageState,
   Profile,
@@ -20,6 +24,13 @@ export const initialState: HomePageState = {
   /*-- Friend Requests --*/
   friendRequests: null,
   recentFriendRequest: null,
+  /*-- Friends --*/
+  friends: null,
+  recentCreateFriend: null,
+  /*--  --*/
+  /*--  --*/
+
+  /*--  --*/
 };
 
 const slice = createSlice({
@@ -97,6 +108,57 @@ const slice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+
+    /*-- Friends --*/
+
+    fetchFriendsRequest: (
+      state,
+      action: PayloadAction<FetchFriendsPayload>,
+    ) => {
+      state.loading = true;
+    },
+    fetchFriendsSuccess: (state, action: PayloadAction<Friend[]>) => {
+      state.friends = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    createFriendRequest: (
+      state,
+      action: PayloadAction<CreateFriendPayload>,
+    ) => {
+      state.loading = true;
+    },
+    createFriendSuccess: (state, action) => {
+      state.recentCreateFriend = action.payload;
+      state.loading = false;
+    },
+    deleteFriendRequest: (
+      state,
+      action: PayloadAction<DeleteFriendPayload>,
+    ) => {
+      state.loading = true;
+    },
+    deleteFriendSuccess: (state, action: PayloadAction<number>) => {
+      if (!Array.isArray(state.friends)) {
+        state.friends = [];
+      } else {
+        state.friends = state.friends.filter(
+          friend => friend.id !== action.payload,
+        );
+      }
+      state.loading = false;
+      state.error = null;
+    },
+    friendFailure: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+
+    /*--  --*/
+
+    /*--  --*/
+
+    /*--  --*/
 
     /*--  --*/
 
