@@ -8,7 +8,7 @@ import {
   selectRecentFriendRequest,
 } from 'app/pages/HomePage/slice/selectors';
 import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
-import { testStyles } from './TestComponent';
+import { testStyles } from './TestComponent/testStyles';
 
 const FriendRequestsTest = () => {
   const dispatch = useDispatch();
@@ -48,9 +48,8 @@ const FriendRequestsTest = () => {
 
   return (
     <div>
-      <h4>Friend Requests Test Component</h4>
+      <h4>FRIEND REQs Test Component</h4>
       <br />
-      {error && <p style={{ color: 'red' }}>Error: {error.errorMessage}</p>}
       Enter Friend ID:{' '}
       <input
         type="text"
@@ -69,24 +68,29 @@ const FriendRequestsTest = () => {
         </div>
       )}
       <br />
+      <br />
       <h4>Friend Requests:</h4>
-      {friendRequests && friendRequests.length > 0 ? (
-        <ul>
-          {friendRequests.map(request => (
-            <div key={request.id}>
-              {`Requester ID: ${request.requestor_id}, Name: ${request.friend_name}`}
-              <button
-                style={testStyles.buttonRed}
-                onClick={() => handleDeleteFriendRequest(request.requestor_id)}
-              >
-                X
-              </button>
-            </div>
-          ))}
-        </ul>
-      ) : (
-        <p>No friend requests.</p>
-      )}
+      <div style={testStyles.list}>
+        {friendRequests && friendRequests.length > 0 ? (
+          <ul>
+            {friendRequests.map(request => (
+              <div key={request.requestor_id}>
+                {`Requester ID: ${request.requestor_id}, Name: ${request.friend_name}`}
+                <button
+                  style={testStyles.buttonRed}
+                  onClick={() =>
+                    handleDeleteFriendRequest(request.requestor_id)
+                  }
+                >
+                  X
+                </button>
+              </div>
+            ))}
+          </ul>
+        ) : (
+          <p>No friend requests.</p>
+        )}
+      </div>
     </div>
   );
 };

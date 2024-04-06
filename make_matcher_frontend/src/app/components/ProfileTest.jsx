@@ -7,8 +7,8 @@ import {
 } from 'app/pages/HomePage/slice/selectors';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { testStyles } from './TestComponent';
 import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
+import { testStyles } from './TestComponent/testStyles';
 
 const ProfileTest = () => {
   const dispatch = useDispatch();
@@ -64,7 +64,7 @@ const ProfileTest = () => {
 
   return (
     <div>
-      <h4>Profile Test Component</h4>
+      <h4>PROFILE Test Component</h4>
       <br />
       <button
         onClick={handleFetchProfile}
@@ -74,9 +74,6 @@ const ProfileTest = () => {
         FETCH PROFILE
       </button>
 
-      <p style={error ? testStyles.errorText : testStyles.successText}>
-        {notification}
-      </p>
       {!profile && <div>Click button to fetch profile.</div>}
       {profile && (
         <div>
