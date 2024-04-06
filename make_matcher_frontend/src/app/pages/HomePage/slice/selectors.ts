@@ -20,4 +20,20 @@ export const selectUpdateSuccess = createSelector(
   state => state.updateSuccess,
 );
 
+/*-- Friend Requests --*/
+
+export const selectFriendRequests = createSelector(
+  [selectSlice],
+  state => state.friendRequests,
+);
+
+export const selectRecentFriendRequest = createSelector(
+  [selectSlice],
+  state => state.recentFriendRequest,
+);
+
+/*--  --*/
+
+/*--  --*/
+
 export const selectError = createSelector([selectSlice], state => state.error);

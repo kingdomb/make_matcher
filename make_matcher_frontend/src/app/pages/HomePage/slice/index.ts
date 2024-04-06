@@ -2,13 +2,24 @@ import { PayloadAction } from '@reduxjs/toolkit';
 import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { homePageSaga } from './saga';
-import { HomePageState, Profile, ProfileUpdatePayload } from './types';
+import {
+  CreateFriendRequestPayload,
+  DeleteFriendRequestPayload,
+  FetchFriendRequestsPayload,
+  FriendRequest,
+  HomePageState,
+  Profile,
+  ProfileUpdatePayload,
+} from './types';
 
 export const initialState: HomePageState = {
   profile: null,
   loading: false,
   error: null,
   updateSuccess: false,
+  /*-- Friend Requests --*/
+  friendRequests: null,
+  recentFriendRequest: null,
 };
 
 const slice = createSlice({
@@ -40,6 +51,59 @@ const slice = createSlice({
       state.error = action.payload;
       state.loading = false;
     },
+
+    /*-- Friend Requests --*/
+
+    fetchFriendRequestsRequest: (
+      state,
+      action: PayloadAction<FetchFriendRequestsPayload>,
+    ) => {
+      state.loading = true;
+    },
+    fetchFriendRequestsSuccess: (
+      state,
+      action: PayloadAction<FriendRequest[]>,
+    ) => {
+      state.friendRequests = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    createFriendRequestRequest: (
+      state,
+      action: PayloadAction<CreateFriendRequestPayload>,
+    ) => {
+      state.loading = true;
+    },
+    createFriendRequestSuccess: (state, action) => {
+      state.recentFriendRequest = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    deleteFriendRequestRequest: (
+      state,
+      action: PayloadAction<DeleteFriendRequestPayload>,
+    ) => {
+      state.loading = true;
+    },
+    deleteFriendRequestSuccess: (state, action: PayloadAction<number>) => {
+      state.friendRequests =
+        state.friendRequests?.filter(
+          request => request.id !== action.payload,
+        ) || null;
+      state.loading = false;
+      state.error = null;
+    },
+    friendRequestFailure: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
+
+    /*--  --*/
+
+    /*--  --*/
+
+    /*-- General --*/
+
     reset: state => {
       state.profile = null;
       state.loading = false;

@@ -65,6 +65,48 @@ export function apiPostProfile(data, token) {
     .catch(handleAxiosError);
 }
 
+/*-- Friend Requests --*/
+
+export function apiGetFriendRequests(token) {
+  console.log(`GET request to: ${apiBaseUrl}/friend_requests`);
+  return axios
+    .get(`${apiBaseUrl}/friend_requests`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiCreateFriendRequest(data, token) {
+  console.log(`POST request to: ${apiBaseUrl}/friend_requests`);
+  return axios
+    .post(`${apiBaseUrl}/friend_requests`, data, {
+      headers: {
+        'Content-Type': 'application/json',
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiDeleteFriendRequest(requestId, token) {
+  console.log(`DELETE request to: ${apiBaseUrl}/friend_requests/${requestId}`);
+  return axios
+    .delete(`${apiBaseUrl}/friend_requests/${requestId}`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+/*--  --*/
+/*--  --*/
+
 function handleAxiosError(error) {
   if (axios.isAxiosError(error)) {
     return Promise.reject({
