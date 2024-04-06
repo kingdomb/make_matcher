@@ -44,8 +44,14 @@ export const selectCreateFriend = createSelector(
   state => state.recentCreateFriend,
 );
 
-/*--  --*/
-/*--  --*/
-/*--  --*/
+/*-- Match --*/
+export const selectMatches = createSelector(
+  [selectSlice],
+  state => state.matches,
+);
+
+/*-- Group --*/
+
+/*-- Geenral --*/
 
 export const selectError = createSelector([selectSlice], state => state.error);

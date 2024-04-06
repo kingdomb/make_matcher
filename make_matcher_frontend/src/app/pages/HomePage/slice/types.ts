@@ -10,10 +10,9 @@ export interface HomePageState {
   /*-- Friends --*/
   friends: Friend[] | null;
   recentCreateFriend: Friend | null;
-
-  /*--  --*/
-  /*--  --*/
-  /*--  --*/
+  /*-- Match --*/
+  matches: Match[] | null;
+  /*-- Group --*/
 }
 
 export interface Profile {
@@ -78,11 +77,43 @@ export interface DeleteFriendPayload {
   token: string;
 }
 
-/*--  --*/
+/*-- Match --*/
+export interface Match {
+  id: number;
+  matched_id: number;
+  games: Game[];
+  matched: {
+    display_name: string;
+    zip_code: string;
+    date_of_birth: string;
+    intensity: number;
+    skill: number | null;
+    language: number;
+    days: string[];
+    times: string[];
+    games: number[];
+  };
+}
 
-/*--  --*/
+interface Game {
+  id: number;
+  title: string;
+  created_at: string;
+  updated_at: string;
+}
 
-/*--  --*/
+export interface FetchMatchesPayload {
+  token: string;
+}
+
+export interface RejectMatchPayload {
+  matchId: number;
+  token: string;
+}
+
+/*-- Group --*/
+
+/*-- General --*/
 
 export interface ErrorType {
   statusCode: string;

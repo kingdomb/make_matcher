@@ -9,11 +9,14 @@ import {
   DeleteFriendRequestPayload,
   FetchFriendRequestsPayload,
   FetchFriendsPayload,
+  FetchMatchesPayload,
   Friend,
   FriendRequest,
   HomePageState,
+  Match,
   Profile,
   ProfileUpdatePayload,
+  RejectMatchPayload,
 } from './types';
 
 export const initialState: HomePageState = {
@@ -27,10 +30,9 @@ export const initialState: HomePageState = {
   /*-- Friends --*/
   friends: null,
   recentCreateFriend: null,
-  /*--  --*/
-  /*--  --*/
-
-  /*--  --*/
+  /*-- Match --*/
+  matches: null,
+  /*-- Group --*/
 };
 
 const slice = createSlice({
@@ -154,15 +156,34 @@ const slice = createSlice({
       state.loading = false;
     },
 
-    /*--  --*/
+    /*-- Match --*/
 
-    /*--  --*/
+    fetchMatchesRequest: (
+      state,
+      action: PayloadAction<FetchMatchesPayload>,
+    ) => {
+      state.loading = true;
+    },
+    fetchMatchesSuccess: (state, action: PayloadAction<Match[]>) => {
+      state.matches = action.payload;
+      state.loading = false;
+      state.error = null;
+    },
+    rejectMatchRequest: (state, action: PayloadAction<RejectMatchPayload>) => {
+      state.loading = true;
+    },
+    rejectMatchSuccess: (state, action: PayloadAction<number>) => {
+      state.matches =
+        state.matches?.filter(match => match.id !== action.payload) || null;
+      state.loading = false;
+      state.error = null;
+    },
+    matchFailure: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
 
-    /*--  --*/
-
-    /*--  --*/
-
-    /*--  --*/
+    /*-- Group --*/
 
     /*-- General --*/
 

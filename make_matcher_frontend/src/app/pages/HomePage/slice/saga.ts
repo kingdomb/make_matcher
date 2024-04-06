@@ -1,14 +1,19 @@
 import { call, put, takeLatest } from 'redux-saga/effects';
 import { homePageActions as actions } from '.';
+/*-- Profile --*/
 import { apiGetProfile, apiPostProfile } from 'api-service';
+/*-- Friend Requests --*/
 import {
   apiGetFriendRequests,
   apiCreateFriendRequest,
   apiDeleteFriendRequest,
 } from 'api-service';
+/*-- Friend --*/
 import { apiGetFriends, apiCreateFriend, apiDeleteFriend } from 'api-service';
+/*-- Match --*/
+import { apiGetMatches, apiRejectMatch } from 'api-service';
+/*-- Group --*/
 import { getErrorMessage } from 'api-service';
-// import { request } from 'http';
 
 // function* doSomething() {}
 function* fetchProfile(action) {
@@ -123,11 +128,35 @@ function* deleteFriend(action) {
   }
 }
 
-/*--  --*/
+/*-- Match --*/
 
-/*--  --*/
+function* fetchMatches(action) {
+  try {
+    const { token } = action.payload;
+    const response = yield call(apiGetMatches, token);
+    yield put(actions.fetchMatchesSuccess(response.data.matches));
+  } catch (error) {
+    yield put(actions.matchFailure(getErrorMessage(error)));
+  }
+}
 
-/*--  --*/
+function* rejectMatch(action) {
+  try {
+    const { matchId, token } = action.payload;
+    const response = yield call(apiRejectMatch, matchId, token);
+    if (response.data.message === 'Success') {
+      yield put(actions.rejectMatchSuccess(matchId));
+    } else {
+      throw new Error('Match rejection failed');
+    }
+  } catch (error) {
+    yield put(actions.matchFailure(getErrorMessage(error)));
+  }
+}
+
+/*-- Group --*/
+
+/*-- Listerners --*/
 
 export function* homePageSaga() {
   // yield takeLatest(actions.someAction.type, doSomething);
@@ -151,9 +180,9 @@ export function* homePageSaga() {
   yield takeLatest(actions.createFriendRequest.type, createFriend);
   yield takeLatest(actions.deleteFriendRequest.type, deleteFriend);
 
-  /*--  --*/
+  /*-- Match --*/
+  yield takeLatest(actions.fetchMatchesRequest.type, fetchMatches);
+  yield takeLatest(actions.rejectMatchRequest.type, rejectMatch);
 
-  /*--  --*/
-
-  /*--  --*/
+  /*-- Group --*/
 }

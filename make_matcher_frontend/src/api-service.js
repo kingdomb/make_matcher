@@ -140,9 +140,33 @@ export function apiDeleteFriend(friendId, token) {
     .catch(handleAxiosError);
 }
 
-/*--  --*/
-/*--  --*/
-/*--  --*/
+/*-- Match --*/
+
+export function apiGetMatches(token) {
+  return axios
+    .get(`https://make-matcher-backend.fly.dev/api/matches`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiRejectMatch(matchId, token) {
+  return axios
+    .delete(`https://make-matcher-backend.fly.dev/api/matches/${matchId}`, {
+      headers: {
+        Authorization: `Token ${token}`,
+        ...getHeaders(),
+      },
+    })
+    .catch(handleAxiosError);
+}
+
+/*-- Group --*/
+
+/*-- General --*/
 
 function handleAxiosError(error) {
   if (axios.isAxiosError(error)) {
