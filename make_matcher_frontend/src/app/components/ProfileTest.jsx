@@ -64,17 +64,16 @@ const ProfileTest = () => {
 
   return (
     <div>
+      <h4>Profile Test Component</h4>
       <br />
-      <h4>Test API Calls to Fetch & Update Profile</h4>
       <button
         onClick={handleFetchProfile}
         disabled={loading}
-        style={testStyles.button}
+        style={testStyles.buttonBlue}
       >
         FETCH PROFILE
       </button>
 
-      {loading && <p>Loading...</p>}
       <p style={error ? testStyles.errorText : testStyles.successText}>
         {notification}
       </p>
@@ -84,22 +83,22 @@ const ProfileTest = () => {
           <textarea
             style={{
               width: '100%',
-              height: '200px',
+              height: '180px',
               border: '1px solid #ccc',
               padding: '10px',
             }}
             value={editableProfile}
             onChange={e => setEditableProfile(e.target.value)}
           />
+          <button
+            onClick={handleUpdateProfile}
+            disabled={loading || !editableProfile}
+            style={testStyles.buttonBlue}
+          >
+            UPDATE PROFILE
+          </button>
         </div>
       )}
-      <button
-        onClick={handleUpdateProfile}
-        disabled={loading || !editableProfile}
-        style={testStyles.button}
-      >
-        UPDATE PROFILE
-      </button>
       <br />
     </div>
   );
