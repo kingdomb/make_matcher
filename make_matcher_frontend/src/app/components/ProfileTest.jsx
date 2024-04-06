@@ -83,10 +83,11 @@ const ProfileTest = () => {
       {!profile && <div>Click button to fetch profile.</div>}
       {profile && (
         <div>
+          Try edit profile:
           <textarea
             style={{
               width: '100%',
-              height: '180px',
+              height: '160px',
               border: '1px solid #ccc',
               padding: '10px',
             }}

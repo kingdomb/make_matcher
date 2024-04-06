@@ -48,7 +48,7 @@ const FriendRequestsTest = () => {
 
   return (
     <div>
-      <h4>FRIEND REQs Test Component</h4>
+      <h4>REQUEST Test Component</h4>
       <br />
       Enter Friend ID:{' '}
       <input

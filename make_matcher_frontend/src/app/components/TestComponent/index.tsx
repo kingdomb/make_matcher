@@ -35,7 +35,9 @@ export function TestComponent(props: Props) {
         <br />
       </div>
       <div style={testStyles.header}>Make Matcher Team 1</div>
-      <div style={testStyles.paragraph}>(Rudimentary Test Components)</div>
+      <div style={testStyles.paragraph}>
+        <i>(Rudimentary Test Components)</i>
+      </div>
       <div style={testStyles.subHeader}>
         <button
           onClick={() => dispatch(actions.fetchStatus())}

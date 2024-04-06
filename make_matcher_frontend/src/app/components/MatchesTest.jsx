@@ -55,8 +55,8 @@ const MatchesTest = () => {
                   {match.games.length === 0 && <>None</>}
                   {match.games.length !== 0 && (
                     <div>
-                      {match.games.map(game => (
-                        <div key={game.id} style={{ fontSize: 11 }}>
+                      {match.games.map((game, index) => (
+                        <div key={index} style={{ fontSize: 11 }}>
                           * {game.title}
                         </div>
                       ))}
