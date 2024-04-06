@@ -12,7 +12,7 @@ class Api::FriendRequestsController < Api::Controller
   end
 
   def destroy
-    FriendRequest.where(requestee_id: params[:id], requestor_id: current_user.id).destroy_all
+    FriendRequest.where(requestee_id: current_user.id, requestor_id: params[:id]).destroy_all
 
     render json: { message: "Success" }, status: :ok
   end
