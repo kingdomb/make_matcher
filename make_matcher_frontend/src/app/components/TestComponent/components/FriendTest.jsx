@@ -8,7 +8,7 @@ import {
   selectLoading,
 } from 'app/pages/HomePage/slice/selectors';
 import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
-import { testStyles } from './TestComponent/testStyles';
+import { testStyles } from '../testStyles';
 
 const FriendTest = () => {
   const dispatch = useDispatch();
@@ -33,6 +33,7 @@ const FriendTest = () => {
         }),
       );
     }
+    setDestinationId('');
   };
 
   const handleDeleteFriend = friendId => {
@@ -46,26 +47,31 @@ const FriendTest = () => {
 
   return (
     <div>
-      <h4>FRIENDS Test Component</h4>
+      <h4>FRIENDS</h4>
       <br />
-      Enter Friend ID:{' '}
+      Enter Player ID:{' '}
       <input
         type="text"
-        placeholder="Enter destination ID"
+        placeholder="Enter player ID"
         value={destinationId}
         onChange={e => setDestinationId(e.target.value)}
         style={{ marginRight: '10px' }}
+        title="Type in Player ID to add as Friend"
       />
-      <button style={testStyles.buttonBlue} onClick={handleCreateFriend}>
+      <button
+        style={testStyles.buttonBlue}
+        onClick={handleCreateFriend}
+        title="Click to Add Friend"
+      >
         Add Friend
       </button>
       {recentCreateFriend && recentCreateFriend.friend.friend_name && (
-        <div>
-          Last created friend: {recentCreateFriend.friend.friend_name} [ID:{' '}
-          {recentCreateFriend.friend.destination_id}]{' '}
+        <div style={{ fontSize: 12 }}>
+          <div style={{ color: '#00b300' }}>
+            <i>Last Added: [ID: {recentCreateFriend.friend.destination_id}] </i>
+          </div>
         </div>
       )}
-      <br />
       <h4>Friends List:</h4>
       <div style={testStyles.list}>
         {friends && friends.friends && friends.friends.length > 0 ? (
@@ -75,10 +81,11 @@ const FriendTest = () => {
                 <button
                   style={testStyles.buttonRed}
                   onClick={() => handleDeleteFriend(friend.destination_id)}
+                  title="Click to Delete Friend"
                 >
-                  X
+                  ×
                 </button>
-                {`Friend ID: ${friend.destination_id}, Name: ${friend.friend_name}`}
+                {`ID: ${friend.destination_id}, Name: ${friend.friend_name}`}
               </div>
             ))}
           </ul>

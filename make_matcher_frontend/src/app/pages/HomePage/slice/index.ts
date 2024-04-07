@@ -30,7 +30,7 @@ export const initialState: HomePageState = {
   profile: null,
   loading: false,
   error: null,
-  updateSuccess: false,
+  updateSuccess: null,
   /*-- Friend Requests --*/
   friendRequests: null,
   recentFriendRequest: null,

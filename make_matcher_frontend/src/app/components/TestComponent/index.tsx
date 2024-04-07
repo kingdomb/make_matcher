@@ -13,13 +13,13 @@ import {
 import { useTestComponentSlice } from './slice';
 import { CSSProperties } from 'react';
 import { LogoutButton } from '../LogoutButton/Loadable';
-import ProfileTest from '../ProfileTest';
-import FriendRequestsTest from '../FriendRequestsTest';
-import FriendTest from '../FriendTest';
+import ProfileTest from './components/ProfileTest';
+import FriendRequestsTest from './components/FriendRequestsTest';
+import FriendTest from './components/FriendTest';
 import { selectError } from 'app/pages/HomePage/slice/selectors';
 import { testStyles } from './testStyles';
-import MatchesTest from '../MatchesTest';
-import GroupsTest from '../GroupsTest';
+import MatchesTest from './components/MatchesTest';
+import GroupsTest from './components/GroupsTest';
 
 interface Props {}
 
@@ -35,8 +35,8 @@ export function TestComponent(props: Props) {
       <div>
         <br />
       </div>
-      <div style={testStyles.paragraph}>
-        (Rudimentary Test Components to demonstrate{' '}
+      <div style={{ ...testStyles.paragraph, color: '#be0000' }}>
+        (Rudimentary Components to demonstrate{' '}
         <u>
           <b>Web Services</b>
         </u>{' '}
@@ -46,17 +46,25 @@ export function TestComponent(props: Props) {
         <button
           onClick={() => dispatch(actions.fetchStatus())}
           style={testStyles.buttonBlue}
+          title="Click to Fetch API Server Status"
         >
           FETCH API STATUS
         </button>
         {!loading && !status && !error && (
-          <p style={testStyles.paragraph}>Click button to view API Status</p>
+          <p style={testStyles.paragraph}>
+            Click button to view API Server Status
+          </p>
         )}
 
         {loading && <p style={testStyles.paragraph}>Loading...</p>}
-        {status && <p style={testStyles.successText}>Status: {status}</p>}
+        {status && (
+          <p style={testStyles.successText}>API Server Status: {status}</p>
+        )}
         {error && (
           <p style={testStyles.errorText}>Error: {error.errorMessage}</p>
+        )}
+        {error && error.errorMessage === 'Unauthorized' && (
+          <div style={testStyles.errorText}>PLEASE LOG IN.</div>
         )}
         <div style={testStyles.row}>
           {' '}

@@ -11,7 +11,7 @@ import {
   selectAcessToken,
   selectUserID,
 } from 'app/pages/AuthPage/slice/selectors';
-import { testStyles } from './TestComponent/testStyles';
+import { testStyles } from '../testStyles';
 
 const GroupsTest = () => {
   const dispatch = useDispatch();
@@ -54,7 +54,7 @@ const GroupsTest = () => {
 
   return (
     <div>
-      <h4>GROUPS Test Component</h4>
+      <h4>GROUPS</h4>
       <br />
       Enter Group Name:{' '}
       <div>
@@ -62,8 +62,13 @@ const GroupsTest = () => {
           value={newGroupName}
           onChange={e => setNewGroupName(e.target.value)}
           placeholder="New Group Name"
+          title="Type desired group name"
         />
-        <button style={testStyles.buttonBlue} onClick={handleCreateGroup}>
+        <button
+          style={testStyles.buttonBlue}
+          onClick={handleCreateGroup}
+          title="Click to Create New Group"
+        >
           Create Group
         </button>
       </div>
@@ -94,21 +99,16 @@ const GroupsTest = () => {
                 <button
                   style={testStyles.buttonRed}
                   onClick={() => handleDeleteGroup(group.id)}
+                  title="Click to Delete Group"
                 >
                   ×
                 </button>
                 <u>{group.name}</u>
-
-                {/* <button
-                  style={testStyles.buttonGreen}
-                  onClick={() => handleAddGroupMember(group.id)}
-                >
-                  Join
-                </button> */}
                 {!group.users.some(user => user.id === userID) && (
                   <button
                     style={testStyles.buttonGreen}
                     onClick={() => handleAddGroupMember(group.id)}
+                    title="Click to Join Group"
                   >
                     Join
                   </button>
@@ -129,6 +129,7 @@ const GroupsTest = () => {
                         onClick={() =>
                           handleRemoveGroupMember(group.id, user.id)
                         }
+                        title="Click to Leave Group"
                       >
                         Leave
                       </button>

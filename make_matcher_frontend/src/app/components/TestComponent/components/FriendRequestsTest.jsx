@@ -8,7 +8,7 @@ import {
   selectRecentFriendRequest,
 } from 'app/pages/HomePage/slice/selectors';
 import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
-import { testStyles } from './TestComponent/testStyles';
+import { testStyles } from '../testStyles';
 
 const FriendRequestsTest = () => {
   const dispatch = useDispatch();
@@ -34,6 +34,7 @@ const FriendRequestsTest = () => {
       );
       dispatch(actions.fetchFriendRequestsRequest({ token }));
     }
+    setRequesteeId('');
   };
 
   const handleDeleteFriendRequest = requestId => {
@@ -48,27 +49,32 @@ const FriendRequestsTest = () => {
 
   return (
     <div>
-      <h4>REQUEST Test Component</h4>
+      <h4>REQUESTS</h4>
       <br />
-      Enter Friend ID:{' '}
+      Enter Player ID:{' '}
       <input
         type="text"
-        placeholder="Enter requestee ID"
+        placeholder="Enter player ID"
         value={requesteeId}
         onChange={e => setRequesteeId(e.target.value)}
         style={{ marginRight: '10px' }}
+        title="Enter Player ID to send Friend Request to"
       />
-      <button style={testStyles.buttonBlue} onClick={handleCreateFriendRequest}>
-        Create Friend Request
+      <button
+        style={testStyles.buttonBlue}
+        onClick={handleCreateFriendRequest}
+        title="Click to Send Friend Request"
+      >
+        Send Request
       </button>
       {recentFriendRequest && recentFriendRequest.friend_name && (
-        <div>
-          Last request sent to: {recentFriendRequest.friend_name} [ID:{' '}
-          {recentFriendRequest.requestee_id}]{' '}
+        <div style={{ fontSize: 12 }}>
+          <div style={{ color: '#00b300' }}>
+            <i>Last Request: [ID: {recentFriendRequest.requestee_id}] </i>
+          </div>
         </div>
       )}
-      <br />
-      <h4>Friend Requests:</h4>
+      <h4>Requests from Players:</h4>
       <div style={testStyles.list}>
         {friendRequests && friendRequests.length > 0 ? (
           <ul>
@@ -79,10 +85,11 @@ const FriendRequestsTest = () => {
                   onClick={() =>
                     handleDeleteFriendRequest(request.requestor_id)
                   }
+                  title="Click to reject Friend Request"
                 >
-                  X
+                  ×
                 </button>{' '}
-                {`Requester ID: ${request.requestor_id}, Name: ${request.friend_name}`}
+                {`ID: ${request.requestor_id}, Name: ${request.friend_name}`}
               </div>
             ))}
           </ul>

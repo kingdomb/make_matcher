@@ -44,6 +44,16 @@ export const testStyles: Record<string, CSSProperties> = {
     cursor: 'pointer',
     boxShadow: 'none',
   },
+  buttonGreen: {
+    backgroundColor: '#00da41',
+    color: '#ffffff',
+    padding: '5px',
+    fontSize: '11px',
+    border: 'none',
+    borderRadius: '5px',
+    cursor: 'pointer',
+    boxShadow: 'none',
+  },
   buttonRed: {
     backgroundColor: '#ff0000',
     color: '#ffffff',
@@ -69,11 +79,22 @@ export const testStyles: Record<string, CSSProperties> = {
     display: 'flex',
     flexDirection: 'row',
     justifyContent: 'center',
-    gap: '20px',
+    gap: '10px',
   },
   column: {
     flex: '1',
   },
-  list: { height: '135px', width: '100%', overflow: 'auto' },
-  listmatches: { height: '275px', width: '100%', overflow: 'auto' },
+  list: { height: '170px', width: '100%', overflow: 'auto', textAlign: 'left' },
+  listgroups: {
+    height: '200px',
+    width: '100%',
+    overflow: 'auto',
+    textAlign: 'left',
+  },
+  listmatches: {
+    height: '275px',
+    width: '100%',
+    overflow: 'auto',
+    textAlign: 'left',
+  },
 };

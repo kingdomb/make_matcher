@@ -12,6 +12,7 @@ function* handleLogin(action) {
       actions.loginSuccess({
         accessToken: token,
         username: user.username,
+        id: user.id,
       }),
     );
   } catch (error) {
@@ -30,6 +31,7 @@ function* handleSignup(action) {
       actions.loginSuccess({
         accessToken: token,
         username: user.username,
+        id: user.id,
       }),
     );
   } catch (error) {

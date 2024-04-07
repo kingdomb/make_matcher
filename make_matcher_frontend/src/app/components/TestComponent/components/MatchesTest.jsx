@@ -7,7 +7,7 @@ import {
   selectLoading,
 } from 'app/pages/HomePage/slice/selectors';
 import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
-import { testStyles } from './TestComponent/testStyles';
+import { testStyles } from '../testStyles';
 
 const MatchesTest = () => {
   const dispatch = useDispatch();
@@ -32,40 +32,48 @@ const MatchesTest = () => {
 
   return (
     <div>
-      <h4>MATCHES Test Component</h4>
+      <h4>MATCHES</h4>
       <br />
-      <h4>Matches List:</h4>
+      <h4>Match Recommendations:</h4>
       <div style={testStyles.listmatches}>
         {matches && matches.length > 0 ? (
-          <ul>
+          <div>
             {matches.map(match => (
               <div key={match.id} style={{ fontSize: 12 }}>
                 <button
                   style={testStyles.buttonRed}
                   onClick={() => handleRejectMatch(match.id)}
+                  title="Click to Delete Recommended Match"
                 >
-                  X
+                  ×
                 </button>
-                <u>
-                  {`Match ID: ${match.id}, Name: ${match.matched.display_name}`}
-                </u>
-
+                <u>{`Match ID: ${match.id}`}</u>
                 <div>
-                  <h5>Games in common:</h5>
+                  <b>ID: ??? Name: {match.matched.display_name}</b>
+                </div>
+                <div>
+                  <h5>Games:</h5>
                   {match.games.length === 0 && <>None</>}
                   {match.games.length !== 0 && (
                     <div>
                       {match.games.map((game, index) => (
                         <div key={index} style={{ fontSize: 11 }}>
-                          * {game.title}
+                          <i>{game.title}</i>
                         </div>
                       ))}
                     </div>
                   )}
                 </div>
+                <hr
+                  style={{
+                    margin: '10px 0',
+                    border: 'none',
+                    borderBottom: '1px solid #e0e0e0',
+                  }}
+                />
               </div>
             ))}
-          </ul>
+          </div>
         ) : (
           <p>No matches found.</p>
         )}

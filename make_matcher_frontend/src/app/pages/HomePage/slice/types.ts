@@ -3,7 +3,7 @@ export interface HomePageState {
   profile: Profile | null;
   loading: boolean;
   error: ErrorType | null;
-  updateSuccess: boolean;
+  updateSuccess: boolean | null;
   /*-- Friend Requests --*/
   friendRequests: FriendRequest[] | null;
   recentFriendRequest: FriendRequest | null;
