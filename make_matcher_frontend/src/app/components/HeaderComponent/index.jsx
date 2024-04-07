@@ -34,6 +34,15 @@ export function HeaderComponent() {
           >
             Profile
           </Link>
+          <Link
+            to="/test"
+            className={`navbar-link ${
+              location.pathname === '/test' ? 'active' : ''
+            }`}
+            id="nav-link3"
+          >
+            Test
+          </Link>
           <LogoutButton />
         </div>
       </nav>

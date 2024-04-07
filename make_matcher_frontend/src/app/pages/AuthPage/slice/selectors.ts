@@ -12,6 +12,8 @@ export const selectUsername = createSelector(
   state => state.username,
 );
 
+export const selectUserID = createSelector([selectSlice], state => state.id);
+
 export const selectAcessToken = createSelector(
   [selectSlice],
   state => state.accessToken,

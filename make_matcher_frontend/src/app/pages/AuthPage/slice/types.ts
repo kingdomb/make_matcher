@@ -1,6 +1,7 @@
 /* --- STATE --- */
 export interface AuthState {
   username: null | string;
+  id: null | number;
   accessToken: null | string;
   refreshToken: null | string;
   isAuthenticated: boolean;

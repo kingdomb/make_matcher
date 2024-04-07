@@ -6,6 +6,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 
 export const initialState: AuthState = {
   username: null,
+  id: null,
   accessToken: null,
   refreshToken: null,
   isAuthenticated: false,
@@ -27,6 +28,7 @@ const slice = createSlice({
       state.accessToken = action.payload.accessToken;
       state.refreshToken = action.payload.refreshToken;
       state.username = action.payload.username;
+      state.id = action.payload.id;
       state.isAuthenticated = true;
       state.loading = false;
       state.error = null;
@@ -40,6 +42,7 @@ const slice = createSlice({
     },
     logout: state => {
       state.username = null;
+      state.id = null;
       state.accessToken = null;
       state.refreshToken = null;
       state.isAuthenticated = false;

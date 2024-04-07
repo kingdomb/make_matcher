@@ -1,3 +1,5 @@
+/* eslint-disable react-hooks/exhaustive-deps */
+/* eslint-disable no-unused-vars */
 import { useHomePageSlice } from 'app/pages/HomePage/slice';
 import {
   selectError,
@@ -7,8 +9,12 @@ import {
 } from 'app/pages/HomePage/slice/selectors';
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { testStyles } from './TestComponent';
-import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
+import {
+  selectAcessToken,
+  selectUserID,
+  selectUsername,
+} from 'app/pages/AuthPage/slice/selectors';
+import { testStyles } from '../testStyles';
 
 const ProfileTest = () => {
   const dispatch = useDispatch();
@@ -17,9 +23,17 @@ const ProfileTest = () => {
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const token = useSelector(selectAcessToken);
+  const userID = useSelector(selectUserID);
+  const userName = useSelector(selectUsername);
   const updateSuccess = useSelector(selectUpdateSuccess);
   const [editableProfile, setEditableProfile] = useState('');
   const [notification, setNotification] = useState('');
+
+  useEffect(() => {
+    if (token) {
+      dispatch(actions.fetchProfileRequest({ token }));
+    }
+  }, [token]);
 
   useEffect(() => {
     if (profile) {
@@ -64,42 +78,53 @@ const ProfileTest = () => {
 
   return (
     <div>
+      <h4>PROFILE</h4>
       <br />
-      <h4>Test API Calls to Fetch & Update Profile</h4>
+      <div>
+        ID: {userID} Name: {userName}
+      </div>
+
       <button
         onClick={handleFetchProfile}
         disabled={loading}
-        style={testStyles.button}
+        style={testStyles.buttonBlue}
+        title="Click to fetch my Profile"
       >
         FETCH PROFILE
       </button>
-
-      {loading && <p>Loading...</p>}
-      <p style={error ? testStyles.errorText : testStyles.successText}>
-        {notification}
-      </p>
       {!profile && <div>Click button to fetch profile.</div>}
       {profile && (
         <div>
+          {
+            <div style={{ fontSize: 12 }}>
+              {updateSuccess === true ? (
+                <div style={{ color: '#00b300' }}>Updated successfully</div>
+              ) : (
+                <i>Try to edit profile:</i>
+              )}
+            </div>
+          }
           <textarea
             style={{
               width: '100%',
-              height: '200px',
+              height: '135px',
               border: '1px solid #ccc',
               padding: '10px',
             }}
             value={editableProfile}
             onChange={e => setEditableProfile(e.target.value)}
+            title="Try to edit profile, then click the Update Profile button"
           />
+          <button
+            onClick={handleUpdateProfile}
+            disabled={loading || !editableProfile}
+            style={testStyles.buttonBlue}
+            title="Click to apply changes to my profile"
+          >
+            UPDATE PROFILE
+          </button>
         </div>
       )}
-      <button
-        onClick={handleUpdateProfile}
-        disabled={loading || !editableProfile}
-        style={testStyles.button}
-      >
-        UPDATE PROFILE
-      </button>
       <br />
     </div>
   );
