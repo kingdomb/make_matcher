@@ -19,6 +19,7 @@ import FriendTest from '../FriendTest';
 import { selectError } from 'app/pages/HomePage/slice/selectors';
 import { testStyles } from './testStyles';
 import MatchesTest from '../MatchesTest';
+import GroupsTest from '../GroupsTest';
 
 interface Props {}
 
@@ -34,9 +35,12 @@ export function TestComponent(props: Props) {
       <div>
         <br />
       </div>
-      <div style={testStyles.header}>Make Matcher Team 1</div>
       <div style={testStyles.paragraph}>
-        <i>(Rudimentary Test Components)</i>
+        (Rudimentary Test Components to demonstrate{' '}
+        <u>
+          <b>Web Services</b>
+        </u>{' '}
+        features)
       </div>
       <div style={testStyles.subHeader}>
         <button
@@ -60,6 +64,11 @@ export function TestComponent(props: Props) {
           <div style={testStyles.column}>
             <div style={testStyles.paper}>
               <ProfileTest />
+            </div>
+          </div>
+          <div style={testStyles.column}>
+            <div style={testStyles.paper}>
+              <GroupsTest />
             </div>
           </div>
           <div style={testStyles.column}>
