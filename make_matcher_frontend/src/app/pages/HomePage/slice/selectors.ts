@@ -52,6 +52,16 @@ export const selectMatches = createSelector(
 
 /*-- Group --*/
 
+export const selectAllGroups = createSelector(
+  [selectSlice],
+  state => state.allGroups,
+);
+
+export const selectUserGroups = createSelector(
+  [selectSlice],
+  state => state.userGroups,
+);
+
 /*-- Geenral --*/
 
 export const selectError = createSelector([selectSlice], state => state.error);

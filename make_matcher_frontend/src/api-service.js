@@ -39,6 +39,8 @@ export function apiPostAuth(path, data = {}) {
     .catch(handleAxiosError);
 }
 
+/*-- Profile --*/
+
 export function apiGetProfile(token) {
   console.log(`GET request to: ${apiBaseUrl}/profile`);
   return axios
@@ -107,6 +109,7 @@ export function apiDeleteFriendRequest(requestId, token) {
 /*-- Friends --*/
 
 export function apiGetFriends(token) {
+  console.log(`GET request to: ${apiBaseUrl}/friends`);
   return axios
     .get(`${apiBaseUrl}/friends`, {
       headers: {
@@ -118,6 +121,7 @@ export function apiGetFriends(token) {
 }
 
 export function apiCreateFriend(data, token) {
+  console.log(`POST request to: ${apiBaseUrl}/friends`);
   return axios
     .post(`${apiBaseUrl}/friends`, data, {
       headers: {
@@ -130,6 +134,7 @@ export function apiCreateFriend(data, token) {
 }
 
 export function apiDeleteFriend(friendId, token) {
+  console.log(`DELETE request to: ${apiBaseUrl}/friends/${friendId}`);
   return axios
     .delete(`${apiBaseUrl}/friends/${friendId}`, {
       headers: {
@@ -143,8 +148,9 @@ export function apiDeleteFriend(friendId, token) {
 /*-- Match --*/
 
 export function apiGetMatches(token) {
+  console.log(`POST request to: ${apiBaseUrl}/matches`);
   return axios
-    .get(`https://make-matcher-backend.fly.dev/api/matches`, {
+    .get(`${apiBaseUrl}/matches`, {
       headers: {
         Authorization: `Token ${token}`,
         ...getHeaders(),
@@ -154,8 +160,9 @@ export function apiGetMatches(token) {
 }
 
 export function apiRejectMatch(matchId, token) {
+  console.log(`DELETE request to: ${apiBaseUrl}/matches/${matchId}`);
   return axios
-    .delete(`https://make-matcher-backend.fly.dev/api/matches/${matchId}`, {
+    .delete(`${apiBaseUrl}/matches/${matchId}`, {
       headers: {
         Authorization: `Token ${token}`,
         ...getHeaders(),
@@ -165,6 +172,66 @@ export function apiRejectMatch(matchId, token) {
 }
 
 /*-- Group --*/
+
+export function apiGetAllGroups(token) {
+  console.log(`GET request to: ${apiBaseUrl}/groups`);
+  const params = new URLSearchParams({ all: true });
+  return axios
+    .get(`${apiBaseUrl}/groups?${params.toString()}`, {
+      headers: { Authorization: `Token ${token}`, ...getHeaders() },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiGetUserGroups(token) {
+  console.log(`GET request to: ${apiBaseUrl}/groups`);
+  return axios
+    .get(`${apiBaseUrl}/groups`, {
+      headers: { Authorization: `Token ${token}`, ...getHeaders() },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiCreateGroup(data) {
+  console.log(`POST request to: ${apiBaseUrl}/groups`);
+  return axios
+    .post(`${apiBaseUrl}/groups`, data, {
+      headers: { Authorization: `Token ${data.token}`, ...getHeaders() },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiDeleteGroup(groupId, token) {
+  console.log(`DELETE request to: ${apiBaseUrl}/groups/${groupId}`);
+  return axios
+    .delete(`${apiBaseUrl}/groups/${groupId}`, {
+      headers: { Authorization: `Token ${token}`, ...getHeaders() },
+    })
+    .catch(handleAxiosError);
+}
+
+export function apiAddGroupMember(groupId, userId, token) {
+  console.log(`POST request to: ${apiBaseUrl}/groups/${groupId}/memberships`);
+  return axios
+    .post(
+      `${apiBaseUrl}/groups/${groupId}/memberships`,
+      { userId },
+      {
+        headers: { Authorization: `Token ${token}`, ...getHeaders() },
+      },
+    )
+    .catch(handleAxiosError);
+}
+
+export function apiRemoveGroupMember(groupId, userId, token) {
+  console.log(`DELETE request to: ${apiBaseUrl}/groups/${groupId}/memberships`);
+  return axios
+    .delete(`${apiBaseUrl}/groups/${groupId}/memberships`, {
+      data: { userId },
+      headers: { Authorization: `Token ${token}`, ...getHeaders() },
+    })
+    .catch(handleAxiosError);
+}
 
 /*-- General --*/
 

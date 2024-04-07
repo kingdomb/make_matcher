@@ -13,6 +13,8 @@ export interface HomePageState {
   /*-- Match --*/
   matches: Match[] | null;
   /*-- Group --*/
+  allGroups: Group[] | null;
+  userGroups: Group[] | null;
 }
 
 export interface Profile {
@@ -112,6 +114,40 @@ export interface RejectMatchPayload {
 }
 
 /*-- Group --*/
+
+export interface Group {
+  id: number;
+  name: string;
+  users: number[];
+}
+
+export interface FetchAllGroupsPayload {
+  token: string;
+}
+
+export interface FetchUserGroupsPayload {
+  token: string;
+}
+
+export interface CreateGroupPayload {
+  name: string;
+  token: string;
+}
+
+export interface DeleteGroupPayload {
+  groupId: number;
+  token: string;
+}
+
+export interface AddGroupMemberPayload {
+  groupId: number;
+  token: string;
+}
+
+export interface RemoveGroupMemberPayload {
+  groupId: number;
+  token: string;
+}
 
 /*-- General --*/
 

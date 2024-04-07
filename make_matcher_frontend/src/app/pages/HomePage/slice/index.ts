@@ -3,20 +3,27 @@ import { createSlice } from 'utils/@reduxjs/toolkit';
 import { useInjectReducer, useInjectSaga } from 'utils/redux-injectors';
 import { homePageSaga } from './saga';
 import {
+  AddGroupMemberPayload,
   CreateFriendPayload,
   CreateFriendRequestPayload,
+  CreateGroupPayload,
   DeleteFriendPayload,
   DeleteFriendRequestPayload,
+  DeleteGroupPayload,
+  FetchAllGroupsPayload,
   FetchFriendRequestsPayload,
   FetchFriendsPayload,
   FetchMatchesPayload,
+  FetchUserGroupsPayload,
   Friend,
   FriendRequest,
+  Group,
   HomePageState,
   Match,
   Profile,
   ProfileUpdatePayload,
   RejectMatchPayload,
+  RemoveGroupMemberPayload,
 } from './types';
 
 export const initialState: HomePageState = {
@@ -33,6 +40,8 @@ export const initialState: HomePageState = {
   /*-- Match --*/
   matches: null,
   /*-- Group --*/
+  allGroups: null,
+  userGroups: null,
 };
 
 const slice = createSlice({
@@ -184,6 +193,65 @@ const slice = createSlice({
     },
 
     /*-- Group --*/
+
+    fetchAllGroupsRequest: (
+      state,
+      action: PayloadAction<FetchAllGroupsPayload>,
+    ) => {
+      state.loading = true;
+    },
+    fetchAllGroupsSuccess: (state, action: PayloadAction<Group[]>) => {
+      state.allGroups = action.payload;
+      state.loading = false;
+    },
+    fetchUserGroupsRequest: (
+      state,
+      action: PayloadAction<FetchUserGroupsPayload>,
+    ) => {
+      state.loading = true;
+    },
+    fetchUserGroupsSuccess: (state, action: PayloadAction<Group[]>) => {
+      state.userGroups = action.payload;
+      state.loading = false;
+    },
+    createGroupRequest: (state, action: PayloadAction<CreateGroupPayload>) => {
+      state.loading = true;
+    },
+    createGroupSuccess: (state, action: PayloadAction<Group>) => {
+      state.loading = false;
+      // Optionally update state with new group
+    },
+    deleteGroupRequest: (state, action: PayloadAction<DeleteGroupPayload>) => {
+      state.loading = true;
+    },
+    deleteGroupSuccess: (state, action: PayloadAction<number>) => {
+      state.loading = false;
+      // Optionally remove deleted group from state
+    },
+    addGroupMemberRequest: (
+      state,
+      action: PayloadAction<AddGroupMemberPayload>,
+    ) => {
+      state.loading = true;
+    },
+    addGroupMemberSuccess: state => {
+      state.loading = false;
+      // Optionally update group members in state
+    },
+    removeGroupMemberRequest: (
+      state,
+      action: PayloadAction<RemoveGroupMemberPayload>,
+    ) => {
+      state.loading = true;
+    },
+    removeGroupMemberSuccess: state => {
+      state.loading = false;
+      // Optionally update group members in state
+    },
+    groupFailure: (state, action) => {
+      state.error = action.payload;
+      state.loading = false;
+    },
 
     /*-- General --*/
 

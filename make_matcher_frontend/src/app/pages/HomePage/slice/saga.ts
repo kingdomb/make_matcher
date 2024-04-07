@@ -1,4 +1,4 @@
-import { call, put, takeLatest } from 'redux-saga/effects';
+import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { homePageActions as actions } from '.';
 /*-- Profile --*/
 import { apiGetProfile, apiPostProfile } from 'api-service';
@@ -13,7 +13,17 @@ import { apiGetFriends, apiCreateFriend, apiDeleteFriend } from 'api-service';
 /*-- Match --*/
 import { apiGetMatches, apiRejectMatch } from 'api-service';
 /*-- Group --*/
+import {
+  apiGetAllGroups,
+  apiGetUserGroups,
+  apiCreateGroup,
+  apiDeleteGroup,
+  apiAddGroupMember,
+  apiRemoveGroupMember,
+} from 'api-service';
+/*-- General --*/
 import { getErrorMessage } from 'api-service';
+import { selectUserID } from 'app/pages/AuthPage/slice/selectors';
 
 // function* doSomething() {}
 function* fetchProfile(action) {
@@ -134,6 +144,7 @@ function* fetchMatches(action) {
   try {
     const { token } = action.payload;
     const response = yield call(apiGetMatches, token);
+    console.log('Fetch Matches response: ', response.data);
     yield put(actions.fetchMatchesSuccess(response.data.matches));
   } catch (error) {
     yield put(actions.matchFailure(getErrorMessage(error)));
@@ -155,6 +166,90 @@ function* rejectMatch(action) {
 }
 
 /*-- Group --*/
+
+function* fetchAllGroups(action) {
+  try {
+    const { token } = action.payload;
+    const response = yield call(apiGetAllGroups, token);
+    console.log('Fetch All Groups response: ', response.data);
+    yield put(actions.fetchAllGroupsSuccess(response.data.groups));
+  } catch (error) {
+    yield put(actions.groupFailure(getErrorMessage(error)));
+  }
+}
+
+function* fetchUserGroups(action) {
+  try {
+    const { token } = action.payload;
+    const response = yield call(apiGetUserGroups, token);
+    console.log("Fetch User's Groups response: ", response.data);
+    yield put(actions.fetchUserGroupsSuccess(response.data.groups));
+  } catch (error) {
+    yield put(actions.groupFailure(getErrorMessage(error)));
+  }
+}
+
+function* createGroup(action) {
+  try {
+    const { name, token } = action.payload;
+    console.log('Create Group name: ', name);
+    const response = yield call(apiCreateGroup, action.payload);
+    console.log('Fetch Create Group response: ', response.data);
+    yield put(actions.createGroupSuccess(response.data.group));
+    yield put(actions.fetchAllGroupsRequest({ token }));
+    yield put(actions.fetchUserGroupsRequest({ token }));
+  } catch (error) {
+    yield put(actions.groupFailure(getErrorMessage(error)));
+  }
+}
+
+function* deleteGroup(action) {
+  try {
+    const { token, groupId } = action.payload;
+    console.log('Create Group ID: ', action.payload.groupId);
+    const response = yield call(
+      apiDeleteGroup,
+      action.payload.groupId,
+      action.payload.token,
+    );
+    console.log('Delete Group response: ', response.data);
+    yield put(actions.deleteGroupSuccess(action.payload.groupId));
+    yield put(actions.fetchAllGroupsRequest({ token }));
+    yield put(actions.fetchUserGroupsRequest({ token }));
+  } catch (error) {
+    yield put(actions.groupFailure(getErrorMessage(error)));
+  }
+}
+
+function* addGroupMember(action) {
+  const userId = yield select(selectUserID);
+  try {
+    const { groupId, token } = action.payload;
+    console.log(`Add User ID: ${userId} to Group ID: ${groupId}`);
+    const response = yield call(apiAddGroupMember, groupId, userId, token);
+    console.log('Add Group Member response: ', response.data);
+    yield put(actions.addGroupMemberSuccess());
+    yield put(actions.fetchAllGroupsRequest({ token }));
+    yield put(actions.fetchUserGroupsRequest({ token }));
+  } catch (error) {
+    yield put(actions.groupFailure(getErrorMessage(error)));
+  }
+}
+
+function* removeGroupMember(action) {
+  const userId = yield select(selectUserID);
+  try {
+    const { groupId, token } = action.payload;
+    console.log(`Remove User ID: ${userId} from Group ID: ${groupId}`);
+    const response = yield call(apiRemoveGroupMember, groupId, userId, token);
+    console.log('Remove Group Member response: ', response.data);
+    yield put(actions.removeGroupMemberSuccess());
+    yield put(actions.fetchAllGroupsRequest({ token }));
+    yield put(actions.fetchUserGroupsRequest({ token }));
+  } catch (error) {
+    yield put(actions.groupFailure(getErrorMessage(error)));
+  }
+}
 
 /*-- Listerners --*/
 
@@ -185,4 +280,10 @@ export function* homePageSaga() {
   yield takeLatest(actions.rejectMatchRequest.type, rejectMatch);
 
   /*-- Group --*/
+  yield takeLatest(actions.fetchAllGroupsRequest.type, fetchAllGroups);
+  yield takeLatest(actions.fetchUserGroupsRequest.type, fetchUserGroups);
+  yield takeLatest(actions.createGroupRequest.type, createGroup);
+  yield takeLatest(actions.deleteGroupRequest.type, deleteGroup);
+  yield takeLatest(actions.addGroupMemberRequest.type, addGroupMember);
+  yield takeLatest(actions.removeGroupMemberRequest.type, removeGroupMember);
 }
