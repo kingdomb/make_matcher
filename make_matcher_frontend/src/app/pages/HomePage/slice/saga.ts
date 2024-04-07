@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { call, put, select, takeLatest } from 'redux-saga/effects';
 import { homePageActions as actions } from '.';
 /*-- Profile --*/

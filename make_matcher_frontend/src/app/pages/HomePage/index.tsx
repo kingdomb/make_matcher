@@ -1,3 +1,4 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 import { FooterComponent } from 'app/components/FooterComponent/Loadable';
 import { HeaderComponent } from 'app/components/HeaderComponent/Loadable';
 import { TestComponent } from 'app/components/TestComponent/Loadable';

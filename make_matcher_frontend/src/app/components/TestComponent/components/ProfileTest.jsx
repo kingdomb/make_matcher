@@ -1,3 +1,4 @@
+/* eslint-disable no-unused-vars */
 import { useHomePageSlice } from 'app/pages/HomePage/slice';
 import {
   selectError,
