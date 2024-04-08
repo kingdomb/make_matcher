@@ -27,6 +27,7 @@ class Profile < ApplicationRecord
   # Validations
   validates_presence_of :display_name
   validates :intensity, :skill, :language, inclusion: 1..10, allow_nil: true
+  validate :array_fields, on: :update
 
   # Constants
   COORDINATES = %w[latitude longitude].freeze
@@ -58,5 +59,15 @@ class Profile < ApplicationRecord
     assign_attributes Geocode.locate_timezone(latitude, longitude) if locate_utc_offset?
   rescue StandardError => e
     Rails.logger.error "There was an error locating the zip code (#{zip_code}) -- #{e.inspect}"
+  end
+
+  def array_fields
+    if days_changed? && (days - DAYS).present?
+      errors.add(:days, :invalid, message: "Days can only be one of the following: #{DAYS}")
+    end
+
+    if times_changed? && (times - TIMES).present?
+      errors.add(:times, :invalid, message: "Days can only be one of the following: #{TIMES}")
+    end
   end
 end
