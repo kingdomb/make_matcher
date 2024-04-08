@@ -87,7 +87,7 @@ const FriendTest = () => {
                   ×
                 </button>
                 <b>{`Player ID: ${friend.destination_id}`}</b>
-                <div>Name: ${friend.friend_name}</div>
+                <div>Name: {friend.friend_name}</div>
               </div>
             ))}
           </ul>
