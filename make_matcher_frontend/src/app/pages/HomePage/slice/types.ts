@@ -7,6 +7,7 @@ export interface HomePageState {
   /*-- Friend Requests --*/
   friendRequests: FriendRequest[] | null;
   recentFriendRequest: FriendRequest | null;
+  recentFriendRequestID: number | null;
   /*-- Friends --*/
   friends: Friend[] | null;
   recentCreateFriend: Friend | null;

@@ -84,7 +84,18 @@ export const testStyles: Record<string, CSSProperties> = {
   column: {
     flex: '1',
   },
-  list: { height: '170px', width: '100%', overflow: 'auto', textAlign: 'left' },
+  listrequests: {
+    height: '170px',
+    width: '100%',
+    overflow: 'auto',
+    textAlign: 'left',
+  },
+  listfriends: {
+    height: '250px',
+    width: '100%',
+    overflow: 'auto',
+    textAlign: 'left',
+  },
   listgroups: {
     height: '200px',
     width: '100%',
