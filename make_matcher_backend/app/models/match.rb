@@ -5,7 +5,8 @@ class Match < ApplicationRecord
 
   # Joins
   def games
-    Game.joins(:profiles).where(profiles: { id: [matcher_id, matched_id] })
+    Game.joins(:profiles).where(profiles: { id: matcher_id })
+        .where(id: Game.joins(:profiles).where(profiles: { id: matched_id }).select(:id))
   end
 
   # Callbacks
