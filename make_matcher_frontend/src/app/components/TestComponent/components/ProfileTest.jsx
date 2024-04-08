@@ -81,7 +81,9 @@ const ProfileTest = () => {
       <h4>PROFILE</h4>
       <br />
       <div>
-        ID: {userID} Name: {userName}
+        <h4>
+          ID: {userID} Name: {userName}
+        </h4>
       </div>
 
       <button

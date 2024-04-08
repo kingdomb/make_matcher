@@ -74,7 +74,7 @@ const GroupsTest = () => {
         </button>
       </div>
       <div style={testStyles.listgroups}>
-        <h3>My Groups:</h3>
+        <h4>My Groups:</h4>
         {myGroups && myGroups.length > 0 ? (
           myGroups.map(group => (
             <div key={group.id} style={{ fontSize: 11 }}>
@@ -91,7 +91,7 @@ const GroupsTest = () => {
             borderBottom: '1px solid #e0e0e0',
           }}
         />
-        <h3>All Groups:</h3>
+        <h4>All Groups:</h4>
         {allGroups &&
           allGroups.map(group => (
             <div key={group.id} style={{ textAlign: 'left' }}>
@@ -123,7 +123,8 @@ const GroupsTest = () => {
                 {group.users.map(user => (
                   <div key={user.id} style={{ fontSize: 11 }}>
                     {/* Delete member from group */}
-                    ID: {user.id}, Name: {user.username}{' '}
+                    <b>Player ID: {user.id}</b>
+
                     {userID === user.id && (
                       <button
                         style={testStyles.buttonRed}
@@ -135,6 +136,11 @@ const GroupsTest = () => {
                         Leave
                       </button>
                     )}
+                    <div>
+                      <i>
+                        {'   '}Name: {user.username}
+                      </i>
+                    </div>
                   </div>
                 ))}
               </div>

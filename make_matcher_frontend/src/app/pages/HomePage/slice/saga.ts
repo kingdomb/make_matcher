@@ -79,6 +79,7 @@ function* createFriendRequest(action) {
     );
     console.log('Create friend request response: ', response.data);
     yield put(actions.createFriendRequestSuccess(response.data.friend_request));
+    yield put(actions.recentFriendRequestID(requestee_id));
     yield put(actions.fetchFriendRequestsRequest({ token }));
   } catch (error) {
     const errorMsg = getErrorMessage(error);

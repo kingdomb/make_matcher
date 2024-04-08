@@ -34,6 +34,7 @@ export const initialState: HomePageState = {
   /*-- Friend Requests --*/
   friendRequests: null,
   recentFriendRequest: null,
+  recentFriendRequestID: null,
   /*-- Friends --*/
   friends: null,
   recentCreateFriend: null,
@@ -118,6 +119,9 @@ const slice = createSlice({
     friendRequestFailure: (state, action) => {
       state.error = action.payload;
       state.loading = false;
+    },
+    recentFriendRequestID: (state, action) => {
+      state.recentFriendRequestID = action.payload;
     },
 
     /*-- Friends --*/

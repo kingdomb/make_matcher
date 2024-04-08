@@ -32,6 +32,11 @@ export const selectRecentFriendRequest = createSelector(
   state => state.recentFriendRequest,
 );
 
+export const selectRecentFriendRequestID = createSelector(
+  [selectSlice],
+  state => state.recentFriendRequestID,
+);
+
 /*-- Friends --*/
 
 export const selectFriends = createSelector(
