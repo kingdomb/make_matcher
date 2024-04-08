@@ -91,7 +91,7 @@ const FriendRequestsTest = () => {
                   ×
                 </button>{' '}
                 <b>{`Player ID: ${request.requestor_id}`}</b>
-                <div>Name: ${request.friend_name}</div>
+                <div>Name: {request.friend_name}</div>
               </div>
             ))}
           </ul>
