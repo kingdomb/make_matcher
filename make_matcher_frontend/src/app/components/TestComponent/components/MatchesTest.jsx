@@ -50,10 +50,14 @@ const MatchesTest = () => {
                 </button>
                 <u>{`Match ID: ${match.id}`}</u>
                 <div>
-                  <b>ID: ??? Name: {match.matched.display_name}</b>
+                  <b>Player ID: {match.matched.user_id}</b>
                 </div>
                 <div>
-                  <h5>Games:</h5>
+                  Name:
+                  {match.matched.display_name}
+                </div>
+                <div>
+                  <h5>Games in common:</h5>
                   {match.games.length === 0 && <>None</>}
                   {match.games.length !== 0 && (
                     <div>

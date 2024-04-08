@@ -123,7 +123,8 @@ const GroupsTest = () => {
                 {group.users.map(user => (
                   <div key={user.id} style={{ fontSize: 11 }}>
                     {/* Delete member from group */}
-                    ID: {user.id}, Name: {user.username}{' '}
+                    <b>Player ID: {user.id}</b>
+
                     {userID === user.id && (
                       <button
                         style={testStyles.buttonRed}
@@ -135,6 +136,11 @@ const GroupsTest = () => {
                         Leave
                       </button>
                     )}
+                    <div>
+                      <i>
+                        {'   '}Name: {user.username}
+                      </i>
+                    </div>
                   </div>
                 ))}
               </div>
