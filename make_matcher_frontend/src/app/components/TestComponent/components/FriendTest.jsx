@@ -50,7 +50,7 @@ const FriendTest = () => {
     <div>
       <h4>FRIENDS</h4>
       <br />
-      Enter Player ID:{' '}
+      {/* Enter Player ID:{' '}
       <input
         type="text"
         placeholder="Enter player ID"
@@ -65,7 +65,7 @@ const FriendTest = () => {
         title="Click to Add Friend"
       >
         Add Friend
-      </button>
+      </button> */}
       {recentCreateFriend && recentCreateFriend.friend.friend_name && (
         <div style={{ fontSize: 12 }}>
           <div style={{ color: '#00b300' }}>
@@ -74,7 +74,7 @@ const FriendTest = () => {
         </div>
       )}
       <h4>Friends List:</h4>
-      <div style={testStyles.list}>
+      <div style={testStyles.listfriends}>
         {friends && friends.friends && friends.friends.length > 0 ? (
           <ul>
             {friends.friends.map(friend => (

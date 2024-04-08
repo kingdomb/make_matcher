@@ -7,6 +7,7 @@ import {
   selectFriendRequests,
   selectLoading,
   selectRecentFriendRequest,
+  selectRecentFriendRequestID,
 } from 'app/pages/HomePage/slice/selectors';
 import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
 import { testStyles } from '../testStyles';
@@ -16,6 +17,7 @@ const FriendRequestsTest = () => {
   const { actions } = useHomePageSlice();
   const friendRequests = useSelector(selectFriendRequests);
   const recentFriendRequest = useSelector(selectRecentFriendRequest);
+  const recentFriendRequestID = useSelector(selectRecentFriendRequestID);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
   const token = useSelector(selectAcessToken);
@@ -48,6 +50,15 @@ const FriendRequestsTest = () => {
     dispatch(actions.fetchFriendRequestsRequest({ token }));
   };
 
+  const handleAddAsFriend = playerID => {
+    dispatch(
+      actions.createFriendRequest({
+        destination_id: playerID,
+        token,
+      }),
+    );
+  };
+
   return (
     <div>
       <h4>REQUESTS</h4>
@@ -71,12 +82,12 @@ const FriendRequestsTest = () => {
       {recentFriendRequest && recentFriendRequest.friend_name && (
         <div style={{ fontSize: 12 }}>
           <div style={{ color: '#00b300' }}>
-            <i>Last Request: [ID: {recentFriendRequest.requestee_id}] </i>
+            <i>Last Request: [ID: {recentFriendRequestID}] </i>
           </div>
         </div>
       )}
       <h4>Requests from Players:</h4>
-      <div style={testStyles.list}>
+      <div style={testStyles.listrequests}>
         {friendRequests && friendRequests.length > 0 ? (
           <ul>
             {friendRequests.map(request => (
@@ -91,6 +102,13 @@ const FriendRequestsTest = () => {
                   ×
                 </button>{' '}
                 <b>{`Player ID: ${request.requestor_id}`}</b>
+                <button
+                  style={{ ...testStyles.buttonGreen, marginLeft: '10px' }}
+                  onClick={() => handleAddAsFriend(request.requestor_id)}
+                  title="Click to Add as Friend"
+                >
+                  Add as Friend
+                </button>
                 <div>Name: {request.friend_name}</div>
               </div>
             ))}

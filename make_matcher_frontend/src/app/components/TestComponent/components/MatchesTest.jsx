@@ -31,6 +31,15 @@ const MatchesTest = () => {
     );
   };
 
+  const handleSendFriendRequest = playerID => {
+    dispatch(
+      actions.createFriendRequestRequest({
+        requestee_id: parseInt(playerID, 10),
+        token,
+      }),
+    );
+  };
+
   return (
     <div>
       <h4>MATCHES</h4>
@@ -51,6 +60,15 @@ const MatchesTest = () => {
                 <u>{`Match ID: ${match.id}`}</u>
                 <div>
                   <b>Player ID: {match.matched.user_id}</b>
+                  <button
+                    style={{ ...testStyles.buttonGreen, marginLeft: '10px' }}
+                    onClick={() =>
+                      handleSendFriendRequest(match.matched.user_id)
+                    }
+                    title="Click to Send Friend Request"
+                  >
+                    Friend Request
+                  </button>
                 </div>
                 <div>
                   Name:
