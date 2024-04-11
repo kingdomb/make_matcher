@@ -9,7 +9,10 @@ import {
   selectRecentFriendRequest,
   selectRecentFriendRequestID,
 } from 'app/pages/HomePage/slice/selectors';
-import { selectAcessToken } from 'app/pages/AuthPage/slice/selectors';
+import {
+  selectAcessToken,
+  selectUserID,
+} from 'app/pages/AuthPage/slice/selectors';
 import { testStyles } from '../testStyles';
 
 const FriendRequestsTest = () => {
@@ -22,13 +25,21 @@ const FriendRequestsTest = () => {
   const error = useSelector(selectError);
   const token = useSelector(selectAcessToken);
   const [requesteeId, setRequesteeId] = useState('');
+  const userId = useSelector(selectUserID);
 
   useEffect(() => {
     dispatch(actions.fetchFriendRequestsRequest({ token }));
   }, [dispatch, actions, token]);
 
   const handleCreateFriendRequest = () => {
-    if (requesteeId) {
+    if (!requesteeId || Number(requesteeId) === userId) {
+      return;
+    }
+
+    const isConfirmed = window.confirm(
+      `Are you sure you want to send friend request to Player ${requesteeId}?`,
+    );
+    if (isConfirmed && requesteeId && requesteeId !== userId) {
       dispatch(
         actions.createFriendRequestRequest({
           requestee_id: parseInt(requesteeId, 10),
@@ -36,27 +47,37 @@ const FriendRequestsTest = () => {
         }),
       );
       dispatch(actions.fetchFriendRequestsRequest({ token }));
+      setRequesteeId('');
     }
-    setRequesteeId('');
   };
 
   const handleDeleteFriendRequest = requestId => {
-    dispatch(
-      actions.deleteFriendRequestRequest({
-        requestId,
-        token,
-      }),
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete this friend request from Player ${requestId}?`,
     );
-    dispatch(actions.fetchFriendRequestsRequest({ token }));
+    if (isConfirmed) {
+      dispatch(
+        actions.deleteFriendRequestRequest({
+          requestId,
+          token,
+        }),
+      );
+      dispatch(actions.fetchFriendRequestsRequest({ token }));
+    }
   };
 
   const handleAddAsFriend = playerID => {
-    dispatch(
-      actions.createFriendRequest({
-        destination_id: playerID,
-        token,
-      }),
+    const isConfirmed = window.confirm(
+      `Are you sure you want to add Player ${playerID} as friend?`,
     );
+    if (isConfirmed) {
+      dispatch(
+        actions.createFriendRequest({
+          destination_id: playerID,
+          token,
+        }),
+      );
+    }
   };
 
   return (
