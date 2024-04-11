@@ -31,26 +31,47 @@ const GroupsTest = () => {
   }, [dispatch, actions, token]);
 
   const handleCreateGroup = () => {
-    if (newGroupName) {
+    if (!newGroupName) {
+      return;
+    }
+    const isConfirmed = window.confirm(
+      `Are you sure you want to create new group "${newGroupName}"?`,
+    );
+    if (isConfirmed && newGroupName) {
       dispatch(actions.createGroupRequest({ name: newGroupName, token }));
     }
   };
 
-  const handleDeleteGroup = groupId => {
-    dispatch(actions.deleteGroupRequest({ groupId, token }));
-  };
-
-  const handleAddGroupMember = groupId => {
-    dispatch(
-      actions.addGroupMemberRequest({
-        groupId,
-        token,
-      }),
+  const handleDeleteGroup = (groupId, groupName) => {
+    const isConfirmed = window.confirm(
+      `Are you sure you want to delete group "${groupName}"?`,
     );
+    if (isConfirmed) {
+      dispatch(actions.deleteGroupRequest({ groupId, token }));
+    }
   };
 
-  const handleRemoveGroupMember = groupId => {
-    dispatch(actions.removeGroupMemberRequest({ groupId, token }));
+  const handleAddGroupMember = (groupId, groupName) => {
+    const isConfirmed = window.confirm(
+      `Are you sure you want to join group "${groupName}"?`,
+    );
+    if (isConfirmed) {
+      dispatch(
+        actions.addGroupMemberRequest({
+          groupId,
+          token,
+        }),
+      );
+    }
+  };
+
+  const handleRemoveGroupMember = (groupId, groupName) => {
+    const isConfirmed = window.confirm(
+      `Are you sure you want to leave group "${groupName}"?`,
+    );
+    if (isConfirmed) {
+      dispatch(actions.removeGroupMemberRequest({ groupId, token }));
+    }
   };
 
   return (
@@ -99,7 +120,7 @@ const GroupsTest = () => {
                 {/* Delete group */}
                 <button
                   style={testStyles.buttonRed}
-                  onClick={() => handleDeleteGroup(group.id)}
+                  onClick={() => handleDeleteGroup(group.id, group.name)}
                   title="Click to Delete Group"
                 >
                   ×
@@ -108,13 +129,14 @@ const GroupsTest = () => {
                 {!group.users.some(user => user.id === userID) && (
                   <button
                     style={testStyles.buttonGreen}
-                    onClick={() => handleAddGroupMember(group.id)}
+                    onClick={() => handleAddGroupMember(group.id, group.name)}
                     title="Click to Join Group"
                   >
                     Join
                   </button>
                 )}
               </div>
+              <div style={{ fontSize: 12 }}>Group ID: {group.id}</div>
               <div style={{ fontSize: 12 }}>Members:</div>
               <div>
                 {group.users.length === 0 && (
@@ -129,7 +151,7 @@ const GroupsTest = () => {
                       <button
                         style={testStyles.buttonRed}
                         onClick={() =>
-                          handleRemoveGroupMember(group.id, user.id)
+                          handleRemoveGroupMember(group.id, group.name)
                         }
                         title="Click to Leave Group"
                       >

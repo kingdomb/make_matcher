@@ -61,18 +61,23 @@ const ProfileTest = () => {
   };
 
   const handleUpdateProfile = () => {
-    setNotification('');
-    let updatedProfileData;
-    try {
-      updatedProfileData = JSON.parse(editableProfile);
-      dispatch(
-        actions.updateProfileRequest({
-          profileData: updatedProfileData,
-          token,
-        }),
-      );
-    } catch (e) {
-      setNotification('Invalid JSON format');
+    const isConfirmed = window.confirm(
+      `Are you sure you want to apply changes to your profile?`,
+    );
+    if (isConfirmed) {
+      setNotification('');
+      let updatedProfileData;
+      try {
+        updatedProfileData = JSON.parse(editableProfile);
+        dispatch(
+          actions.updateProfileRequest({
+            profileData: updatedProfileData,
+            token,
+          }),
+        );
+      } catch (e) {
+        setNotification('Invalid JSON format');
+      }
     }
   };
 

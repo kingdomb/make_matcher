@@ -38,12 +38,17 @@ const FriendTest = () => {
   };
 
   const handleDeleteFriend = friendId => {
-    dispatch(
-      actions.deleteFriendRequest({
-        friendId,
-        token,
-      }),
+    const isConfirmed = window.confirm(
+      `Are you sure you want to unfriend Player ${friendId}?`,
     );
+    if (isConfirmed) {
+      dispatch(
+        actions.deleteFriendRequest({
+          friendId,
+          token,
+        }),
+      );
+    }
   };
 
   return (

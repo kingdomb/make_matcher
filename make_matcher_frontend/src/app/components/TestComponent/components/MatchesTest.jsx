@@ -23,21 +23,31 @@ const MatchesTest = () => {
   }, [dispatch, actions, token]);
 
   const handleRejectMatch = matchId => {
-    dispatch(
-      actions.rejectMatchRequest({
-        matchId,
-        token,
-      }),
+    const isConfirmed = window.confirm(
+      `Are you sure you want to remove match ID ${matchId} from the list?`,
     );
+    if (isConfirmed) {
+      dispatch(
+        actions.rejectMatchRequest({
+          matchId,
+          token,
+        }),
+      );
+    }
   };
 
   const handleSendFriendRequest = playerID => {
-    dispatch(
-      actions.createFriendRequestRequest({
-        requestee_id: parseInt(playerID, 10),
-        token,
-      }),
+    const isConfirmed = window.confirm(
+      `Are you sure you want to send friend request to Player ${playerID}?`,
     );
+    if (isConfirmed) {
+      dispatch(
+        actions.createFriendRequestRequest({
+          requestee_id: parseInt(playerID, 10),
+          token,
+        }),
+      );
+    }
   };
 
   return (

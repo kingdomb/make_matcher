@@ -223,14 +223,12 @@ const slice = createSlice({
     },
     createGroupSuccess: (state, action: PayloadAction<Group>) => {
       state.loading = false;
-      // Optionally update state with new group
     },
     deleteGroupRequest: (state, action: PayloadAction<DeleteGroupPayload>) => {
       state.loading = true;
     },
     deleteGroupSuccess: (state, action: PayloadAction<number>) => {
       state.loading = false;
-      // Optionally remove deleted group from state
     },
     addGroupMemberRequest: (
       state,
@@ -240,7 +238,6 @@ const slice = createSlice({
     },
     addGroupMemberSuccess: state => {
       state.loading = false;
-      // Optionally update group members in state
     },
     removeGroupMemberRequest: (
       state,
@@ -250,7 +247,6 @@ const slice = createSlice({
     },
     removeGroupMemberSuccess: state => {
       state.loading = false;
-      // Optionally update group members in state
     },
     groupFailure: (state, action) => {
       state.error = action.payload;
