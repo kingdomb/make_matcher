@@ -53,4 +53,6 @@ group :development do
   gem 'rails-erd'
 end
 
+gem 'simplecov', require: false, group: :test
+
 gem "dockerfile-rails", ">= 1.6", :group => :development
