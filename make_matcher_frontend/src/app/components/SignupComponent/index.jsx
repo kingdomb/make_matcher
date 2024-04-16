@@ -7,7 +7,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { InputComponent } from '../InputComponent';
+import { TypedInputComponent } from '../TypedInputComponent';
 import {
   isEmail,
   isZipCode,
@@ -130,7 +130,7 @@ export function SignupComponent() {
       <form onSubmit={handleSignUp}>
         <h2 className="title">Welcome!</h2>
         <span className="sub-title">Sign up here.</span>
-        <InputComponent
+        <TypedInputComponent
           label="Username"
           id="username"
           className="form-inputs"
@@ -140,7 +140,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('username', e.target.value)}
           error={usernameIsInvalid && 'Please enter a valid username!'}
         />
-        <InputComponent
+        <TypedInputComponent
           label="Email"
           id="email"
           className="form-inputs"
@@ -150,7 +150,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('email', e.target.value)}
           error={emailIsInvalid && 'Please enter a valid email!'}
         />
-        <InputComponent
+        <TypedInputComponent
           label="Zip Code"
           id="zip-code"
           type="text"
@@ -162,7 +162,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('zipCode', e.target.value)}
           error={zipCodeIsInvalid && 'Please enter a valid zip code!'}
         />
-        <InputComponent
+        <TypedInputComponent
           label="Password"
           id="password"
           type="password"
@@ -171,7 +171,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('password', e.target.value)}
           error={passwordIsInvalid && 'Please enter a valid password!'}
         />
-        <InputComponent
+        <TypedInputComponent
           label="Confirm Password"
           id="confirm-password"
           className="form-inputs"

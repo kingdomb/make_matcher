@@ -284,3 +284,7 @@ export function getErrorMessage(error) {
 
   return { statusCode, errorMessage };
 }
+
+export function getFullYear() {
+  return new Date().getFullYear();
+}
