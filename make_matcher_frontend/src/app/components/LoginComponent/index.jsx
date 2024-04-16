@@ -7,11 +7,11 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { InputComponent } from '../InputComponent';
+import styles from './Login.module.scss';
 import { isNotEmpty, hasMinLength } from '../../../utils/validation.js';
-import './Login.scss';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
+import { TypedInputComponent } from '../TypedInputComponent';
 
 export function LoginComponent(props) {
   const navigate = useNavigate();
@@ -33,8 +33,6 @@ export function LoginComponent(props) {
     password: false,
   });
 
-  // TODO ATTN Arbern
-  // eslint-disable-next-line no-unused-vars
   const [userProfileIsComplete, setUserProfileIsComplete] = useState(false);
 
   // if authenticated, either route to home,
@@ -42,6 +40,7 @@ export function LoginComponent(props) {
   useEffect(() => {
     if (isAuthenticated && userProfileIsComplete) {
       setIsNavigationPending(true);
+      setUserProfileIsComplete(true);
       navigate('/home');
     } else if (isAuthenticated) {
       setIsNavigationPending(true);
@@ -89,46 +88,52 @@ export function LoginComponent(props) {
   }
 
   return (
-    <>
+    <div className={styles['login-form']}>
       <form onSubmit={handleLogin}>
-        <h2 className="title">Log In</h2>
-        <InputComponent
+        <h2 className={styles['title']}>Log In</h2>
+        <TypedInputComponent
           label="Username"
           id="username"
-          className="form-inputs"
           type="username"
           name="username"
           onBlur={() => handleInputFocus('username')}
           onChange={e => handleEnteredValues('username', e.target.value)}
           error={usernameIsInvalid && 'Please enter a valid username!'}
+          containerClassName={styles['login']}
+          inputClassName={styles['login-input']}
+          labelClassName={styles['login-label']}
+          errorClassName={styles['login-error']}
         />
-        <InputComponent
+        <TypedInputComponent
           label="Password"
           id="password"
-          className="form-inputs"
           type="password"
           name="password"
           onBlur={() => handleInputFocus('password')}
           onChange={e => handleEnteredValues('password', e.target.value)}
           error={passwordIsInvalid && 'Please enter a valid password!'}
+          containerClassName={styles['login']}
+          inputClassName={styles['login-input']}
+          labelClassName={styles['login-label']}
+          errorClassName={styles['login-error']}
         />
 
-        <div className="checkbox-wrapper">
+        <div className={styles['checkbox-wrapper']}>
           <label>
             <input
               type="checkbox"
-              className="login-checkbox"
+              className={styles['login-checkbox']}
               name="login checkbox"
             />
             Keep me logged in
           </label>
         </div>
 
-        <div className="login-btn-container">
-          <button className="login-btn">Log In</button>
+        <div className={styles['login-btn-container']}>
+          <button className={styles['login-btn']}>Log In</button>
         </div>
 
-        <p className="login-link">
+        <p className={styles['login-link']}>
           Don't have an account? Create one{' '}
           <span
             onClick={() => {
@@ -142,6 +147,6 @@ export function LoginComponent(props) {
         </p>
         {error ? <ErrorMessageComponent error={error} /> : <></>}
       </form>
-    </>
+    </div>
   );
 }

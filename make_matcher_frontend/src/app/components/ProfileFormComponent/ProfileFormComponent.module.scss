@@ -1,0 +1,208 @@
+@import '../../../styles/mixins';
+
+form {
+  box-shadow: 15px 15px 20px rgba(0, 0, 0, 0.1), -15px -15px 20px #fffb;
+  border-radius: 20px;
+  padding: 4.5rem 4.5rem;
+  min-width: 18rem;
+  margin-bottom: 20rem;
+ }
+
+.profile {
+  position: relative;
+  margin: 1.5rem 0;
+}
+
+::placeholder { /* Chrome, Firefox, Opera, Safari 10.1+ */
+  color: rgb(138, 138, 138);
+  font-size: 1rem;
+  opacity: 1; /* Firefox */
+}
+
+/* Individual Input Styles */
+.profile-input { 
+  line-height: 2.5rem;
+  border-radius: 10px;
+  width: 25rem;
+  padding: 0.5rem 1rem; /* Adjust padding as needed */
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+}
+
+// .profile-input {
+//   line-height: 3rem;
+//   border-radius: 10px;
+//   width: 25rem;
+//   text-indent: 2rem;
+//   border: none;
+//   outline: none;
+//   background: transparent;
+//   font-size: 1.5rem;
+//   box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+// }
+
+.profile-label {
+  position: absolute;
+  left: 15px;
+  transform: translateY(-50%);
+  color: rgb(124, 124, 124);
+  pointer-events: none;
+  line-height: 1.1rem;
+  background-color: #fff; /* Match form background color */
+  padding: 0rem 0.5rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+}
+
+// .profile-label {
+//   position: absolute;
+//   left: 15px;
+//   transform: translateY(-50%);
+//   color: rgb(124, 124, 124);
+//   pointer-events: none;
+//   line-height: 1.1rem;
+//   border-radius: 15px;
+//   font-size: 1rem;
+//   background-color: #eef2f5;
+//   padding: 0rem 0.5rem;
+//   box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+// }
+
+.update-container {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 4rem;
+}
+
+.profile-button {
+  height: 3.5rem;  
+  width: 4.5rem;  
+  display: flex; 
+  justify-content: center; 
+  align-items: center;
+  overflow: visible;
+  margin-left: 4rem;
+}
+
+.profile-button-icon {
+  display: block; 
+  height: 3rem; 
+  width: 3rem; 
+}
+
+.profile-error {
+  color: rgb(240, 93, 93);
+  margin-left: 0.6rem;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+}
+
+.range {
+  position: relative;
+  margin: 3rem 0 1rem 0;
+  display: flex;
+  justify-content: space-around;
+  // align-items: center;
+  width: 100%;
+    &>div {
+      width: inherit;
+    }
+}
+
+.range-input {
+  -webkit-appearance: none;  /* Override default CSS styles */
+  appearance: none;
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  border-radius: 50px;
+  width: 25rem; 
+  padding-right: 1rem;
+  padding-left: 1rem;
+  height: 2rem; /* Specified height */
+  background: transparent; 
+  outline: none ; /* Remove outline */
+  opacity: 0.7; /* Set transparency (for mouse-over effects on hover) */
+  -webkit-transition: .2s; /* 0.2 seconds transition on hover */
+  transition: opacity .2s;
+  cursor: pointer;
+}
+
+.range-input::-webkit-slider-thumb {
+  
+  cursor: pointer; /* Cursor on hover */
+}
+
+.range-label {
+  position: absolute;
+  left: 15px;
+  transform: translateY(-50%);
+  color: rgb(124, 124, 124);
+  pointer-events: none;
+  line-height: 1.1rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  background-color: #eef2f5;
+  padding: 0rem 0.5rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+}
+
+.range-output {
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  width: 7%;
+  border-radius: 50px;
+  height: 2rem;
+  text-align: center;
+}
+
+.range-error {
+  color: rgb(240, 93, 93);
+  margin-left: 0.6rem;
+  margin-bottom: 2rem;
+  font-size: 0.8rem;
+}
+
+.dropdown-label {
+ display: inline-block;
+ width: 10rem;
+}
+
+// .dropdown {
+  
+// }
+
+.signup-btn-container {
+  margin-top: 3rem;
+}
+
+button {
+  font-size: 1.5rem;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+  font-weight: 600;
+  background: transparent;
+  &:focus {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  }
+}
+
+/* Select Box Styles */
+.dropdown-input {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+  padding: 0.75rem 2rem 0.75rem 1rem;
+  width: 28rem !important; 
+  border: none;
+  outline: none;
+  background: transparent;
+  font-size: 1rem;
+  box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  line-height: 2.5; 
+  border-radius: 10px;
+}

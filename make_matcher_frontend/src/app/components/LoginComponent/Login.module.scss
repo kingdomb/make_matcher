@@ -16,16 +16,12 @@ form {
   color: rgb(124, 124, 124);
 }
 
-.form-input-sections {
+.login {
   position: relative;
   margin: 1.5rem 0;
 }
 
-#last-input {
-  margin-bottom: 10px;
-}
-
-.form-input-sections input {
+.login-input {
   line-height: 2.5rem;
   border-radius: 10px;
   width: 18rem;
@@ -35,6 +31,42 @@ form {
   background: transparent;
   font-size: 1rem;
   box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+}
+
+.login-label {
+  position: absolute;
+  left: 15px;
+  transform: translateY(-50%);
+  color: rgb(124, 124, 124);
+  pointer-events: none;
+  line-height: 1.1rem;
+  border-radius: 15px;
+  font-size: 0.8rem;
+  background-color: #eef2f5;
+  padding: 0rem 0.5rem;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+}
+
+.login-error {
+  color: rgb(240, 93, 93);
+  margin-left: 0.6rem;
+  margin-top: 0.3rem;
+  font-size: 0.8rem;
+}
+
+button {
+  font-size: 1.5rem;
+  border-radius: 50px;
+  padding: 1rem 2rem;
+  margin: 5px;
+  border: none;
+  cursor: pointer;
+  box-shadow: 5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px #fff;
+  font-weight: 600;
+  background: transparent;
+  &:focus {
+    box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
+  }
 }
 
 .checkbox-wrapper label {
@@ -80,5 +112,3 @@ form {
 .login-btn:focus {
   box-shadow: inset 5px 5px 10px rgba(0, 0, 0, 0.1), inset -5px -5px 10px #fff;
 }
-
-

@@ -14,7 +14,7 @@ import {
   selectUserID,
   selectUsername,
 } from 'app/pages/AuthPage/slice/selectors';
-import { testStyles } from '../testStyles';
+import { testStyles } from '../testStyles.ts';
 
 const ProfileTest = () => {
   const dispatch = useDispatch();
@@ -22,6 +22,7 @@ const ProfileTest = () => {
   const profile = useSelector(selectProfile);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
+
   const token = useSelector(selectAcessToken);
   const userID = useSelector(selectUserID);
   const userName = useSelector(selectUsername);
@@ -114,7 +115,7 @@ const ProfileTest = () => {
           <textarea
             style={{
               width: '100%',
-              height: '135px',
+              height: '30rem',
               border: '1px solid #ccc',
               padding: '10px',
             }}

@@ -1,19 +1,18 @@
+/* eslint-disable @typescript-eslint/no-unused-vars */
 /**
  *
  * ProfilePage
  *
  */
+
 import * as React from 'react';
 import { useTranslation } from 'react-i18next';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 import { messages } from './messages';
-import { HeaderComponent } from '../../components/HeaderComponent';
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
-import { TestComponent } from '../../components/TestComponent';
-import { FooterComponent } from '../../components/FooterComponent';
 import { Helmet } from 'react-helmet-async';
+import { ProfileFormComponent } from 'app/components/ProfileFormComponent';
+import { HeaderComponent } from 'app/components/HeaderComponent';
+import { FooterComponent } from 'app/components/FooterComponent';
 
-// eslint-disable-next-line @typescript-eslint/no-unused-vars
 interface Props {}
 
 export function ProfilePage() {
@@ -28,7 +27,12 @@ export function ProfilePage() {
       </Helmet>
 
       <HeaderComponent />
-      <div className="profile-placeholder">PROFILE</div>
+      {/* <div className="profile-placeholder">
+        <TestComponent />
+      </div> */}
+      <div className="profile-placeholder" style={{ width: '100vw' }}>
+        <ProfileFormComponent />
+      </div>
       <FooterComponent />
     </>
   );
