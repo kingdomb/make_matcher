@@ -4,14 +4,12 @@ export const testStyles: Record<string, CSSProperties> = {
   container: {
     width: '1200px',
     fontFamily: 'Arial, sans-serif',
-    margin: '20px',
-
-    padding: '20px',
+    // padding: '2px',
     textAlign: 'center',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    justifyContent: 'center',
+    justifyContent: 'flex-start',
   },
   header: {
     fontWeight: 'bold',
@@ -19,7 +17,7 @@ export const testStyles: Record<string, CSSProperties> = {
     color: '#333',
   },
   subHeader: {
-    marginTop: '10px',
+    // marginTop: '10px',
     fontSize: '16px',
     color: '#555',
   },
