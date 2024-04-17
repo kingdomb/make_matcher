@@ -4,15 +4,40 @@ import { authSaga } from './saga';
 import { AuthState, LoginCreds, SignupCreds } from './types';
 import { PayloadAction } from '@reduxjs/toolkit';
 
-export const initialState: AuthState = {
-  username: null,
-  id: null,
-  accessToken: null,
-  refreshToken: null,
-  isAuthenticated: false,
-  loading: false,
-  error: null,
-};
+// export const initialState: AuthState = {
+//   username: null,
+//   id: null,
+//   accessToken: null,
+//   refreshToken: null,
+//   isAuthenticated: false,
+//   loading: false,
+//   error: null,
+// };
+
+export const initialState: AuthState = (() => {
+  const authData = localStorage.getItem('authData');
+  if (authData) {
+    const { username, id, accessToken, refreshToken } = JSON.parse(authData);
+    return {
+      username,
+      id,
+      accessToken,
+      refreshToken,
+      isAuthenticated: true,
+      loading: false,
+      error: null,
+    };
+  }
+  return {
+    username: null,
+    id: null,
+    accessToken: null,
+    refreshToken: null,
+    isAuthenticated: false,
+    loading: false,
+    error: null,
+  };
+})();
 
 const slice = createSlice({
   name: 'auth',
@@ -25,14 +50,27 @@ const slice = createSlice({
       state.loading = true;
     },
     loginSuccess: (state, action) => {
-      state.accessToken = action.payload.accessToken;
-      state.refreshToken = action.payload.refreshToken;
-      state.username = action.payload.username;
-      state.id = action.payload.id;
+      const { accessToken, refreshToken, username, id } = action.payload;
+      state.accessToken = accessToken;
+      state.refreshToken = refreshToken;
+      state.username = username;
+      state.id = id;
       state.isAuthenticated = true;
       state.loading = false;
       state.error = null;
+
+      // store
+      localStorage.setItem(
+        'authData',
+        JSON.stringify({
+          accessToken,
+          refreshToken,
+          username,
+          id,
+        }),
+      );
     },
+
     loginFailure: (state, action) => {
       state.loading = false;
       state.error = action.payload;
@@ -47,7 +85,11 @@ const slice = createSlice({
       state.refreshToken = null;
       state.isAuthenticated = false;
       state.loading = false;
+
+      // clear
+      localStorage.removeItem('authData');
     },
+
     clearError: state => {
       state.error = null;
     },
