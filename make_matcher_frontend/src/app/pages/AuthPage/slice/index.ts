@@ -15,7 +15,7 @@ import { PayloadAction } from '@reduxjs/toolkit';
 // };
 
 export const initialState: AuthState = (() => {
-  const authData = localStorage.getItem('authData');
+  const authData = sessionStorage.getItem('authData');
   if (authData) {
     const { username, id, accessToken, refreshToken } = JSON.parse(authData);
     return {
@@ -60,7 +60,7 @@ const slice = createSlice({
       state.error = null;
 
       // store
-      localStorage.setItem(
+      sessionStorage.setItem(
         'authData',
         JSON.stringify({
           accessToken,
@@ -87,7 +87,7 @@ const slice = createSlice({
       state.loading = false;
 
       // clear
-      localStorage.removeItem('authData');
+      sessionStorage.removeItem('authData');
     },
 
     clearError: state => {
