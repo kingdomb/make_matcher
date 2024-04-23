@@ -598,7 +598,12 @@ export function ProfileFormComponent() {
           >
             <RegisteredProfileComponent
               label={'Days:'}
-              data={profile.profile.days.join(' ')}
+              // data={profile.profile.days.join(' ')}
+              data={
+                profile.profile.days &&
+                profile.profile.days.length !== 0 &&
+                profile.profile.days.join(' ')
+              }
             />
             <DropdownFormComponent
               label="Choose a day:"
@@ -624,7 +629,12 @@ export function ProfileFormComponent() {
           >
             <RegisteredProfileComponent
               label={'Times:'}
-              data={profile.profile.times.join('  ')}
+              // data={profile.profile.times.join('  ')}
+              data={
+                profile.profile.times &&
+                profile.profile.times.length !== 0 &&
+                profile.profile.times.join('  ')
+              }
             />
             <DropdownFormComponent
               label="Choose a time:"
@@ -651,7 +661,12 @@ export function ProfileFormComponent() {
             <RegisteredProfileComponent
               label={'Games:'}
               data={gamesOptions}
-              gamesData={profile.profile.games}
+              // gamesData={profile.profile.games}
+              gamesData={
+                profile.profile.games &&
+                profile.profile.games.length !== 0 &&
+                profile.profile.games.join(', ')
+              }
             />
             <DropdownFormComponent
               label="Choose a time:"
