@@ -7,7 +7,8 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-// import { TypedInputComponent } from '../TypedInputComponent';
+import { InputComponent } from '../InputComponent';
+
 import {
   isEmail,
   isZipCode,
