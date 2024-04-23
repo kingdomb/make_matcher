@@ -663,12 +663,24 @@ export function ProfileFormComponent() {
           >
             <RegisteredProfileComponent
               label={'Games:'}
-              data={gamesOptions}
+              // data={gamesOptions}
               // gamesData={profile.profile.games}
-              gamesData={
+              // gamesData={
+              //   profile.profile.games &&
+              //   profile.profile.games.length !== 0 &&
+              //   profile.profile.games.join(', ')
+              // }
+              data={
                 profile.profile.games &&
                 profile.profile.games.length !== 0 &&
-                profile.profile.games.join(', ')
+                profile.profile.games
+                  .map(gameId => {
+                    const game = gamesOptions.find(
+                      option => option.value === gameId,
+                    );
+                    return game ? game.label : gameId;
+                  })
+                  .join(', ')
               }
             />
             <DropdownFormComponent

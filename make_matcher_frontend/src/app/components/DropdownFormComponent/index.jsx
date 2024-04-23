@@ -26,13 +26,31 @@ export function DropdownFormComponent({
     onChange(value);
   };
 
+  const handleSelectChange = event => {
+    const { options } = event.target;
+    const value = [];
+    for (let i = 0, l = options.length; i < l; i += 1) {
+      if (options[i].selected) {
+        value.push(options[i].value);
+      }
+    }
+    onChange(value);
+  };
+
   return (
     <div className={containerClassName}>
       <div className={`${updateClassName}`}>
         <label htmlFor={name} className={`${labelClassName}`}>
           {label}
         </label>
-        <select name={name} id={name} className={`${inputClassName}`} multiple>
+        {/* <select name={name} id={name} className={`${inputClassName}`} multiple> */}
+        <select
+          name={name}
+          id={name}
+          className={`${inputClassName}`}
+          multiple
+          onChange={handleSelectChange}
+        >
           <option value="" disabled hidden selected>
             -- Select your days --
           </option>
