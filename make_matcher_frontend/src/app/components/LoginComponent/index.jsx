@@ -12,6 +12,7 @@ import { isNotEmpty, hasMinLength } from '../../../utils/validation.js';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
 import { InputComponent } from '../InputComponent';
+import { TypedInputComponent } from '../TypedInputComponent';
 // import { TypedInputComponent } from '../TypedInputComponent';
 
 export function LoginComponent(props) {
@@ -92,7 +93,7 @@ export function LoginComponent(props) {
     <div className={styles['login-form']}>
       <form onSubmit={handleLogin}>
         <h2 className={styles['title']}>Log In</h2>
-        <InputComponent
+        <TypedInputComponent
           label="Username"
           id="username"
           type="username"
@@ -105,7 +106,7 @@ export function LoginComponent(props) {
           labelClassName={styles['login-label']}
           errorClassName={styles['login-error']}
         />
-        <InputComponent
+        <TypedInputComponent
           label="Password"
           id="password"
           type="password"
