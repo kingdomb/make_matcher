@@ -326,11 +326,14 @@ export function ProfileFormComponent() {
   };
 
   const updateEditableProfile = (field, value) => {
-    setEditableProfile(prevProfile => {
-      const parsedProfile = JSON.parse(prevProfile);
-      parsedProfile.profile[field] = value;
-      return JSON.stringify(parsedProfile);
-    });
+    if (editableProfile) {
+      setEditableProfile(prevProfile => {
+        const parsedProfile = JSON.parse(prevProfile || '{}');
+        parsedProfile.profile[field] = value;
+        // parsedProfile[field] = value;
+        return JSON.stringify(parsedProfile, null, 10);
+      });
+    }
   };
 
   console.log(editableProfile);
