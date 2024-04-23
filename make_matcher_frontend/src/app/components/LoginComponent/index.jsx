@@ -11,7 +11,8 @@ import styles from './Login.module.scss';
 import { isNotEmpty, hasMinLength } from '../../../utils/validation.js';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
-import { TypedInputComponent } from '../TypedInputComponent';
+import { InputComponent } from '../InputComponent';
+// import { TypedInputComponent } from '../TypedInputComponent';
 
 export function LoginComponent(props) {
   const navigate = useNavigate();
@@ -91,7 +92,7 @@ export function LoginComponent(props) {
     <div className={styles['login-form']}>
       <form onSubmit={handleLogin}>
         <h2 className={styles['title']}>Log In</h2>
-        <TypedInputComponent
+        <InputComponent
           label="Username"
           id="username"
           type="username"
@@ -104,7 +105,7 @@ export function LoginComponent(props) {
           labelClassName={styles['login-label']}
           errorClassName={styles['login-error']}
         />
-        <TypedInputComponent
+        <InputComponent
           label="Password"
           id="password"
           type="password"

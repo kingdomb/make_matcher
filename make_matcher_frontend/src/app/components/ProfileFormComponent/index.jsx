@@ -16,7 +16,7 @@ import { selectAcessToken } from '../../pages/AuthPage/slice/selectors';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import styles from './ProfileFormComponent.module.scss';
-import { TypedInputComponent } from '../TypedInputComponent';
+// import { TypedInputComponent } from '../TypedInputComponent';
 import { RangeInputComponent } from '../RangeInputComponent';
 import { DropdownFormComponent } from '../DropdownFormComponent';
 import ProfileTest from '../TestComponent/components/ProfileTest';
@@ -31,6 +31,7 @@ import {
 } from '../../../utils/validation.js';
 import { LoadingIndicator } from '../LoadingIndicator';
 import { RegisteredProfileComponent } from '../RegisteredProfileComponent';
+import { InputComponent } from '../InputComponent';
 
 export function ProfileFormComponent() {
   const navigate = useNavigate();
@@ -404,7 +405,7 @@ export function ProfileFormComponent() {
               label={'User Name:'}
               data={profile.profile.display_name}
             />
-            <TypedInputComponent
+            <InputComponent
               id="display_name"
               type="text"
               name="username"
@@ -434,7 +435,7 @@ export function ProfileFormComponent() {
               label={'Zip Code:'}
               data={profile.profile.zip_code}
             />
-            <TypedInputComponent
+            <InputComponent
               id="zip_code"
               type="text"
               name="zip-code"
@@ -466,7 +467,7 @@ export function ProfileFormComponent() {
               label={'Date of Birth:'}
               data={profile.profile.date_of_birth}
             />
-            <TypedInputComponent
+            <InputComponent
               id="date_of_birth"
               type="text"
               name="birth-year"

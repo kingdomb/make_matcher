@@ -8,6 +8,7 @@ import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
 import { InputComponent } from '../InputComponent';
+
 import {
   isEmail,
   isZipCode,
@@ -18,6 +19,7 @@ import {
 import './Signup.scss';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
+import { InputComponent } from '../InputComponent';
 
 export function SignupComponent() {
   const navigate = useNavigate();
