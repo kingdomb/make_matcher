@@ -15,19 +15,17 @@ import {
   selectUsername,
 } from 'app/pages/AuthPage/slice/selectors';
 import { testStyles } from '../testStyles.ts';
-
 const ProfileTest = () => {
   const dispatch = useDispatch();
   const { actions } = useHomePageSlice();
   const profile = useSelector(selectProfile);
   const loading = useSelector(selectLoading);
   const error = useSelector(selectError);
-
   const token = useSelector(selectAcessToken);
   const userID = useSelector(selectUserID);
   const userName = useSelector(selectUsername);
   const updateSuccess = useSelector(selectUpdateSuccess);
-  const [editableProfile, setEditableProfile] = useState(null);
+  const [editableProfile, setEditableProfile] = useState('');
   const [notification, setNotification] = useState('');
 
   useEffect(() => {
@@ -38,7 +36,8 @@ const ProfileTest = () => {
 
   useEffect(() => {
     if (profile) {
-      setEditableProfile(profile); // Set state directly
+      setEditableProfile(JSON.stringify(profile, null, 2));
+      console.log(editableProfile);
       setNotification('Profile fetched successfully.');
     }
   }, [profile]);
@@ -67,12 +66,18 @@ const ProfileTest = () => {
     );
     if (isConfirmed) {
       setNotification('');
-      dispatch(
-        actions.updateProfileRequest({
-          profileData: editableProfile, // Send data directly
-          token,
-        }),
-      );
+      let updatedProfileData;
+      try {
+        updatedProfileData = JSON.parse(editableProfile);
+        dispatch(
+          actions.updateProfileRequest({
+            profileData: updatedProfileData,
+            token,
+          }),
+        );
+      } catch (e) {
+        setNotification('Invalid JSON format');
+      }
     }
   };
 
@@ -85,7 +90,6 @@ const ProfileTest = () => {
           ID: {userID} Name: {userName}
         </h4>
       </div>
-
       <button
         onClick={handleFetchProfile}
         disabled={loading}
@@ -113,10 +117,8 @@ const ProfileTest = () => {
               border: '1px solid #ccc',
               padding: '10px',
             }}
-            value={
-              editableProfile ? JSON.stringify(editableProfile, null, 2) : ''
-            } // Controlled
-            onChange={e => setEditableProfile(JSON.parse(e.target.value))} // Parse on change
+            value={editableProfile}
+            onChange={e => setEditableProfile(e.target.value)}
             title="Try to edit profile, then click the Update Profile button"
           />
           <button
@@ -133,5 +135,4 @@ const ProfileTest = () => {
     </div>
   );
 };
-
 export default ProfileTest;
