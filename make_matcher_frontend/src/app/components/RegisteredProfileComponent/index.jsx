@@ -8,7 +8,7 @@ import styled from 'styled-components/macro';
 
 export function RegisteredProfileComponent(props) {
   const gamesLookup = {};
-  Object.values(props.data).forEach(game => {
+  Object.values(props.data || {}).forEach(game => {
     gamesLookup[game.value] = game.label;
   });
   return (
@@ -17,13 +17,15 @@ export function RegisteredProfileComponent(props) {
         <Label>{props.label}</Label>
         {!props.gamesData && <Value>{props.data}</Value>}
       </Div>
-      <div style={{ paddingLeft: '4rem' }}>
-        {props.gamesData &&
-          props.gamesData.map(game => {
-            const label = gamesLookup[game];
-            return label && <Title>{label}</Title>;
-          })}
-      </div>
+      {props.data && (
+        <div style={{ paddingLeft: '4rem' }}>
+          {props.gamesData &&
+            props.gamesData.map(game => {
+              const label = gamesLookup[game];
+              return label && <Title>{label}</Title>;
+            })}
+        </div>
+      )}
     </div>
   );
 }

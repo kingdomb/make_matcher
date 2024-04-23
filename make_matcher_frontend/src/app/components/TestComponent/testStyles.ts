@@ -10,6 +10,7 @@ export const testStyles: Record<string, CSSProperties> = {
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'flex-start',
+    marginTop: '20vh',
   },
   header: {
     fontWeight: 'bold',

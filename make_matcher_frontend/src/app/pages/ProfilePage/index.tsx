@@ -30,7 +30,10 @@ export function ProfilePage() {
       {/* <div className="profile-placeholder">
         <TestComponent />
       </div> */}
-      <div className="profile-placeholder" style={{ width: '100vw' }}>
+      <div
+        className="profile-placeholder"
+        style={{ width: '100vw', paddingTop: '7vh' }}
+      >
         <ProfileFormComponent />
       </div>
       <FooterComponent />

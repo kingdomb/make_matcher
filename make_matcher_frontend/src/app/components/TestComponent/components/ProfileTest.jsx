@@ -27,7 +27,7 @@ const ProfileTest = () => {
   const userID = useSelector(selectUserID);
   const userName = useSelector(selectUsername);
   const updateSuccess = useSelector(selectUpdateSuccess);
-  const [editableProfile, setEditableProfile] = useState('');
+  const [editableProfile, setEditableProfile] = useState(null);
   const [notification, setNotification] = useState('');
 
   useEffect(() => {
@@ -38,7 +38,7 @@ const ProfileTest = () => {
 
   useEffect(() => {
     if (profile) {
-      setEditableProfile(JSON.stringify(profile, null, 2));
+      setEditableProfile(profile); // Set state directly
       setNotification('Profile fetched successfully.');
     }
   }, [profile]);
@@ -67,18 +67,12 @@ const ProfileTest = () => {
     );
     if (isConfirmed) {
       setNotification('');
-      let updatedProfileData;
-      try {
-        updatedProfileData = JSON.parse(editableProfile);
-        dispatch(
-          actions.updateProfileRequest({
-            profileData: updatedProfileData,
-            token,
-          }),
-        );
-      } catch (e) {
-        setNotification('Invalid JSON format');
-      }
+      dispatch(
+        actions.updateProfileRequest({
+          profileData: editableProfile, // Send data directly
+          token,
+        }),
+      );
     }
   };
 
@@ -119,8 +113,10 @@ const ProfileTest = () => {
               border: '1px solid #ccc',
               padding: '10px',
             }}
-            value={editableProfile}
-            onChange={e => setEditableProfile(e.target.value)}
+            value={
+              editableProfile ? JSON.stringify(editableProfile, null, 2) : ''
+            } // Controlled
+            onChange={e => setEditableProfile(JSON.parse(e.target.value))} // Parse on change
             title="Try to edit profile, then click the Update Profile button"
           />
           <button
