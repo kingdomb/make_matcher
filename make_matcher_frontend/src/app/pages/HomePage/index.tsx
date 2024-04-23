@@ -33,6 +33,7 @@ export function HomePage() {
             display: 'flex',
             justifyContent: 'space-between',
             alignItems: 'top',
+            paddingTop: '8vh',
           }}
         >
           <UserProfileComponent />
