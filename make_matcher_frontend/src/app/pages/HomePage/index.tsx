@@ -24,6 +24,7 @@ export function HomePage() {
           flexDirection: 'column',
           justifyContent: 'space-between',
           alignItems: 'top',
+          marginBottom: '20rem',
         }}
       >
         <div
