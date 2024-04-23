@@ -19,7 +19,6 @@ import {
 import './Signup.scss';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
-import { InputComponent } from '../InputComponent';
 
 export function SignupComponent() {
   const navigate = useNavigate();
