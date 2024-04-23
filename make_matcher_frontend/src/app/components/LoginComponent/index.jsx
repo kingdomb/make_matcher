@@ -11,7 +11,7 @@ import styles from './Login.module.scss';
 import { isNotEmpty, hasMinLength } from '../../../utils/validation.js';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
-import { InputComponent } from '../InputComponent';
+// import { InputComponent } from '../InputComponent';
 import { TypedInputComponent } from '../TypedInputComponent';
 // import { TypedInputComponent } from '../TypedInputComponent';
 
