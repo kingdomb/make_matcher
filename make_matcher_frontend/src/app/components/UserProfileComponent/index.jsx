@@ -142,9 +142,24 @@ export const UserProfileComponent = () => {
             <div>Intensity: {profile.profile.intensity}</div>
             <div>Skill: {profile.profile.skill}</div>
             <div>Language: {profile.profile.language}</div>
-            <div>Days: {profile.profile.days.join(', ')}</div>
-            <div>Times: {profile.profile.times.join(', ')}</div>
-            <div>Games: {profile.profile.games.join(', ')}</div>
+            <div>
+              Days:{' '}
+              {profile.profile.days &&
+                profile.profile.days.length !== 0 &&
+                profile.profile.days.join(', ')}
+            </div>
+            <div>
+              Times:{' '}
+              {profile.profile.times &&
+                profile.profile.times.length !== 0 &&
+                profile.profile.times.join(', ')}
+            </div>
+            <div>
+              Games:{' '}
+              {profile.profile.games &&
+                profile.profile.games.length !== 0 &&
+                profile.profile.games.join(', ')}
+            </div>
           </div>
         </div>
       )}

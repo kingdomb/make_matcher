@@ -7,7 +7,7 @@ import {
 import React, { useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useNavigate } from 'react-router';
-import { TypedInputComponent } from '../TypedInputComponent';
+// import { TypedInputComponent } from '../TypedInputComponent';
 import {
   isEmail,
   isZipCode,
@@ -18,6 +18,7 @@ import {
 import './Signup.scss';
 import { ErrorMessageComponent } from '../ErrorMessageComponent';
 import { LoadingIndicator } from '../LoadingIndicator';
+import { InputComponent } from '../InputComponent';
 
 export function SignupComponent() {
   const navigate = useNavigate();
@@ -130,7 +131,7 @@ export function SignupComponent() {
       <form onSubmit={handleSignUp}>
         <h2 className="title">Welcome!</h2>
         <span className="sub-title">Sign up here.</span>
-        <TypedInputComponent
+        <InputComponent
           label="Username"
           id="username"
           className="form-inputs"
@@ -140,7 +141,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('username', e.target.value)}
           error={usernameIsInvalid && 'Please enter a valid username!'}
         />
-        <TypedInputComponent
+        <InputComponent
           label="Email"
           id="email"
           className="form-inputs"
@@ -150,7 +151,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('email', e.target.value)}
           error={emailIsInvalid && 'Please enter a valid email!'}
         />
-        <TypedInputComponent
+        <InputComponent
           label="Zip Code"
           id="zip-code"
           type="text"
@@ -162,7 +163,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('zipCode', e.target.value)}
           error={zipCodeIsInvalid && 'Please enter a valid zip code!'}
         />
-        <TypedInputComponent
+        <InputComponent
           label="Password"
           id="password"
           type="password"
@@ -171,7 +172,7 @@ export function SignupComponent() {
           onChange={e => handleEnteredValues('password', e.target.value)}
           error={passwordIsInvalid && 'Please enter a valid password!'}
         />
-        <TypedInputComponent
+        <InputComponent
           label="Confirm Password"
           id="confirm-password"
           className="form-inputs"
